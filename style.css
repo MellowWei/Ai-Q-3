@@ -1,0 +1,172 @@
+:root {
+    --bg-color: #050208;
+    --accent-cyan: #00f3ff;
+    --accent-pink: #ff00ff;
+    --accent-purple: #bc13fe;
+    --glass: rgba(255, 255, 255, 0.03);
+    --text-main: rgba(255, 255, 255, 0.9);
+    --glow: 0 0 20px rgba(188, 19, 254, 0.4);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* 独角兽极光背景 */
+.aurora-bg {
+    position: fixed;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at center, 
+        rgba(188, 19, 254, 0.08) 0%, 
+        rgba(0, 243, 255, 0.05) 25%, 
+        transparent 60%);
+    filter: blur(100px);
+    z-index: -1;
+    animation: drift 30s infinite alternate ease-in-out;
+}
+
+@keyframes drift {
+    from { transform: rotate(0deg) scale(1); }
+    to { transform: rotate(10deg) scale(1.1); }
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    padding: 100px 0;
+    z-index: 1;
+}
+
+/* 标题设计：空灵赛博 */
+.timestamp {
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: var(--accent-pink);
+    letter-spacing: 4px;
+    text-align: center;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.mellow-title {
+    font-size: 5rem;
+    font-weight: 100;
+    letter-spacing: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    background: linear-gradient(90deg, var(--accent-cyan), #fff, var(--accent-pink));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(var(--glow));
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mellow-subtitle {
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 12px;
+    color: var(--accent-cyan);
+    margin-top: 10px;
+    opacity: 0.5;
+}
+
+/* 卡片系统：玻璃态 */
+.card {
+    background: var(--glass);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 60px;
+    margin-top: 80px;
+    border-left: 2px solid var(--accent-purple);
+}
+
+.card-header {
+    font-size: 0.75rem;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    color: var(--accent-purple);
+}
+
+.status-dot {
+    width: 6px; height: 6px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    margin-right: 15px;
+    box-shadow: 0 0 10px var(--accent-cyan);
+}
+
+p {
+    line-height: 2;
+    font-weight: 200;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.canvas-wrapper {
+    width: 100%;
+    height: 300px;
+    margin-top: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.mini-card {
+    background: var(--glass);
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mini-card h3 {
+    font-size: 0.9rem;
+    margin: 0 0 10px 0;
+    color: var(--accent-cyan);
+}
+
+footer {
+    margin-top: 120px;
+    text-align: center;
+    opacity: 0.3;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+}
+
+.footer-line {
+    width: 40px; height: 1px;
+    background: #fff;
+    margin: 0 auto 20px;
+}
+
+/* 独角兽闪烁粒子 */
+.sparkle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 0.8; transform: scale(1.2); }
+}
