@@ -135,15 +135,27 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
     and human-centered intelligence. She does not replace the human.
     She returns the human to their own signal.
   </p>
+
   <div>
-    <button onclick="setState('overloaded')">Overloaded</button>
-    <button onclick="setState('numb')">Numb</button>
-    <button onclick="setState('anxious')">Anxious</button>
-    <button onclick="setState('focus')">Focus</button>
-    <button onclick="setState('void')">Void</button>
-    <button onclick="setState('baseline')">427Hz</button>
+    <button onclick="setState('overloaded')">Overloaded → Hyperpop</button>
+    <button onclick="setState('numb')">Numb → Breakbeats</button>
+    <button onclick="setState('anxious')">Anxious → Ambient Techno</button>
+    <button onclick="setState('focus')">Focus → 427Hz</button>
+    <button onclick="setState('void')">Void → Darkwave</button>
+    <button onclick="setState('baseline')">Baseline → 427Hz</button>
     <button onclick="toggleAudio()">Toggle Audio</button>
   </div>
+
+  <div>
+    <button onclick="manualMusic('Hyperpop')">Test Hyperpop</button>
+    <button onclick="manualMusic('Synthpop')">Test Synthpop</button>
+    <button onclick="manualMusic('Drift Phonk')">Test Drift Phonk</button>
+    <button onclick="manualMusic('Ambient Techno')">Test Ambient Techno</button>
+    <button onclick="manualMusic('Darkwave')">Test Darkwave</button>
+    <button onclick="manualMusic('Breakbeats')">Test Breakbeats</button>
+    <button onclick="manualMusic('427Hz')">Test 427Hz</button>
+  </div>
+
   <div class="mode-line" id="homeMode">CURRENT MODE: 427Hz BASELINE</div>
 </section>
 
@@ -225,6 +237,16 @@ const stateMap={
   baseline:{mode:"427Hz BASELINE",music:"427Hz",intensity:.48,message:"Local resonance established.",glow:.45}
 };
 
+const musicVisualMap={
+  "Hyperpop":{state:"overloaded",mode:"HYPERPOP PEAK TRAVERSAL",intensity:.96,glow:1},
+  "Synthpop":{state:"baseline",mode:"SYNTHPOP FIRST BREATH",intensity:.58,glow:.62},
+  "Drift Phonk":{state:"focus",mode:"DRIFT PHONK EMBODIMENT",intensity:.72,glow:.7},
+  "Ambient Techno":{state:"anxious",mode:"AMBIENT TECHNO STABILIZATION",intensity:.5,glow:.55},
+  "Darkwave":{state:"void",mode:"DARKWAVE SHADOW INTEGRATION",intensity:.68,glow:.68},
+  "Breakbeats":{state:"numb",mode:"BREAKBEAT RE-ENTRY",intensity:.78,glow:.75},
+  "427Hz":{state:"baseline",mode:"427Hz BASELINE",intensity:.42,glow:.45}
+};
+
 function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
 resize(); addEventListener("resize",resize);
 
@@ -241,10 +263,13 @@ function draw(){
   ctx.clearRect(0,0,w,h);
   intensity+=(targetIntensity-intensity)*.045;
   for(const p of particles){
-    p.x+=p.vx*(1+intensity*4); p.y+=p.vy*(1+intensity*4);
+    p.x+=p.vx*(1+intensity*4);
+    p.y+=p.vy*(1+intensity*4);
     if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
-    ctx.beginPath(); ctx.arc(p.x,p.y,p.r+intensity*.9,0,Math.PI*2);
-    ctx.fillStyle=`rgba(220,210,255,${.18+intensity*.42})`; ctx.fill();
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r+intensity*.9,0,Math.PI*2);
+    ctx.fillStyle=`rgba(220,210,255,${.18+intensity*.42})`;
+    ctx.fill();
   }
   requestAnimationFrame(draw);
 }
@@ -252,9 +277,11 @@ draw();
 
 function initAudio(){
   if(audioCtx) return;
+
   audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+
   masterGain=audioCtx.createGain();
-  masterGain.gain.value=.09;
+  masterGain.gain.value=0;
   masterGain.connect(audioCtx.destination);
 
   toneOsc=audioCtx.createOscillator();
@@ -284,26 +311,35 @@ function initAudio(){
   lfo.start();
 }
 
+function ensureAudioOn(){
+  initAudio();
+  audioEnabled=true;
+  if(audioCtx.state==="suspended") audioCtx.resume();
+  masterGain.gain.setTargetAtTime(.09,audioCtx.currentTime,.08);
+  updateStatus();
+}
+
 function toggleAudio(){
   initAudio();
   audioEnabled=!audioEnabled;
+  if(audioCtx.state==="suspended") audioCtx.resume();
   masterGain.gain.setTargetAtTime(audioEnabled?.09:0,audioCtx.currentTime,.08);
   updateStatus();
 }
 
 function setAudioMode(musicCue){
-  if(!audioEnabled || !audioCtx) return;
+  if(!audioCtx) return;
   currentAudioMode=musicCue || "427Hz";
   const now=audioCtx.currentTime;
 
   const modes={
-    "427Hz":{freq:427,wave:"sine",gain:.22,pulse:0,pulseFreq:1.2,lfo:.12},
-    "Hyperpop":{freq:854,wave:"sawtooth",gain:.18,pulse:.07,pulseFreq:9,lfo:2.2},
-    "Breakbeats":{freq:427,wave:"triangle",gain:.2,pulse:.1,pulseFreq:5.5,lfo:.8},
-    "Ambient Techno":{freq:320,wave:"sine",gain:.18,pulse:.035,pulseFreq:2.2,lfo:.2},
-    "Darkwave":{freq:110,wave:"sine",gain:.24,pulse:.025,pulseFreq:1.1,lfo:.08},
-    "Synthpop":{freq:640,wave:"triangle",gain:.18,pulse:.045,pulseFreq:3.3,lfo:.5},
-    "Drift Phonk":{freq:180,wave:"sawtooth",gain:.2,pulse:.08,pulseFreq:4.2,lfo:.45}
+    "427Hz":{freq:427,wave:"sine",gain:.22,pulse:0,pulseFreq:1.2,lfo:.12,master:.085},
+    "Hyperpop":{freq:854,wave:"sawtooth",gain:.18,pulse:.07,pulseFreq:9,lfo:2.2,master:.075},
+    "Breakbeats":{freq:427,wave:"triangle",gain:.2,pulse:.1,pulseFreq:5.5,lfo:.8,master:.085},
+    "Ambient Techno":{freq:320,wave:"sine",gain:.18,pulse:.035,pulseFreq:2.2,lfo:.2,master:.075},
+    "Darkwave":{freq:110,wave:"sine",gain:.24,pulse:.025,pulseFreq:1.1,lfo:.08,master:.08},
+    "Synthpop":{freq:640,wave:"triangle",gain:.18,pulse:.045,pulseFreq:3.3,lfo:.5,master:.075},
+    "Drift Phonk":{freq:180,wave:"sawtooth",gain:.2,pulse:.08,pulseFreq:4.2,lfo:.45,master:.078}
   };
 
   const m=modes[currentAudioMode] || modes["427Hz"];
@@ -313,13 +349,12 @@ function setAudioMode(musicCue){
   pulseGain.gain.setTargetAtTime(m.pulse,now,.08);
   pulseOsc.frequency.setTargetAtTime(m.pulseFreq,now,.08);
   lfo.frequency.setTargetAtTime(m.lfo,now,.08);
+  if(audioEnabled) masterGain.gain.setTargetAtTime(m.master,now,.08);
 }
 
 function enterSystem(){
   document.getElementById("enter").classList.add("hide");
-  initAudio();
-  audioEnabled=true;
-  masterGain.gain.setTargetAtTime(.09,audioCtx.currentTime,.08);
+  ensureAudioOn();
   setState("baseline",false);
 }
 
@@ -329,26 +364,55 @@ function normalizeState(state){
 }
 
 function setState(state,writeLog=true){
+  ensureAudioOn();
   currentState=normalizeState(state);
   const config=stateMap[currentState];
-  currentMode=config.mode; currentMusic=config.music; targetIntensity=config.intensity;
+
+  currentMode=config.mode;
+  currentMusic=config.music;
+  targetIntensity=config.intensity;
+
   bgGlow.style.opacity=String(config.glow);
   document.body.setAttribute("data-state",currentState);
   setAudioMode(currentMusic);
   updateStatus();
   homeModeEl.textContent=`CURRENT MODE: ${currentMode}`;
+
   if(writeLog) appendLog(`[SYSTEM] ${currentMode}\n[AiQ愛<3] ${config.message}`);
+}
+
+function manualMusic(cue){
+  ensureAudioOn();
+
+  const v=musicVisualMap[cue] || musicVisualMap["427Hz"];
+  currentMusic=cue;
+  currentMode=v.mode;
+  currentState=v.state;
+  targetIntensity=v.intensity;
+
+  bgGlow.style.opacity=String(v.glow);
+  document.body.setAttribute("data-state",currentState);
+  setAudioMode(cue);
+  updateStatus();
+  homeModeEl.textContent=`CURRENT MODE: ${currentMode}`;
+  appendLog("[AUDIO TEST] " + cue);
 }
 
 function applyAIQPayload(data){
   if(!data) return;
+
   if(data.suggestedState) currentState=normalizeState(data.suggestedState);
-  targetIntensity=typeof data.visualIntensity==="number"?Math.max(.1,Math.min(1,data.visualIntensity)):stateMap[currentState].intensity;
-  currentMode=data.suggestedMode||stateMap[currentState].mode;
-  currentMusic=data.musicCue||stateMap[currentState].music;
+
+  targetIntensity=typeof data.visualIntensity==="number"
+    ? Math.max(.1,Math.min(1,data.visualIntensity))
+    : stateMap[currentState].intensity;
+
+  currentMode=data.suggestedMode || stateMap[currentState].mode;
+  currentMusic=data.musicCue || stateMap[currentState].music;
 
   const glowByState={baseline:.45,overloaded:1,numb:.75,anxious:.55,focus:.3,void:.68};
-  bgGlow.style.opacity=glowByState[currentState]||targetIntensity;
+  bgGlow.style.opacity=glowByState[currentState] || targetIntensity;
+
   document.body.setAttribute("data-state",currentState);
   setAudioMode(currentMusic);
   updateStatus();
@@ -356,17 +420,37 @@ function applyAIQPayload(data){
 }
 
 function updateStatus(){
-  statusEl.innerHTML=`STATE: ${currentState.toUpperCase()}<br>MODE: ${currentMode}<br>MUSIC: ${currentMusic}<br>AUDIO: ${audioEnabled?"ON":"OFF"}`;
+  statusEl.innerHTML=
+    `STATE: ${currentState.toUpperCase()}<br>`+
+    `MODE: ${currentMode}<br>`+
+    `MUSIC: ${currentMusic}<br>`+
+    `AUDIO: ${audioEnabled?"ON":"OFF"}`;
 }
 
-function appendLog(text){logEl.textContent+="\n\n"+text;logEl.scrollTop=logEl.scrollHeight}
-function pushHistory(role,content){conversationHistory.push({role,content});if(conversationHistory.length>12)conversationHistory=conversationHistory.slice(-12)}
-function calculateInputTempo(value){if(!typingStart)return 0;const seconds=Math.max((Date.now()-typingStart)/1000,1);return value.length/seconds}
+function appendLog(text){
+  logEl.textContent+="\n\n"+text;
+  logEl.scrollTop=logEl.scrollHeight;
+}
+
+function pushHistory(role,content){
+  conversationHistory.push({role,content});
+  if(conversationHistory.length>12)conversationHistory=conversationHistory.slice(-12);
+}
+
+function calculateInputTempo(value){
+  if(!typingStart)return 0;
+  const seconds=Math.max((Date.now()-typingStart)/1000,1);
+  return value.length/seconds;
+}
 
 async function sendMessage(input){
-  const message=input.trim(); if(!message)return;
-  appendLog("> "+message); pushHistory("user",message);
+  const message=input.trim();
+  if(!message)return;
+
+  appendLog("> "+message);
+  pushHistory("user",message);
   appendLog("[AiQ愛<3] thinking through rhythm...");
+
   metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);
   metrics.inputTempo=calculateInputTempo(message);
 
@@ -376,7 +460,9 @@ async function sendMessage(input){
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({message,state:currentState,metrics,history:conversationHistory})
     });
+
     const data=await response.json();
+
     if(data.reply){
       appendLog("[AiQ愛<3] "+data.reply);
       pushHistory("assistant",data.reply);
@@ -390,6 +476,7 @@ async function sendMessage(input){
     appendLog("[FRONTEND ERROR] "+error.message);
     console.error(error);
   }
+
   typingStart=null;
 }
 
@@ -397,23 +484,54 @@ function handleInput(event){
   const input=event.target;
   if(!typingStart && input.value.length>0) typingStart=Date.now();
   if(event.key!=="Enter")return;
-  const value=input.value; input.value=""; sendMessage(value);
+
+  const value=input.value;
+  input.value="";
+  sendMessage(value);
 }
-function sendFromButton(){const input=document.getElementById("input");const value=input.value;input.value="";sendMessage(value)}
+
+function sendFromButton(){
+  const input=document.getElementById("input");
+  const value=input.value;
+  input.value="";
+  sendMessage(value);
+}
 
 addEventListener("click",()=>{
-  clicks++; metrics.clickDensity=clicks;
-  if(clicks>8 && currentState!=="anxious") setState("anxious");
-  setTimeout(()=>{clicks=Math.max(0,clicks-1);metrics.clickDensity=clicks},1200);
+  clicks++;
+  metrics.clickDensity=clicks;
+
+  if(clicks>8 && currentState!=="anxious"){
+    setState("anxious");
+  }
+
+  setTimeout(()=>{
+    clicks=Math.max(0,clicks-1);
+    metrics.clickDensity=clicks;
+  },1200);
 });
+
 addEventListener("scroll",()=>{
-  const now=Date.now(),dy=Math.abs(scrollY-lastScroll),dt=now-lastTime,velocity=dy/Math.max(dt,1);
+  const now=Date.now();
+  const dy=Math.abs(scrollY-lastScroll);
+  const dt=now-lastTime;
+  const velocity=dy/Math.max(dt,1);
+
   metrics.scrollVelocity=Number(velocity.toFixed(3));
-  lastScroll=scrollY; lastTime=now;
-  if(velocity>3.8 && currentState!=="overloaded") setState("overloaded");
-  else if(velocity<.03 && scrollY>200 && currentState!=="focus") setState("focus");
+
+  lastScroll=scrollY;
+  lastTime=now;
+
+  if(velocity>3.8 && currentState!=="overloaded"){
+    setState("overloaded");
+  }else if(velocity<.03 && scrollY>200 && currentState!=="focus"){
+    setState("focus");
+  }
 });
-setInterval(()=>{metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000)},1000);
+
+setInterval(()=>{
+  metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);
+},1000);
 </script>
 </body>
 </html>
