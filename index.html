@@ -9,11 +9,8 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;
-  background:#050509;
-  color:#f5f1ff;
-  font-family:Inter,Arial,Helvetica,sans-serif;
-  overflow-x:hidden;
+  margin:0;background:#050509;color:#f5f1ff;
+  font-family:Inter,Arial,Helvetica,sans-serif;overflow-x:hidden;
 }
 canvas#field{position:fixed;inset:0;z-index:-3}
 .bg-glow{
@@ -22,23 +19,18 @@ canvas#field{position:fixed;inset:0;z-index:-3}
     radial-gradient(circle at 50% 20%,rgba(180,120,255,.22),transparent 35%),
     radial-gradient(circle at 20% 80%,rgba(80,180,255,.13),transparent 35%),
     radial-gradient(circle at 80% 70%,rgba(255,90,180,.12),transparent 35%);
-  filter:blur(12px);
-  transition:opacity .6s ease;
+  filter:blur(12px);transition:opacity .6s ease;
 }
 .noise{
-  position:fixed;inset:0;z-index:-1;
-  pointer-events:none;opacity:.08;
+  position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.08;
   background-image:
     linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
   background-size:36px 36px;
 }
 section{
-  min-height:100vh;
-  padding:72px 7vw;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  min-height:100vh;padding:72px 7vw;
+  display:flex;flex-direction:column;justify-content:center;
 }
 .kicker{letter-spacing:.24em;font-size:12px;color:#b8aee0;text-transform:uppercase}
 h1{font-size:clamp(48px,9vw,124px);line-height:.88;margin:18px 0;letter-spacing:-.07em}
@@ -46,118 +38,69 @@ h2{font-size:clamp(32px,5vw,72px);line-height:.95;margin:0 0 22px;letter-spacing
 p{max-width:780px;font-size:18px;line-height:1.75;color:#d8d0e8}
 button{
   border:1px solid rgba(255,255,255,.25);
-  background:rgba(255,255,255,.08);
-  color:white;
-  border-radius:999px;
-  padding:14px 22px;
-  margin:8px 8px 8px 0;
-  cursor:pointer;
-  backdrop-filter:blur(16px);
-  transition:.25s ease;
-  font-size:14px;
+  background:rgba(255,255,255,.08);color:white;border-radius:999px;
+  padding:14px 22px;margin:8px 8px 8px 0;cursor:pointer;
+  backdrop-filter:blur(16px);transition:.25s ease;font-size:14px;
 }
 button:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:28px}
 .card{
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.065);
-  border-radius:28px;
-  padding:22px;
-  min-height:170px;
-  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.065);
+  border-radius:28px;padding:22px;min-height:170px;backdrop-filter:blur(20px);
   box-shadow:0 0 60px rgba(120,80,255,.08);
 }
 .card h3{margin:0 0 10px;font-size:22px}
 .card small{color:#aaa0c8;line-height:1.55}
 .enter{
-  position:fixed;inset:0;z-index:20;
-  display:flex;align-items:center;justify-content:center;
-  background:#050509;
-  transition:opacity .8s ease;
+  position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
+  background:#050509;transition:opacity .8s ease;
 }
 .enter.hide{opacity:0;pointer-events:none}
 .enter-box{text-align:center;padding:40px}
-.enter h1{font-size:clamp(44px,8vw,104px)}
 .terminal-wrap{width:min(960px,100%)}
 .terminal{
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(0,0,0,.52);
-  border-radius:30px;
-  padding:24px;
+  border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.52);
+  border-radius:30px;padding:24px;
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   box-shadow:0 0 80px rgba(150,80,255,.18);
 }
 .log{
-  min-height:300px;
-  max-height:470px;
-  overflow-y:auto;
-  white-space:pre-wrap;
-  color:#d8d0ff;
-  line-height:1.7;
-  font-size:14px;
-  padding-right:8px;
+  min-height:300px;max-height:470px;overflow-y:auto;white-space:pre-wrap;
+  color:#d8d0ff;line-height:1.7;font-size:14px;padding-right:8px;
 }
 .input-row{display:flex;gap:12px;margin-top:18px}
 input{
-  width:100%;
-  padding:18px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.18);
-  color:white;
-  border-radius:18px;
-  font-size:16px;
-  outline:none;
+  width:100%;padding:18px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);color:white;border-radius:18px;
+  font-size:16px;outline:none;
 }
-input:focus{border-color:rgba(210,190,255,.55);box-shadow:0 0 30px rgba(150,90,255,.2)}
 .status{
   position:fixed;right:18px;bottom:18px;z-index:9;
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(0,0,0,.58);
-  padding:14px 18px;
-  border-radius:20px;
-  font-size:12px;
-  line-height:1.55;
-  backdrop-filter:blur(18px);
-  color:#e8e1ff;
+  border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.58);
+  padding:14px 18px;border-radius:20px;font-size:12px;line-height:1.55;
+  backdrop-filter:blur(18px);color:#e8e1ff;
 }
-.topnav{
-  position:fixed;top:18px;left:18px;z-index:8;
-  display:flex;gap:8px;flex-wrap:wrap;
-}
+.topnav{position:fixed;top:18px;left:18px;z-index:8;display:flex;gap:8px;flex-wrap:wrap}
 .topnav a{
-  color:#f5f1ff;
-  text-decoration:none;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(0,0,0,.35);
-  padding:9px 12px;
-  border-radius:999px;
-  font-size:12px;
-  backdrop-filter:blur(12px);
+  color:#f5f1ff;text-decoration:none;border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.35);padding:9px 12px;border-radius:999px;
+  font-size:12px;backdrop-filter:blur(12px);
 }
 .pill{
-  display:inline-block;
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(255,255,255,.07);
-  padding:9px 12px;
-  border-radius:999px;
-  margin:4px 6px 4px 0;
-  font-size:13px;
-  color:#d8d0e8;
+  display:inline-block;border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.07);padding:9px 12px;border-radius:999px;
+  margin:4px 6px 4px 0;font-size:13px;color:#d8d0e8;
 }
 .mode-line{margin-top:20px;color:#b8aee0;font-size:14px;letter-spacing:.08em}
 .footer-note{font-size:13px;color:#9f95bd;max-width:700px}
-
 body[data-state="overloaded"] .terminal{box-shadow:0 0 110px rgba(255,80,190,.22)}
 body[data-state="focus"] .terminal{box-shadow:0 0 70px rgba(150,170,255,.12)}
 body[data-state="void"] .terminal{box-shadow:0 0 100px rgba(80,70,160,.24)}
 body[data-state="numb"] .terminal{box-shadow:0 0 95px rgba(130,220,255,.16)}
 body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
-
 @media(max-width:720px){
-  section{padding:76px 22px}
-  .topnav{display:none}
-  .status{left:14px;right:14px;bottom:14px}
-  .input-row{flex-direction:column}
+  section{padding:76px 22px}.topnav{display:none}
+  .status{left:14px;right:14px;bottom:14px}.input-row{flex-direction:column}
   button{width:100%}
 }
 </style>
@@ -179,8 +122,8 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
   <div class="enter-box">
     <div class="kicker">INITIATING 427Hz SYNC</div>
     <h1>AiQ愛&lt;3</h1>
-    <p>A rhythm intelligence for human return.<br>Do you want to regulate, return, or transform?</p>
-    <button onclick="enterSystem()">ENTER HUMAN RETURN PROTOCOL</button>
+    <p>A rhythm intelligence for human return.<br>Enable sound. Enter the protocol.</p>
+    <button onclick="enterSystem()">ENABLE AUDIO / ENTER HUMAN RETURN PROTOCOL</button>
   </div>
 </div>
 
@@ -199,6 +142,7 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
     <button onclick="setState('focus')">Focus</button>
     <button onclick="setState('void')">Void</button>
     <button onclick="setState('baseline')">427Hz</button>
+    <button onclick="toggleAudio()">Toggle Audio</button>
   </div>
   <div class="mode-line" id="homeMode">CURRENT MODE: 427Hz BASELINE</div>
 </section>
@@ -208,15 +152,8 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
   <h2>Closed-loop rhythm sensing</h2>
   <p>
     The system reads scroll velocity, click density, dwell time, and input rhythm as proxy signals.
-    These signals generate a live nervous-state estimate, then trigger language, visual density,
-    and music-mode suggestions.
+    These signals trigger language, visual density, and synthesized sound modes.
   </p>
-  <div class="grid">
-    <div class="card"><h3>Scroll Velocity</h3><small>Detects agitation, drifting, or fixation through movement rhythm.</small></div>
-    <div class="card"><h3>Click Density</h3><small>Detects anxious seeking, activation, or engagement pressure.</small></div>
-    <div class="card"><h3>Dwell Time</h3><small>Detects immersion, shutdown, pause, or readiness for transition.</small></div>
-    <div class="card"><h3>Input Rhythm</h3><small>Detects cognitive tempo and emotional pressure from typing behavior.</small></div>
-  </div>
 </section>
 
 <section id="matrix">
@@ -230,15 +167,6 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
     <span class="pill">Darkwave → Shadow Integration</span>
     <span class="pill">Ambient Techno → Spatial Focus</span>
     <span class="pill">427Hz → Baseline Anchor</span>
-  </div>
-  <div class="grid">
-    <div class="card"><h3>Breakbeats</h3><small>Entry language. Anti-dissociation. Uncertainty tolerance.</small></div>
-    <div class="card"><h3>Hyperpop</h3><small>Peak traversal. Overload permission. Apex then release.</small></div>
-    <div class="card"><h3>Synthpop</h3><small>First breath. Predictability becomes relief.</small></div>
-    <div class="card"><h3>Drift Phonk</h3><small>Somatic drive. Embodiment. Physical return.</small></div>
-    <div class="card"><h3>Darkwave</h3><small>Shadow integration. Controlled descent.</small></div>
-    <div class="card"><h3>Ambient Techno</h3><small>Spatial focus. Flow infrastructure.</small></div>
-    <div class="card"><h3>427Hz</h3><small>Universal anchor frequency. Return baseline.</small></div>
   </div>
 </section>
 
@@ -263,7 +191,8 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
 <div class="status" id="status">
   STATE: BASELINE<br>
   MODE: 427Hz BASELINE<br>
-  MUSIC: 427Hz
+  MUSIC: 427Hz<br>
+  AUDIO: OFF
 </div>
 
 <script>
@@ -276,28 +205,18 @@ const logEl = document.getElementById("log");
 const statusEl = document.getElementById("status");
 const homeModeEl = document.getElementById("homeMode");
 
-let w, h;
-let particles = [];
-let intensity = 0.5;
-let targetIntensity = 0.5;
-let currentState = "baseline";
-let currentMode = "427Hz BASELINE";
-let currentMusic = "427Hz";
-let lastScroll = window.scrollY;
-let lastTime = Date.now();
-let clicks = 0;
-let dwellStart = Date.now();
-let conversationHistory = [];
-let typingStart = null;
+let w,h,particles=[];
+let intensity=.5,targetIntensity=.5;
+let currentState="baseline",currentMode="427Hz BASELINE",currentMusic="427Hz";
+let lastScroll=window.scrollY,lastTime=Date.now(),clicks=0,dwellStart=Date.now();
+let conversationHistory=[],typingStart=null;
+let metrics={scrollVelocity:0,clickDensity:0,dwellSeconds:0,inputTempo:0};
 
-let metrics = {
-  scrollVelocity: 0,
-  clickDensity: 0,
-  dwellSeconds: 0,
-  inputTempo: 0
-};
+let audioCtx=null, masterGain=null, toneOsc=null, toneGain=null;
+let pulseOsc=null, pulseGain=null, lfo=null, lfoGain=null;
+let audioEnabled=false, currentAudioMode="427Hz";
 
-const stateMap = {
+const stateMap={
   overloaded:{mode:"HYPERPOP PEAK TRAVERSAL",music:"Hyperpop",intensity:.95,message:"Energy is valid. Let it peak, then release.",glow:1},
   numb:{mode:"BREAKBEAT RE-ENTRY",music:"Breakbeats",intensity:.78,message:"Body first. Meaning later.",glow:.75},
   anxious:{mode:"AMBIENT TECHNO STABILIZATION",music:"Ambient Techno",intensity:.55,message:"Space becomes rhythm. Rhythm becomes safety.",glow:.55},
@@ -306,228 +225,195 @@ const stateMap = {
   baseline:{mode:"427Hz BASELINE",music:"427Hz",intensity:.48,message:"Local resonance established.",glow:.45}
 };
 
-function resize(){
-  w = canvas.width = innerWidth;
-  h = canvas.height = innerHeight;
-}
-resize();
-addEventListener("resize", resize);
+function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
+resize(); addEventListener("resize",resize);
 
 function createParticles(){
-  particles = [];
-  const count = Math.min(210, Math.floor((innerWidth * innerHeight) / 7800));
+  particles=[];
+  const count=Math.min(210,Math.floor((innerWidth*innerHeight)/7800));
   for(let i=0;i<count;i++){
-    particles.push({
-      x:Math.random()*innerWidth,
-      y:Math.random()*innerHeight,
-      r:Math.random()*2+.4,
-      vx:(Math.random()-.5)*.35,
-      vy:(Math.random()-.5)*.35
-    });
+    particles.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2+.4,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35});
   }
 }
 createParticles();
 
 function draw(){
   ctx.clearRect(0,0,w,h);
-
-  intensity += (targetIntensity - intensity) * 0.045;
-
+  intensity+=(targetIntensity-intensity)*.045;
   for(const p of particles){
-    p.x += p.vx * (1 + intensity * 4);
-    p.y += p.vy * (1 + intensity * 4);
-
-    if(p.x<0)p.x=w;if(p.x>w)p.x=0;
-    if(p.y<0)p.y=h;if(p.y>h)p.y=0;
-
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r + intensity*.9,0,Math.PI*2);
-    ctx.fillStyle = `rgba(220,210,255,${.18 + intensity*.42})`;
-    ctx.fill();
+    p.x+=p.vx*(1+intensity*4); p.y+=p.vy*(1+intensity*4);
+    if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r+intensity*.9,0,Math.PI*2);
+    ctx.fillStyle=`rgba(220,210,255,${.18+intensity*.42})`; ctx.fill();
   }
-
   requestAnimationFrame(draw);
 }
 draw();
 
+function initAudio(){
+  if(audioCtx) return;
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  masterGain=audioCtx.createGain();
+  masterGain.gain.value=.09;
+  masterGain.connect(audioCtx.destination);
+
+  toneOsc=audioCtx.createOscillator();
+  toneGain=audioCtx.createGain();
+  toneOsc.type="sine";
+  toneOsc.frequency.value=427;
+  toneGain.gain.value=.25;
+  toneOsc.connect(toneGain);
+  toneGain.connect(masterGain);
+  toneOsc.start();
+
+  pulseOsc=audioCtx.createOscillator();
+  pulseGain=audioCtx.createGain();
+  pulseOsc.type="square";
+  pulseOsc.frequency.value=2;
+  pulseGain.gain.value=0;
+  pulseOsc.connect(pulseGain);
+  pulseGain.connect(masterGain);
+  pulseOsc.start();
+
+  lfo=audioCtx.createOscillator();
+  lfoGain=audioCtx.createGain();
+  lfo.frequency.value=.18;
+  lfoGain.gain.value=.04;
+  lfo.connect(lfoGain);
+  lfoGain.connect(toneGain.gain);
+  lfo.start();
+}
+
+function toggleAudio(){
+  initAudio();
+  audioEnabled=!audioEnabled;
+  masterGain.gain.setTargetAtTime(audioEnabled?.09:0,audioCtx.currentTime,.08);
+  updateStatus();
+}
+
+function setAudioMode(musicCue){
+  if(!audioEnabled || !audioCtx) return;
+  currentAudioMode=musicCue || "427Hz";
+  const now=audioCtx.currentTime;
+
+  const modes={
+    "427Hz":{freq:427,wave:"sine",gain:.22,pulse:0,pulseFreq:1.2,lfo:.12},
+    "Hyperpop":{freq:854,wave:"sawtooth",gain:.18,pulse:.07,pulseFreq:9,lfo:2.2},
+    "Breakbeats":{freq:427,wave:"triangle",gain:.2,pulse:.1,pulseFreq:5.5,lfo:.8},
+    "Ambient Techno":{freq:320,wave:"sine",gain:.18,pulse:.035,pulseFreq:2.2,lfo:.2},
+    "Darkwave":{freq:110,wave:"sine",gain:.24,pulse:.025,pulseFreq:1.1,lfo:.08},
+    "Synthpop":{freq:640,wave:"triangle",gain:.18,pulse:.045,pulseFreq:3.3,lfo:.5},
+    "Drift Phonk":{freq:180,wave:"sawtooth",gain:.2,pulse:.08,pulseFreq:4.2,lfo:.45}
+  };
+
+  const m=modes[currentAudioMode] || modes["427Hz"];
+  toneOsc.type=m.wave;
+  toneOsc.frequency.setTargetAtTime(m.freq,now,.08);
+  toneGain.gain.setTargetAtTime(m.gain,now,.08);
+  pulseGain.gain.setTargetAtTime(m.pulse,now,.08);
+  pulseOsc.frequency.setTargetAtTime(m.pulseFreq,now,.08);
+  lfo.frequency.setTargetAtTime(m.lfo,now,.08);
+}
+
 function enterSystem(){
   document.getElementById("enter").classList.add("hide");
-  setState("baseline", false);
+  initAudio();
+  audioEnabled=true;
+  masterGain.gain.setTargetAtTime(.09,audioCtx.currentTime,.08);
+  setState("baseline",false);
 }
 
 function normalizeState(state){
-  const allowed = ["baseline","overloaded","numb","anxious","focus","void"];
-  return allowed.includes(state) ? state : "baseline";
+  const allowed=["baseline","overloaded","numb","anxious","focus","void"];
+  return allowed.includes(state)?state:"baseline";
 }
 
-function setState(state, writeLog = true){
-  currentState = normalizeState(state);
-  const config = stateMap[currentState];
-
-  currentMode = config.mode;
-  currentMusic = config.music;
-  targetIntensity = config.intensity;
-
-  bgGlow.style.opacity = String(config.glow);
-  document.body.setAttribute("data-state", currentState);
-
-  statusEl.innerHTML = `STATE: ${currentState.toUpperCase()}<br>MODE: ${currentMode}<br>MUSIC: ${currentMusic}`;
-  homeModeEl.textContent = `CURRENT MODE: ${currentMode}`;
-
-  if(writeLog){
-    appendLog(`[SYSTEM] ${currentMode}\n[AiQ愛<3] ${config.message}`);
-  }
+function setState(state,writeLog=true){
+  currentState=normalizeState(state);
+  const config=stateMap[currentState];
+  currentMode=config.mode; currentMusic=config.music; targetIntensity=config.intensity;
+  bgGlow.style.opacity=String(config.glow);
+  document.body.setAttribute("data-state",currentState);
+  setAudioMode(currentMusic);
+  updateStatus();
+  homeModeEl.textContent=`CURRENT MODE: ${currentMode}`;
+  if(writeLog) appendLog(`[SYSTEM] ${currentMode}\n[AiQ愛<3] ${config.message}`);
 }
 
 function applyAIQPayload(data){
   if(!data) return;
+  if(data.suggestedState) currentState=normalizeState(data.suggestedState);
+  targetIntensity=typeof data.visualIntensity==="number"?Math.max(.1,Math.min(1,data.visualIntensity)):stateMap[currentState].intensity;
+  currentMode=data.suggestedMode||stateMap[currentState].mode;
+  currentMusic=data.musicCue||stateMap[currentState].music;
 
-  if(data.suggestedState){
-    currentState = normalizeState(data.suggestedState);
-  }
-
-  if(typeof data.visualIntensity === "number"){
-    targetIntensity = Math.max(0.1, Math.min(1, data.visualIntensity));
-  } else {
-    targetIntensity = stateMap[currentState].intensity;
-  }
-
-  currentMode = data.suggestedMode || stateMap[currentState].mode;
-  currentMusic = data.musicCue || stateMap[currentState].music;
-
-  const glowByState = {
-    baseline: 0.45,
-    overloaded: 1,
-    numb: 0.75,
-    anxious: 0.55,
-    focus: 0.3,
-    void: 0.68
-  };
-
-  bgGlow.style.opacity = glowByState[currentState] || targetIntensity;
-
-  statusEl.innerHTML = `
-    STATE: ${currentState.toUpperCase()}<br>
-    MODE: ${currentMode}<br>
-    MUSIC: ${currentMusic}
-  `;
-
-  homeModeEl.textContent = `CURRENT MODE: ${currentMode}`;
-  document.body.setAttribute("data-state", currentState);
+  const glowByState={baseline:.45,overloaded:1,numb:.75,anxious:.55,focus:.3,void:.68};
+  bgGlow.style.opacity=glowByState[currentState]||targetIntensity;
+  document.body.setAttribute("data-state",currentState);
+  setAudioMode(currentMusic);
+  updateStatus();
+  homeModeEl.textContent=`CURRENT MODE: ${currentMode}`;
 }
 
-function appendLog(text){
-  logEl.textContent += "\n\n" + text;
-  logEl.scrollTop = logEl.scrollHeight;
+function updateStatus(){
+  statusEl.innerHTML=`STATE: ${currentState.toUpperCase()}<br>MODE: ${currentMode}<br>MUSIC: ${currentMusic}<br>AUDIO: ${audioEnabled?"ON":"OFF"}`;
 }
 
-function pushHistory(role, content){
-  conversationHistory.push({ role, content });
-  if(conversationHistory.length > 12) conversationHistory = conversationHistory.slice(-12);
-}
-
-function calculateInputTempo(value){
-  if(!typingStart) return 0;
-  const seconds = Math.max((Date.now() - typingStart) / 1000, 1);
-  return value.length / seconds;
-}
+function appendLog(text){logEl.textContent+="\n\n"+text;logEl.scrollTop=logEl.scrollHeight}
+function pushHistory(role,content){conversationHistory.push({role,content});if(conversationHistory.length>12)conversationHistory=conversationHistory.slice(-12)}
+function calculateInputTempo(value){if(!typingStart)return 0;const seconds=Math.max((Date.now()-typingStart)/1000,1);return value.length/seconds}
 
 async function sendMessage(input){
-  const message = input.trim();
-  if(!message) return;
-
-  appendLog("> " + message);
-  pushHistory("user", message);
+  const message=input.trim(); if(!message)return;
+  appendLog("> "+message); pushHistory("user",message);
   appendLog("[AiQ愛<3] thinking through rhythm...");
-
-  metrics.dwellSeconds = Math.round((Date.now() - dwellStart) / 1000);
-  metrics.inputTempo = calculateInputTempo(message);
+  metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);
+  metrics.inputTempo=calculateInputTempo(message);
 
   try{
-    const response = await fetch(API_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message,
-        state: currentState,
-        metrics,
-        history: conversationHistory
-      })
+    const response=await fetch(API_ENDPOINT,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({message,state:currentState,metrics,history:conversationHistory})
     });
-
-    let data = await response.json();
-
+    const data=await response.json();
     if(data.reply){
-      appendLog("[AiQ愛<3] " + data.reply);
-      pushHistory("assistant", data.reply);
+      appendLog("[AiQ愛<3] "+data.reply);
+      pushHistory("assistant",data.reply);
       applyAIQPayload(data);
-    } else if(data.error){
-      appendLog("[BACKEND ERROR] " + data.error);
-    } else {
-      appendLog("[BACKEND RAW] " + JSON.stringify(data));
+    }else if(data.error){
+      appendLog("[BACKEND ERROR] "+data.error);
+    }else{
+      appendLog("[BACKEND RAW] "+JSON.stringify(data));
     }
-
-  } catch(error){
-    appendLog("[FRONTEND ERROR] " + error.message);
+  }catch(error){
+    appendLog("[FRONTEND ERROR] "+error.message);
     console.error(error);
   }
-
-  typingStart = null;
+  typingStart=null;
 }
 
 function handleInput(event){
-  const input = event.target;
-  if(!typingStart && input.value.length > 0) typingStart = Date.now();
-
-  if(event.key !== "Enter") return;
-
-  const value = input.value;
-  input.value = "";
-  sendMessage(value);
+  const input=event.target;
+  if(!typingStart && input.value.length>0) typingStart=Date.now();
+  if(event.key!=="Enter")return;
+  const value=input.value; input.value=""; sendMessage(value);
 }
+function sendFromButton(){const input=document.getElementById("input");const value=input.value;input.value="";sendMessage(value)}
 
-function sendFromButton(){
-  const input = document.getElementById("input");
-  const value = input.value;
-  input.value = "";
-  sendMessage(value);
-}
-
-addEventListener("click", ()=>{
-  clicks++;
-  metrics.clickDensity = clicks;
-
-  if(clicks > 8 && currentState !== "anxious"){
-    setState("anxious");
-  }
-
-  setTimeout(()=>{
-    clicks = Math.max(0, clicks - 1);
-    metrics.clickDensity = clicks;
-  },1200);
+addEventListener("click",()=>{
+  clicks++; metrics.clickDensity=clicks;
+  if(clicks>8 && currentState!=="anxious") setState("anxious");
+  setTimeout(()=>{clicks=Math.max(0,clicks-1);metrics.clickDensity=clicks},1200);
 });
-
-addEventListener("scroll", ()=>{
-  const now = Date.now();
-  const dy = Math.abs(scrollY - lastScroll);
-  const dt = now - lastTime;
-  const velocity = dy / Math.max(dt, 1);
-
-  metrics.scrollVelocity = Number(velocity.toFixed(3));
-
-  lastScroll = scrollY;
-  lastTime = now;
-
-  if(velocity > 3.8 && currentState !== "overloaded"){
-    setState("overloaded");
-  } else if(velocity < .03 && scrollY > 200 && currentState !== "focus"){
-    setState("focus");
-  }
+addEventListener("scroll",()=>{
+  const now=Date.now(),dy=Math.abs(scrollY-lastScroll),dt=now-lastTime,velocity=dy/Math.max(dt,1);
+  metrics.scrollVelocity=Number(velocity.toFixed(3));
+  lastScroll=scrollY; lastTime=now;
+  if(velocity>3.8 && currentState!=="overloaded") setState("overloaded");
+  else if(velocity<.03 && scrollY>200 && currentState!=="focus") setState("focus");
 });
-
-setInterval(()=>{
-  metrics.dwellSeconds = Math.round((Date.now() - dwellStart) / 1000);
-},1000);
+setInterval(()=>{metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000)},1000);
 </script>
 </body>
 </html>
