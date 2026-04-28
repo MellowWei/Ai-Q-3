@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@anthropic-ai/sdk": "latest",
+    "@supabase/supabase-js": "latest",
     "openai": "latest"
   }
 }
