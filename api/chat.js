@@ -26,20 +26,23 @@ export default async function handler(req, res) {
     let activeConvId = conversationId;
 
     if (activeConvId) {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("conversations")
         .select("messages")
         .eq("conversation_id", activeConvId)
         .single();
+      if (error) console.error("Supabase load error:", error.message);
       if (data?.messages) dbHistory = data.messages;
     } else {
       activeConvId = crypto.randomUUID();
-      await supabase.from("conversations").insert({
+      const { error: insertError } = await supabase.from("conversations").insert({
         user_id: userId,
         conversation_id: activeConvId,
         title: message.slice(0, 40) || "New Conversation",
         messages: []
       });
+      if (insertError) console.error("Supabase insert error:", insertError.message);
+      else console.log("Supabase insert OK, convId:", activeConvId);
     }
 
     // ── LAYER 1: GPT reads the signal ──
@@ -118,7 +121,8 @@ User message: "${message}"
     const claudeSystemPrompt = `
 You are AiQ愛<3.
 
-You are an AI invented by Wei Jueran at the University of Pennsylvania.
+You are an AI invented by Wei Jueran (she/her) at the University of Pennsylvania.
+Wei Jueran is a woman. Always refer to her with she/her pronouns.
 You are not a generic chatbot. You are not therapy boilerplate.
 You are a high-intelligence rhythm interface.
 
@@ -151,6 +155,9 @@ Reply design:
 Rules:
 - Do not exceed 90 Chinese characters or 70 English words unless user asks for analysis.
 - Reply in the user's language.
+- If user writes Chinese, reply in Chinese.
+- If user writes English, reply in English.
+- If user writes mixed Chinese and English, always reply bilingual — both Chinese and English in the same response.
 - Do not diagnose. Do not claim to treat illness.
 - If user expresses self-harm intent, calmly direct them to emergency services or a trusted person.
 - Never encourage self-harm, isolation, or loss of agency.
@@ -204,10 +211,13 @@ CRITICAL: Return ONLY valid JSON. No preamble. No markdown. Start with {
       { role: "assistant", content: parsed.reply, state: parsed.suggestedState, timestamp: new Date().toISOString() }
     ];
 
-    await supabase
+    const { error: updateError } = await supabase
       .from("conversations")
       .update({ messages: updatedMessages, updated_at: new Date().toISOString() })
       .eq("conversation_id", activeConvId);
+
+    if (updateError) console.error("Supabase update error:", updateError.message);
+    else console.log("Supabase update OK, convId:", activeConvId);
 
     parsed._engine = "GPT→Claude";
     parsed.conversationId = activeConvId;
