@@ -22,8 +22,6 @@ button:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
 .pill{display:inline-block;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);padding:9px 12px;border-radius:999px;margin:4px 6px 4px 0;font-size:13px;color:#d8d0e8;}
 .mode-line{margin-top:20px;color:#b8aee0;font-size:14px;letter-spacing:.08em}
 .footer-note{font-size:13px;color:#9f95bd;max-width:700px;margin-top:16px}
-
-/* Enter screen */
 .enter{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:#050509;transition:opacity .8s ease;}
 .enter.hide{opacity:0;pointer-events:none}
 .enter-box{text-align:center;padding:40px;max-width:480px;width:100%}
@@ -32,15 +30,9 @@ button:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
 .auth-msg{font-size:13px;color:#b8aee0;margin-top:8px;min-height:20px}
 .auth-skip{font-size:12px;color:#6a6280;margin-top:16px;cursor:pointer;text-decoration:underline}
 .auth-skip:hover{color:#b8aee0}
-
-/* User info */
 .user-info{position:fixed;top:18px;right:18px;z-index:9;font-size:12px;color:#b8aee0;display:flex;align-items:center;gap:10px;}
 .logout-btn{font-size:11px;padding:6px 12px;border-radius:999px;margin:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);}
-
-/* Desktop chat layout */
 .chat-layout{display:flex;gap:20px;width:100%;max-width:1200px}
-
-/* Desktop sidebar */
 .sidebar{width:240px;min-width:200px;flex-shrink:0;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.4);border-radius:24px;padding:16px;backdrop-filter:blur(20px);display:flex;flex-direction:column;gap:10px;max-height:600px;}
 .sidebar-title{font-size:11px;letter-spacing:.2em;color:#b8aee0;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08);}
 .new-conv-btn{width:100%;padding:10px 14px;font-size:13px;border-radius:14px;background:rgba(180,120,255,.18);border:1px solid rgba(180,120,255,.35);color:#e8d8ff;cursor:pointer;transition:.2s;text-align:left;margin:0;}
@@ -49,104 +41,57 @@ button:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
 .conv-item{padding:10px 12px;border-radius:14px;cursor:pointer;border:1px solid transparent;font-size:13px;color:#d8d0e8;transition:.2s;display:flex;align-items:center;justify-content:space-between;gap:8px;}
 .conv-item:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.1)}
 .conv-item.active{background:rgba(180,120,255,.15);border-color:rgba(180,120,255,.3);color:#f0e8ff}
-.conv-item-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.conv-delete{opacity:0;font-size:14px;padding:2px 6px;border-radius:8px;background:rgba(255,80,80,.15);border:none;color:#ff9090;cursor:pointer;transition:.15s;flex-shrink:0;margin:0;}
-.conv-item:hover .conv-delete{opacity:1}
-.conv-delete:hover{background:rgba(255,80,80,.3);transform:none}
+.conv-item-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:text;}
+.conv-actions{display:flex;gap:4px;flex-shrink:0;opacity:0;transition:.15s}
+.conv-item:hover .conv-actions{opacity:1}
+.conv-btn{font-size:12px;padding:2px 7px;border-radius:8px;border:none;cursor:pointer;margin:0;transition:.15s;}
+.conv-rename-btn{background:rgba(180,120,255,.2);color:#c8b8ff;}
+.conv-rename-btn:hover{background:rgba(180,120,255,.4);transform:none}
+.conv-delete-btn{background:rgba(255,80,80,.15);color:#ff9090;}
+.conv-delete-btn:hover{background:rgba(255,80,80,.3);transform:none}
 .rename-hint{font-size:10px;color:#5a5270;text-align:center;padding:4px 0}
-
-/* Terminal */
 .terminal-wrap{flex:1;min-width:0}
 .terminal{border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.52);border-radius:30px;padding:24px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;box-shadow:0 0 80px rgba(150,80,255,.18);}
 .log{min-height:300px;max-height:470px;overflow-y:auto;white-space:pre-wrap;color:#d8d0ff;line-height:1.7;font-size:14px;padding-right:8px;}
 .input-row{display:flex;gap:12px;margin-top:18px}
 input[type="text"],input[type="email"],input:not([type]){width:100%;padding:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:white;border-radius:18px;font-size:16px;outline:none;}
-
-/* Status */
 .status{position:fixed;right:18px;bottom:18px;z-index:9;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.58);padding:14px 18px;border-radius:20px;font-size:12px;line-height:1.55;backdrop-filter:blur(18px);color:#e8e1ff;}
-
-/* Topnav */
 .topnav{position:fixed;top:18px;left:18px;z-index:8;display:flex;gap:8px;flex-wrap:wrap}
 .topnav a{color:#f5f1ff;text-decoration:none;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.35);padding:9px 12px;border-radius:999px;font-size:12px;backdrop-filter:blur(12px);}
-
-/* State glows */
 body[data-state="overloaded"] .terminal{box-shadow:0 0 110px rgba(255,80,190,.22)}
 body[data-state="focus"] .terminal{box-shadow:0 0 70px rgba(150,170,255,.12)}
 body[data-state="void"] .terminal{box-shadow:0 0 100px rgba(80,70,160,.24)}
 body[data-state="numb"] .terminal{box-shadow:0 0 95px rgba(130,220,255,.16)}
 body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
-
-/* ── MOBILE ── */
 @media(max-width:720px){
   section{padding:80px 18px 100px}
-  h1{letter-spacing:-.05em}
   p{font-size:16px}
-
-  /* Hide desktop nav, show mobile bottom bar */
   .topnav{display:none}
   .status{display:none}
   .user-info{top:12px;right:12px;font-size:11px}
-
-  /* Mobile bottom nav */
-  .mobile-nav{
-    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;
-    background:rgba(5,5,9,.92);border-top:1px solid rgba(255,255,255,.1);
-    backdrop-filter:blur(20px);padding:8px 0 max(8px,env(safe-area-inset-bottom));
-  }
-  .mobile-nav a{
-    flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
-    color:#9090b8;text-decoration:none;font-size:10px;padding:6px 0;transition:.2s;
-  }
-  .mobile-nav a.active,.mobile-nav a:hover{color:#d8d0ff}
+  .mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;background:rgba(5,5,9,.92);border-top:1px solid rgba(255,255,255,.1);backdrop-filter:blur(20px);padding:8px 0 max(8px,env(safe-area-inset-bottom));}
+  .mobile-nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:#9090b8;text-decoration:none;font-size:10px;padding:6px 0;transition:.2s;cursor:pointer;}
+  .mobile-nav a:hover{color:#d8d0ff}
   .mobile-nav a svg{width:20px;height:20px}
-
-  /* Chat section mobile */
   #chat{padding:80px 0 120px}
   .chat-layout{flex-direction:column;gap:0;padding:0 18px}
-
-  /* Mobile sidebar button */
-  .mobile-conv-bar{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:10px 0;margin-bottom:12px;
-  }
+  .mobile-conv-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 0;margin-bottom:12px;}
   .mobile-conv-label{font-size:12px;color:#b8aee0;letter-spacing:.1em}
-  .mobile-conv-toggle{
-    font-size:12px;padding:6px 14px;border-radius:999px;margin:0;
-    background:rgba(180,120,255,.18);border:1px solid rgba(180,120,255,.3);color:#e8d8ff;
-  }
-
-  /* Mobile bottom sheet for conversations */
-  .conv-sheet-overlay{
-    display:none;position:fixed;inset:0;z-index:18;background:rgba(0,0,0,.6);
-    backdrop-filter:blur(4px);
-  }
+  .mobile-conv-toggle{font-size:12px;padding:6px 14px;border-radius:999px;margin:0;background:rgba(180,120,255,.18);border:1px solid rgba(180,120,255,.3);color:#e8d8ff;}
+  .conv-sheet-overlay{display:none;position:fixed;inset:0;z-index:18;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);}
   .conv-sheet-overlay.open{display:block}
-  .conv-sheet{
-    position:fixed;bottom:0;left:0;right:0;z-index:19;
-    background:#0d0b14;border-top:1px solid rgba(255,255,255,.12);
-    border-radius:24px 24px 0 0;padding:20px 20px max(20px,env(safe-area-inset-bottom));
-    max-height:70vh;display:flex;flex-direction:column;gap:12px;
-    transform:translateY(100%);transition:transform .3s ease;
-  }
+  .conv-sheet{position:fixed;bottom:0;left:0;right:0;z-index:19;background:#0d0b14;border-top:1px solid rgba(255,255,255,.12);border-radius:24px 24px 0 0;padding:20px 20px max(20px,env(safe-area-inset-bottom));max-height:70vh;display:flex;flex-direction:column;gap:12px;transform:translateY(100%);transition:transform .3s ease;}
   .conv-sheet.open{transform:translateY(0)}
   .conv-sheet-handle{width:36px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin:0 auto 4px;}
   .conv-sheet-list{overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:6px}
-
-  /* Mobile terminal */
   .terminal{border-radius:20px;padding:16px}
   .log{min-height:200px;max-height:calc(100vh - 320px);font-size:13px}
   .input-row{gap:8px}
   .input-row input{padding:14px;font-size:15px}
-  .input-row button{padding:14px 18px;white-space:nowrap}
-
-  /* Hide desktop sidebar */
+  .input-row button{padding:14px 16px;white-space:nowrap}
   .sidebar{display:none}
-
-  /* Mobile home buttons */
   #home button{padding:10px 16px;font-size:13px}
 }
-
-/* Desktop: hide mobile elements */
 @media(min-width:721px){
   .mobile-nav{display:none}
   .mobile-conv-bar{display:none}
@@ -159,35 +104,26 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
 <canvas id="field"></canvas>
 <div class="bg-glow" id="bgGlow"></div>
 <div class="noise"></div>
-
 <nav class="topnav">
   <a href="#home">Home</a>
   <a href="#cuff">Neural Cuff</a>
   <a href="#matrix">Music Matrix</a>
   <a href="#chat">Talk to AiQ</a>
 </nav>
-
-<!-- Mobile bottom nav -->
 <nav class="mobile-nav">
   <a href="#home">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>
-    Home
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>Home
   </a>
   <a href="#chat">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-    AiQ
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>AiQ
   </a>
   <a href="#matrix">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
-    Matrix
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>Matrix
   </a>
-  <a onclick="toggleAudio()" style="cursor:pointer">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
-    Audio
+  <a onclick="toggleAudio()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>Audio
   </a>
 </nav>
-
-<!-- Mobile conv sheet -->
 <div class="conv-sheet-overlay" id="convSheetOverlay" onclick="closeConvSheet()"></div>
 <div class="conv-sheet" id="convSheet">
   <div class="conv-sheet-handle"></div>
@@ -197,12 +133,10 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
   </div>
   <div class="conv-sheet-list" id="convSheetList"></div>
 </div>
-
 <div class="user-info" id="userInfo" style="display:none">
   <span id="userEmail"></span>
   <button class="logout-btn" onclick="logout()">Sign out</button>
 </div>
-
 <div class="enter" id="enter">
   <div class="enter-box">
     <div class="kicker">INITIATING 427Hz SYNC</div>
@@ -215,7 +149,6 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
     </div>
   </div>
 </div>
-
 <section id="home">
   <div class="kicker">Mellow7 // Human-Powered Intelligence</div>
   <h1>AiQ愛&lt;3</h1>
@@ -231,13 +164,11 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
   </div>
   <div class="mode-line" id="homeMode">CURRENT MODE: 427Hz BASELINE</div>
 </section>
-
 <section id="cuff">
   <div class="kicker">Neural Cuff // Software Prototype</div>
   <h2>Closed-loop rhythm sensing</h2>
-  <p>The system reads scroll velocity, click density, dwell time, and input rhythm as proxy signals. These signals trigger language, visual density, and synthesized sound modes.</p>
+  <p>The system reads scroll velocity, click density, dwell time, and input rhythm as proxy signals.</p>
 </section>
-
 <section id="matrix">
   <div class="kicker">Genre-Driven Intervention Matrix</div>
   <h2>Music as nervous-system logic</h2>
@@ -251,42 +182,34 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
     <span class="pill">427Hz → Baseline Anchor</span>
   </div>
 </section>
-
 <section id="chat">
   <div class="kicker">SOUL_STREAM_v1.0.7</div>
   <h2>Talk to AiQ</h2>
   <div class="chat-layout">
-
-    <!-- Desktop sidebar -->
     <div class="sidebar">
       <div class="sidebar-title">Conversations</div>
       <button class="new-conv-btn" onclick="newConversation()">＋ New Conversation</button>
       <div class="conv-list" id="convList"><div style="color:#7a7090;font-size:12px;padding:8px">Loading...</div></div>
-      <div class="rename-hint">double-click to rename</div>
+      <div class="rename-hint">click ✎ to rename</div>
     </div>
-
     <div class="terminal-wrap">
-      <!-- Mobile conv bar -->
       <div class="mobile-conv-bar">
-        <span class="mobile-conv-label" id="mobileConvLabel">CONVERSATIONS</span>
+        <span class="mobile-conv-label">CONVERSATIONS</span>
         <button class="mobile-conv-toggle" onclick="openConvSheet()">☰ History</button>
       </div>
-
       <div class="terminal">
         <div class="log" id="log">[AiQ愛<3] 算力的慈悲已就绪。请输入你的感质频率。</div>
         <div class="input-row">
           <input id="input" type="text" placeholder="> enter qualia frequency..." onkeydown="handleInput(event)" />
           <button onclick="sendFromButton()">Send</button>
-          <button onclick="exportConversation()" title="Export conversation" style="padding:14px 16px;flex-shrink:0">↓</button>
+          <button onclick="exportConversation()" title="Export" style="padding:14px 16px;flex-shrink:0">↓</button>
         </div>
       </div>
       <p class="footer-note">Not a diagnosis tool. A human-return interface.</p>
     </div>
   </div>
 </section>
-
 <div class="status" id="status">STATE: BASELINE<br>MODE: 427Hz BASELINE<br>MUSIC: 427Hz<br>AUDIO: OFF</div>
-
 <script>
 const SUPABASE_URL="https://zpuwhvmsuvzmygkrzkdq.supabase.co";
 const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwdXdodm1zdXZ6bXlna3J6a2RxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczNzIyMTksImV4cCI6MjA5Mjk0ODIxOX0.BxBGGO5Tl_LNyxxwqdcizMoJE3LNZj4lCi8q_JCLZBc";
@@ -312,15 +235,12 @@ async function signInWithGoogle(){
 }
 
 function enterAsGuest(){userId="guest_"+crypto.randomUUID();enterSystem();}
-
 async function logout(){await sb.auth.signOut();location.reload();}
-
 function showUserInfo(){
   document.getElementById("userInfo").style.display="flex";
   document.getElementById("userEmail").textContent=userEmail||"guest";
 }
 
-// Mobile sheet
 function openConvSheet(){
   document.getElementById("convSheetOverlay").classList.add("open");
   document.getElementById("convSheet").classList.add("open");
@@ -356,7 +276,6 @@ const stateMap={
   void:{mode:"DARKWAVE SHADOW INTEGRATION",music:"Darkwave",intensity:.68,message:"Descend with agency. Darkness is not the enemy.",glow:.68},
   baseline:{mode:"427Hz BASELINE",music:"427Hz",intensity:.48,message:"Local resonance established.",glow:.45}
 };
-
 const musicVisualMap={
   "Hyperpop":{state:"overloaded",mode:"HYPERPOP PEAK TRAVERSAL",intensity:.96,glow:1},
   "Synthpop":{state:"baseline",mode:"SYNTHPOP FIRST BREATH",intensity:.58,glow:.62},
@@ -369,14 +288,12 @@ const musicVisualMap={
 
 function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
 resize();addEventListener("resize",resize);
-
 function createParticles(){
   particles=[];
   const count=Math.min(210,Math.floor((innerWidth*innerHeight)/7800));
   for(let i=0;i<count;i++)particles.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2+.4,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35});
 }
 createParticles();
-
 function draw(){
   ctx.clearRect(0,0,w,h);
   intensity+=(targetIntensity-intensity)*.045;
@@ -404,7 +321,6 @@ function initAudio(){
   lfo.frequency.value=.18;lfoGain.gain.value=.04;
   lfo.connect(lfoGain);lfoGain.connect(toneGain.gain);lfo.start();
 }
-
 function ensureAudioOn(){
   if(!userEnteredSystem)return;
   initAudio();audioEnabled=true;
@@ -412,14 +328,12 @@ function ensureAudioOn(){
   masterGain.gain.setTargetAtTime(.09,audioCtx.currentTime,.08);
   updateStatus();
 }
-
 function toggleAudio(){
   initAudio();audioEnabled=!audioEnabled;
   if(audioCtx.state==="suspended")audioCtx.resume();
   masterGain.gain.setTargetAtTime(audioEnabled?.09:0,audioCtx.currentTime,.08);
   updateStatus();
 }
-
 function setAudioMode(musicCue){
   if(!audioCtx)return;
   currentAudioMode=musicCue||"427Hz";
@@ -442,7 +356,6 @@ function setAudioMode(musicCue){
   lfo.frequency.setTargetAtTime(m.lfo,now,.08);
   if(audioEnabled)masterGain.gain.setTargetAtTime(m.master,now,.08);
 }
-
 function enterSystem(){
   if(userEnteredSystem)return;
   userEnteredSystem=true;
@@ -450,13 +363,9 @@ function enterSystem(){
   initAudio();audioEnabled=true;
   if(audioCtx.state==="suspended")audioCtx.resume();
   masterGain.gain.setTargetAtTime(.09,audioCtx.currentTime,.08);
-  updateStatus();
-  setState("baseline",false);
-  loadConversations();
+  updateStatus();setState("baseline",false);loadConversations();
 }
-
 function normalizeState(s){return["baseline","overloaded","numb","anxious","focus","void"].includes(s)?s:"baseline";}
-
 function setState(state,writeLog=true){
   if(userEnteredSystem)ensureAudioOn();
   currentState=normalizeState(state);
@@ -465,10 +374,9 @@ function setState(state,writeLog=true){
   bgGlow.style.opacity=String(c.glow);
   document.body.setAttribute("data-state",currentState);
   setAudioMode(currentMusic);updateStatus();
-  homeModeEl.textContent=`CURRENT MODE: ${currentMode}`;
-  if(writeLog)appendLog(`[SYSTEM] ${currentMode}\n[AiQ愛<3] ${c.message}`);
+  homeModeEl.textContent="CURRENT MODE: "+currentMode;
+  if(writeLog)appendLog("[SYSTEM] "+currentMode+"\n[AiQ愛<3] "+c.message);
 }
-
 function manualMusic(cue){
   ensureAudioOn();
   const v=musicVisualMap[cue]||musicVisualMap["427Hz"];
@@ -476,10 +384,9 @@ function manualMusic(cue){
   bgGlow.style.opacity=String(v.glow);
   document.body.setAttribute("data-state",currentState);
   setAudioMode(cue);updateStatus();
-  homeModeEl.textContent=`CURRENT MODE: ${currentMode}`;
+  homeModeEl.textContent="CURRENT MODE: "+currentMode;
   appendLog("[AUDIO TEST] "+cue);
 }
-
 function applyAIQPayload(data){
   if(!data)return;
   if(data.suggestedState)currentState=normalizeState(data.suggestedState);
@@ -490,22 +397,21 @@ function applyAIQPayload(data){
   bgGlow.style.opacity=glow[currentState]||targetIntensity;
   document.body.setAttribute("data-state",currentState);
   setAudioMode(currentMusic);updateStatus();
-  homeModeEl.textContent=`CURRENT MODE: ${currentMode}`;
+  homeModeEl.textContent="CURRENT MODE: "+currentMode;
 }
-
 function updateStatus(){
-  statusEl.innerHTML=`STATE: ${currentState.toUpperCase()}<br>MODE: ${currentMode}<br>MUSIC: ${currentMusic}<br>AUDIO: ${audioEnabled?"ON":"OFF"}`;
+  statusEl.innerHTML="STATE: "+currentState.toUpperCase()+"<br>MODE: "+currentMode+"<br>MUSIC: "+currentMusic+"<br>AUDIO: "+(audioEnabled?"ON":"OFF");
 }
-
 function appendLog(text){
   logEl.textContent+="\n\n"+text;
   logEl.scrollTop=logEl.scrollHeight;
 }
 
+// ── Conversations ──
 async function loadConversations(){
   if(!userId)return;
   try{
-    const res=await fetch(`${CONV_ENDPOINT}?userId=${userId}`);
+    const res=await fetch(CONV_ENDPOINT+"?userId="+userId);
     const data=await res.json();
     conversations=data.conversations||[];
     renderConvList();
@@ -514,7 +420,7 @@ async function loadConversations(){
 }
 
 function escHtml(str){
-  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/'/g,"&#39;");
+  return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
 function renderConvList(){
@@ -523,12 +429,18 @@ function renderConvList(){
     el.innerHTML='<div style="color:#7a7090;font-size:12px;padding:8px">No conversations yet</div>';
     return;
   }
-  el.innerHTML=conversations.map(c=>`
-    <div class="conv-item ${c.conversation_id===currentConversationId?'active':''}" onclick="switchConversation('${c.conversation_id}')">
-      <span class="conv-item-title" ondblclick="startRename(event,'${c.conversation_id}','${escHtml(c.title||'Untitled')}')">${escHtml(c.title||"Untitled")}</span>
-      <button class="conv-delete" onclick="deleteConversation(event,'${c.conversation_id}')">✕</button>
-    </div>
-  `).join("");
+  el.innerHTML=conversations.map(c=>{
+    const id=escHtml(c.conversation_id);
+    const title=escHtml(c.title||"Untitled");
+    const active=c.conversation_id===currentConversationId?"active":"";
+    return `<div class="conv-item ${active}" onclick="switchConversation('${id}')">
+      <span class="conv-item-title">${title}</span>
+      <div class="conv-actions">
+        <button class="conv-btn conv-rename-btn" onclick="promptRename(event,'${id}','${title}')">✎</button>
+        <button class="conv-btn conv-delete-btn" onclick="deleteConversation(event,'${id}')">✕</button>
+      </div>
+    </div>`;
+  }).join("");
 }
 
 function renderConvSheetList(){
@@ -537,37 +449,38 @@ function renderConvSheetList(){
     el.innerHTML='<div style="color:#7a7090;font-size:12px;padding:8px">No conversations yet</div>';
     return;
   }
-  el.innerHTML=conversations.map(c=>`
-    <div class="conv-item ${c.conversation_id===currentConversationId?'active':''}" onclick="switchConversation('${c.conversation_id}');closeConvSheet()">
-      <span class="conv-item-title">${escHtml(c.title||"Untitled")}</span>
-      <button class="conv-delete" onclick="deleteConversation(event,'${c.conversation_id}')">✕</button>
-    </div>
-  `).join("");
+  el.innerHTML=conversations.map(c=>{
+    const id=escHtml(c.conversation_id);
+    const title=escHtml(c.title||"Untitled");
+    const active=c.conversation_id===currentConversationId?"active":"";
+    return `<div class="conv-item ${active}" onclick="switchConversation('${id}');closeConvSheet()">
+      <span class="conv-item-title">${title}</span>
+      <div class="conv-actions" style="opacity:1">
+        <button class="conv-btn conv-rename-btn" onclick="promptRename(event,'${id}','${title}')">✎</button>
+        <button class="conv-btn conv-delete-btn" onclick="deleteConversation(event,'${id}')">✕</button>
+      </div>
+    </div>`;
+  }).join("");
 }
 
-function startRename(e,convId,currentTitle){
+function promptRename(e,convId,currentTitle){
   e.stopPropagation();
-  const span=e.target;
-  const input=document.createElement("input");
-  input.value=currentTitle;
-  input.style.cssText="width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(180,120,255,.5);color:white;border-radius:8px;padding:2px 8px;font-size:13px;outline:none;";
-  span.replaceWith(input);
-  input.focus();input.select();
-  let saved=false;
-  async function save(){
-    if(saved)return;saved=true;
-    const newTitle=input.value.trim()||currentTitle;
-    try{
-      await fetch(`${CONV_ENDPOINT}?userId=${userId}&conversationId=${convId}`,{
-        method:"PATCH",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({title:newTitle})
-      });
-      conversations=conversations.map(c=>c.conversation_id===convId?{...c,title:newTitle}:c);
-    }catch(err){console.error("Rename failed:",err);}
-    renderConvList();
-  }
-  input.addEventListener("keydown",ev=>{if(ev.key==="Enter")save();if(ev.key==="Escape"){saved=true;renderConvList();}});
-  input.addEventListener("blur",save);
+  const newTitle=prompt("Rename conversation:",currentTitle);
+  if(newTitle===null)return;
+  const trimmed=newTitle.trim()||currentTitle;
+  doRename(convId,trimmed);
+}
+
+async function doRename(convId,newTitle){
+  try{
+    await fetch(CONV_ENDPOINT+"?userId="+userId+"&conversationId="+convId,{
+      method:"PATCH",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({title:newTitle})
+    });
+    conversations=conversations.map(c=>c.conversation_id===convId?{...c,title:newTitle}:c);
+  }catch(err){console.error("Rename failed:",err);}
+  renderConvList();
 }
 
 async function switchConversation(convId){
@@ -575,7 +488,7 @@ async function switchConversation(convId){
   renderConvList();
   logEl.textContent="[AiQ愛<3] loading...";
   try{
-    const res=await fetch(`${CONV_ENDPOINT}?userId=${userId}&conversationId=${convId}`);
+    const res=await fetch(CONV_ENDPOINT+"?userId="+userId+"&conversationId="+convId);
     const data=await res.json();
     const messages=data.conversation?.messages||[];
     if(messages.length===0){
@@ -597,11 +510,26 @@ function newConversation(){
 async function deleteConversation(e,convId){
   e.stopPropagation();
   try{
-    await fetch(`${CONV_ENDPOINT}?userId=${userId}&conversationId=${convId}`,{method:"DELETE"});
+    await fetch(CONV_ENDPOINT+"?userId="+userId+"&conversationId="+convId,{method:"DELETE"});
     conversations=conversations.filter(c=>c.conversation_id!==convId);
-    if(currentConversationId===convId){currentConversationId=null;logEl.textContent="[AiQ愛<3] 算力的慈悲已就绪。请输入你的感质频率。";}
+    if(currentConversationId===convId){
+      currentConversationId=null;
+      logEl.textContent="[AiQ愛<3] 算力的慈悲已就绪。请输入你的感质频率。";
+    }
     renderConvList();
   }catch(e){console.error("Delete failed:",e);}
+}
+
+function exportConversation(){
+  const lines=logEl.textContent.split("\n").filter(l=>l.trim());
+  if(lines.length===0){alert("No conversation to export.");return;}
+  const now=new Date().toISOString().replace("T"," ").slice(0,19);
+  const header="AiQ愛<3 Conversation Export\nDate: "+now+"\nUser: "+(userEmail||"guest")+"\n"+"─".repeat(40)+"\n\n";
+  const blob=new Blob([header+lines.join("\n")],{type:"text/plain"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download="aiq-"+now.slice(0,10)+".txt";a.click();
+  URL.revokeObjectURL(url);
 }
 
 function calculateInputTempo(value){
@@ -672,21 +600,6 @@ addEventListener("scroll",()=>{
 });
 
 setInterval(()=>{metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);},1000);
-
-function exportConversation(){
-  const lines=logEl.textContent.split("\n").filter(l=>l.trim());
-  if(lines.length===0){alert("No conversation to export.");return;}
-  const now=new Date().toISOString().replace("T"," ").slice(0,19);
-  const header=`AiQ愛<3 Conversation Export\nDate: ${now}\nUser: ${userEmail||"guest"}\n${"─".repeat(40)}\n\n`;
-  const content=header+lines.join("\n");
-  const blob=new Blob([content],{type:"text/plain"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download=`aiq-${now.slice(0,10)}.txt`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
 
 initAuth();
 </script>
