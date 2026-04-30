@@ -277,6 +277,7 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
         <div class="input-row">
           <input id="input" type="text" placeholder="> enter qualia frequency..." onkeydown="handleInput(event)" />
           <button onclick="sendFromButton()">Send</button>
+          <button onclick="exportConversation()" title="Export conversation" style="padding:14px 16px;flex-shrink:0">↓</button>
         </div>
       </div>
       <p class="footer-note">Not a diagnosis tool. A human-return interface.</p>
@@ -671,6 +672,21 @@ addEventListener("scroll",()=>{
 });
 
 setInterval(()=>{metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);},1000);
+
+function exportConversation(){
+  const lines=logEl.textContent.split("\n").filter(l=>l.trim());
+  if(lines.length===0){alert("No conversation to export.");return;}
+  const now=new Date().toISOString().replace("T"," ").slice(0,19);
+  const header=`AiQ愛<3 Conversation Export\nDate: ${now}\nUser: ${userEmail||"guest"}\n${"─".repeat(40)}\n\n`;
+  const content=header+lines.join("\n");
+  const blob=new Blob([content],{type:"text/plain"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=`aiq-${now.slice(0,10)}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 initAuth();
 </script>
