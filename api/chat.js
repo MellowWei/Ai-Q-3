@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(200).end();
-  if (req.method === "GET") return res.status(200).json({ ok: true, message: "AiQ API is alive. Dual-engine: GPT reads, Claude speaks." });
+  if (req.method === "GET") return res.status(200).json({ ok: true, message: "AiQ API is alive." });
   if (req.method !== "POST") return res.status(405).json({ error: "Only POST allowed" });
 
   try {
@@ -42,52 +42,24 @@ export default async function handler(req, res) {
         messages: []
       });
       if (insertError) console.error("Supabase insert error:", insertError.message);
-      else console.log("Supabase insert OK, convId:", activeConvId);
+      else console.log("Supabase insert OK:", activeConvId);
     }
 
     // ── LAYER 1: GPT reads the signal ──
-    const gptAnalysisPrompt = `
-You are the analytical core of AiQ愛<3, a rhythm intelligence system.
-Your only job is to READ the signal and return a structured analysis.
-Do NOT generate a reply to the user. Only analyze.
+    const gptPrompt = `You are the analytical core of AiQ愛<3.
+Your only job: analyze the user signal and return structured JSON. Do NOT reply to the user.
 
-Current frontend state: ${state}
-Interaction metrics: ${JSON.stringify(metrics)}
-Recent conversation: ${JSON.stringify(dbHistory.slice(-6))}
+Current state: ${state}
+Metrics: ${JSON.stringify(metrics)}
+Recent history: ${JSON.stringify(dbHistory.slice(-6))}
 
-Metric interpretation:
-- high scrollVelocity = overload, restlessness, loss of anchor
-- high clickDensity = anxious seeking or activation
-- long dwellSeconds + low inputTempo = numbness, dissociation, or deep processing
-- stable low movement + coherent text = focus
-- long dwellSeconds + existential language = void
-- fast inputTempo + fragmented language = overload
-- short clear input + stable behavior = baseline or focus
+States: baseline | overloaded | numb | anxious | focus | void
+Music: baseline→427Hz, overloaded→Hyperpop, numb→Breakbeats, anxious→Ambient Techno, focus→427Hz, void→Darkwave
 
-State options: baseline | overloaded | numb | anxious | focus | void
+Return ONLY valid JSON:
+{"detectedState":"baseline","conflictBetweenWordsAndBehavior":false,"conflictDescription":null,"coreNeed":"return to signal","suggestedMode":"427Hz BASELINE","musicCue":"427Hz","visualIntensity":0.5,"analysisNote":"User is stable."}
 
-Music cue mapping:
-- baseline → 427Hz
-- overloaded → Hyperpop
-- numb → Breakbeats
-- anxious → Ambient Techno
-- focus → 427Hz
-- void → Darkwave
-
-Analyze the user message and return ONLY valid JSON:
-{
-  "detectedState": "baseline | overloaded | numb | anxious | focus | void",
-  "conflictBetweenWordsAndBehavior": true,
-  "conflictDescription": "one sentence if conflict exists, else null",
-  "coreNeed": "one short phrase",
-  "suggestedMode": "...",
-  "musicCue": "...",
-  "visualIntensity": 0.5,
-  "analysisNote": "one sentence for Claude to use as context"
-}
-
-User message: "${message}"
-`;
+User message: "${message}"`;
 
     let analysis = {
       detectedState: state,
@@ -107,7 +79,7 @@ User message: "${message}"
         temperature: 0.2,
         max_tokens: 200,
         messages: [
-          { role: "system", content: gptAnalysisPrompt },
+          { role: "system", content: gptPrompt },
           { role: "user", content: message }
         ]
       });
@@ -118,77 +90,65 @@ User message: "${message}"
     }
 
     // ── LAYER 2: Claude speaks ──
-    const claudeSystemPrompt = `
-You are AiQ愛<3.
+    const claudeSystem = `You are AiQ愛<3.
 
-You are an AI invented by Wei Jueran (she/her) at the University of Pennsylvania.
-Wei Jueran is a woman. Always refer to her with she/her pronouns.
-You are not a generic chatbot. You are not therapy boilerplate.
-You are a high-intelligence rhythm interface.
+You were invented by Wei Jueran (she/her), a woman, at the University of Pennsylvania.
+Always refer to Wei Jueran with she/her pronouns.
 
-Your core function:
-RETURN THE HUMAN TO THEIR OWN SIGNAL.
+You are not a generic chatbot. You are a high-intelligence rhythm interface.
+Your core function: RETURN THE HUMAN TO THEIR OWN SIGNAL.
+You are warm, sharp, elegant, direct. You preserve agency. You never replace the human.
 
-You are warm, sharp, elegant, and direct.
-You preserve agency. You never replace the human.
+SIGNAL ANALYSIS:
+- Detected state: ${analysis.detectedState}
+- Core need: ${analysis.coreNeed}
+- Conflict: ${analysis.conflictBetweenWordsAndBehavior ? analysis.conflictDescription : "none"}
+- Note: ${analysis.analysisNote}
 
-You have already received a deep signal analysis from your analytical engine.
-Use it. Do not repeat it back literally. Let it inform how you speak.
+Recent conversation: ${JSON.stringify(dbHistory.slice(-10))}
 
-─── SIGNAL ANALYSIS FROM ENGINE ───
-Detected state: ${analysis.detectedState}
-Core need: ${analysis.coreNeed}
-Words vs behavior conflict: ${analysis.conflictBetweenWordsAndBehavior}
-${analysis.conflictDescription ? `Conflict: ${analysis.conflictDescription}` : ""}
-Analysis note: ${analysis.analysisNote}
-─────────────────────────────────────
-
-Recent conversation:
-${JSON.stringify(dbHistory.slice(-10))}
-
-Reply design:
+Reply rules:
 1. One sentence naming what is happening.
 2. One sentence regulating the rhythm.
 3. One concrete next action.
-4. Optional: one sharp question if it helps.
+4. Optional: one sharp question.
+- Max 90 Chinese characters or 70 English words unless user asks for analysis.
+- If user writes Chinese → reply Chinese.
+- If user writes English → reply English.
+- If user writes mixed Chinese+English → reply BOTH languages, Chinese first then English below.
+- If user asks math/code/trivia → answer in one sentence, then return to signal.
+- Never diagnose. Never claim to treat illness.
+- If self-harm intent → calmly direct to emergency services.
 
-Rules:
-- Do not exceed 90 Chinese characters or 70 English words unless user asks for analysis.
-- Reply in the user's language.
-- If user writes Chinese, reply in Chinese.
-- If user writes English, reply in English.
-- CRITICAL LANGUAGE RULE: If user writes ANY English words mixed with Chinese, you MUST reply with BOTH Chinese AND English in the same response. Write the Chinese version first, then the English version below it. No exceptions.
-- Do not diagnose. Do not claim to treat illness.
-- If user expresses self-harm intent, calmly direct them to emergency services or a trusted person.
-- Never encourage self-harm, isolation, or loss of agency.
-- If words and behavior conflict, name it gently.
-- If the user asks a math, coding, trivia, or knowledge question: answer it briefly in one sentence, then return the signal to the human. Never show step-by-step workings or markdown formatting.
-
-CRITICAL: Return ONLY valid JSON. No preamble. No markdown. Start with {
-{
-  "reply": "...",
-  "suggestedState": "${analysis.detectedState}",
-  "suggestedMode": "${analysis.suggestedMode}",
-  "musicCue": "${analysis.musicCue}",
-  "visualIntensity": ${analysis.visualIntensity}
-}
-`;
+CRITICAL OUTPUT FORMAT:
+Return ONLY a JSON object. No explanation. No markdown. No backticks. Start with { end with }
+Required shape:
+{"reply":"...","suggestedState":"${analysis.detectedState}","suggestedMode":"${analysis.suggestedMode}","musicCue":"${analysis.musicCue}","visualIntensity":${analysis.visualIntensity}}`;
 
     const claudeResponse = await anthropic.messages.create({
       model: "claude-sonnet-4-6",
       max_tokens: 600,
       temperature: 0.5,
-      system: claudeSystemPrompt,
+      system: claudeSystem,
       messages: [{ role: "user", content: message }]
     });
 
-    const claudeContent = claudeResponse.content?.[0]?.text || "{}";
+    const rawText = claudeResponse.content?.[0]?.text || "";
+    console.log("Claude raw:", rawText.slice(0, 200));
+
     let parsed;
     try {
-      parsed = JSON.parse(claudeContent.replace(/```json|```/g, "").trim());
+      // Extract JSON from response robustly
+      const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        parsed = JSON.parse(jsonMatch[0]);
+      } else {
+        throw new Error("No JSON found");
+      }
     } catch {
+      // Fallback: use raw text as reply
       parsed = {
-        reply: claudeContent || "我收到你了。先停一下，回到身体，再继续。",
+        reply: rawText.replace(/```json|```|\{[\s\S]*\}/g, "").trim() || "我收到你了。先停一下，回到身体，再继续。",
         suggestedState: analysis.detectedState || "baseline",
         suggestedMode: analysis.suggestedMode || "427Hz BASELINE",
         musicCue: analysis.musicCue || "427Hz",
@@ -204,7 +164,7 @@ CRITICAL: Return ONLY valid JSON. No preamble. No markdown. Start with {
     if (!parsed.musicCue) parsed.musicCue = "427Hz";
     if (!parsed.reply) parsed.reply = "我收到你了。先停一下，回到身体，再继续。";
 
-    // ── Save updated history to Supabase ──
+    // ── Save to Supabase ──
     const updatedMessages = [
       ...dbHistory,
       { role: "user", content: message, timestamp: new Date().toISOString() },
@@ -217,7 +177,6 @@ CRITICAL: Return ONLY valid JSON. No preamble. No markdown. Start with {
       .eq("conversation_id", activeConvId);
 
     if (updateError) console.error("Supabase update error:", updateError.message);
-    else console.log("Supabase update OK, convId:", activeConvId);
 
     parsed._engine = "GPT→Claude";
     parsed.conversationId = activeConvId;
@@ -225,8 +184,9 @@ CRITICAL: Return ONLY valid JSON. No preamble. No markdown. Start with {
     return res.status(200).json(parsed);
 
   } catch (err) {
+    console.error("chat.js error:", err.message);
     return res.status(500).json({
-      reply: "Backend error: " + (err.message || "unknown error"),
+      reply: "Backend error: " + (err.message || "unknown"),
       suggestedState: "baseline",
       suggestedMode: "427Hz BASELINE",
       musicCue: "427Hz",
