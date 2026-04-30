@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AiQ愛<3 | Mellow7</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -50,18 +51,43 @@ button:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
 .mode-line{margin-top:20px;color:#b8aee0;font-size:14px;letter-spacing:.08em}
 .footer-note{font-size:13px;color:#9f95bd;max-width:700px}
 
-/* ── Enter screen ── */
+/* ── Enter / Auth screen ── */
 .enter{
   position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
   background:#050509;transition:opacity .8s ease;
 }
 .enter.hide{opacity:0;pointer-events:none}
-.enter-box{text-align:center;padding:40px}
+.enter-box{text-align:center;padding:40px;max-width:480px;width:100%}
 
-/* ── Chat layout with sidebar ── */
+/* Auth form */
+.auth-form{margin-top:28px;display:flex;flex-direction:column;gap:12px}
+.auth-input{
+  width:100%;padding:16px 20px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.2);color:white;border-radius:18px;
+  font-size:16px;outline:none;text-align:center;
+}
+.auth-input::placeholder{color:rgba(255,255,255,.35)}
+.auth-input:focus{border-color:rgba(180,120,255,.6)}
+.auth-btn{
+  width:100%;padding:16px;font-size:15px;border-radius:18px;
+  background:rgba(180,120,255,.22);border:1px solid rgba(180,120,255,.4);
+  color:#f0e8ff;cursor:pointer;transition:.2s;margin:0;
+}
+.auth-btn:hover{background:rgba(180,120,255,.35);transform:none}
+.auth-msg{font-size:13px;color:#b8aee0;margin-top:8px;min-height:20px}
+.auth-skip{font-size:12px;color:#6a6280;margin-top:16px;cursor:pointer;text-decoration:underline}
+.auth-skip:hover{color:#b8aee0}
+.user-info{
+  position:fixed;top:18px;right:18px;z-index:9;
+  font-size:12px;color:#b8aee0;display:flex;align-items:center;gap:10px;
+}
+.logout-btn{
+  font-size:11px;padding:6px 12px;border-radius:999px;margin:0;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+}
+
+/* ── Chat layout ── */
 .chat-layout{display:flex;gap:20px;width:100%;max-width:1200px}
-
-/* Sidebar */
 .sidebar{
   width:240px;min-width:200px;flex-shrink:0;
   border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.4);
@@ -82,8 +108,7 @@ button:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
 .conv-item{
   padding:10px 12px;border-radius:14px;cursor:pointer;
   border:1px solid transparent;font-size:13px;color:#d8d0e8;
-  transition:.2s;display:flex;align-items:center;justify-content:space-between;
-  gap:8px;
+  transition:.2s;display:flex;align-items:center;justify-content:space-between;gap:8px;
 }
 .conv-item:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.1)}
 .conv-item.active{background:rgba(180,120,255,.15);border-color:rgba(180,120,255,.3);color:#f0e8ff}
@@ -109,13 +134,11 @@ button:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
   color:#d8d0ff;line-height:1.7;font-size:14px;padding-right:8px;
 }
 .input-row{display:flex;gap:12px;margin-top:18px}
-input[type="text"], input:not([type]){
+input[type="text"],input[type="email"],input:not([type]){
   width:100%;padding:18px;background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.18);color:white;border-radius:18px;
   font-size:16px;outline:none;
 }
-
-/* Status */
 .status{
   position:fixed;right:18px;bottom:18px;z-index:9;
   border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.58);
@@ -128,14 +151,11 @@ input[type="text"], input:not([type]){
   background:rgba(0,0,0,.35);padding:9px 12px;border-radius:999px;
   font-size:12px;backdrop-filter:blur(12px);
 }
-
-/* State-based terminal glow */
 body[data-state="overloaded"] .terminal{box-shadow:0 0 110px rgba(255,80,190,.22)}
 body[data-state="focus"] .terminal{box-shadow:0 0 70px rgba(150,170,255,.12)}
 body[data-state="void"] .terminal{box-shadow:0 0 100px rgba(80,70,160,.24)}
 body[data-state="numb"] .terminal{box-shadow:0 0 95px rgba(130,220,255,.16)}
 body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
-
 @media(max-width:720px){
   section{padding:76px 22px}.topnav{display:none}
   .status{left:14px;right:14px;bottom:14px}.input-row{flex-direction:column}
@@ -143,7 +163,6 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
 }
 </style>
 </head>
-
 <body data-state="baseline">
 <canvas id="field"></canvas>
 <div class="bg-glow" id="bgGlow"></div>
@@ -156,12 +175,37 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
   <a href="#chat">Talk to AiQ</a>
 </nav>
 
+<div class="user-info" id="userInfo" style="display:none">
+  <span id="userEmail"></span>
+  <button class="logout-btn" onclick="logout()">Sign out</button>
+</div>
+
+<!-- Enter / Auth screen -->
 <div class="enter" id="enter">
   <div class="enter-box">
     <div class="kicker">INITIATING 427Hz SYNC</div>
     <h1>AiQ愛&lt;3</h1>
-    <p>A rhythm intelligence for human return.<br>Enable sound. Enter the protocol.</p>
-    <button onclick="enterSystem()">ENABLE AUDIO / ENTER HUMAN RETURN PROTOCOL</button>
+    <p style="font-size:16px">A rhythm intelligence for human return.</p>
+
+    <!-- Step 1: Email -->
+    <div id="authStep1">
+      <div class="auth-form">
+        <input class="auth-input" type="email" id="emailInput" placeholder="your@email.com" />
+        <button class="auth-btn" onclick="sendMagicLink()">SEND MAGIC LINK</button>
+        <div class="auth-msg" id="authMsg"></div>
+      </div>
+      <div class="auth-skip" onclick="enterAsGuest()">Continue as guest (no memory saved)</div>
+    </div>
+
+    <!-- Step 2: Sent confirmation -->
+    <div id="authStep2" style="display:none">
+      <div style="margin-top:24px;color:#b8aee0;font-size:15px;line-height:1.8">
+        ✦ Magic link sent.<br>
+        Check your email and click the link.<br>
+        This tab will update automatically.
+      </div>
+      <div class="auth-skip" onclick="enterAsGuest()">Skip for now</div>
+    </div>
   </div>
 </div>
 
@@ -221,8 +265,6 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
   <div class="kicker">SOUL_STREAM_v1.0.7</div>
   <h2>Talk to AiQ</h2>
   <div class="chat-layout">
-
-    <!-- Sidebar: conversation list -->
     <div class="sidebar">
       <div class="sidebar-title">Conversations</div>
       <button class="new-conv-btn" onclick="newConversation()">＋ New Conversation</button>
@@ -230,8 +272,6 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
         <div style="color:#7a7090;font-size:12px;padding:8px">Loading...</div>
       </div>
     </div>
-
-    <!-- Terminal -->
     <div class="terminal-wrap">
       <div class="terminal">
         <div class="log" id="log">[AiQ愛<3] 算力的慈悲已就绪。请输入你的感质频率。</div>
@@ -249,26 +289,86 @@ body[data-state="anxious"] .terminal{box-shadow:0 0 80px rgba(210,190,255,.18)}
 </section>
 
 <div class="status" id="status">
-  STATE: BASELINE<br>
-  MODE: 427Hz BASELINE<br>
-  MUSIC: 427Hz<br>
-  AUDIO: OFF
+  STATE: BASELINE<br>MODE: 427Hz BASELINE<br>MUSIC: 427Hz<br>AUDIO: OFF
 </div>
 
 <script>
+const SUPABASE_URL = "https://zpuwhvmsuvzmygkrzkdq.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwdXdodm1zdXZ6bXlna3J6a2RxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczNzIyMTksImV4cCI6MjA5Mjk0ODIxOX0.BxBGGO5Tl_LNyxxwqdcizMoJE3LNZj4lCi8q_JCLZBc";
 const API_ENDPOINT = "https://ai-q-3.vercel.app/api/chat";
 const CONV_ENDPOINT = "https://ai-q-3.vercel.app/api/conversations";
 
-// ── User ID (persisted in localStorage) ──
-let userId = localStorage.getItem("aiq_user_id");
-if (!userId) {
-  userId = "user_" + crypto.randomUUID();
-  localStorage.setItem("aiq_user_id", userId);
-}
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+let userId = null;
+let userEmail = null;
 let currentConversationId = null;
 let conversations = [];
 
+// ── Auth ──
+async function initAuth() {
+  // Handle magic link callback
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    userId = session.user.id;
+    userEmail = session.user.email;
+    showUserInfo();
+    enterSystem();
+    return;
+  }
+
+  // Listen for auth state changes (magic link click)
+  sb.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_IN" && session) {
+      userId = session.user.id;
+      userEmail = session.user.email;
+      showUserInfo();
+      enterSystem();
+    }
+  });
+}
+
+async function sendMagicLink() {
+  const email = document.getElementById("emailInput").value.trim();
+  if (!email || !email.includes("@")) {
+    document.getElementById("authMsg").textContent = "Please enter a valid email.";
+    return;
+  }
+  document.getElementById("authMsg").textContent = "Sending...";
+  const { error } = await sb.auth.signInWithOtp({
+    email,
+    options: { emailRedirectTo: "https://mellowwei.github.io/Ai-Q-3/" }
+  });
+  if (error) {
+    document.getElementById("authMsg").textContent = "Error: " + error.message;
+  } else {
+    document.getElementById("authStep1").style.display = "none";
+    document.getElementById("authStep2").style.display = "block";
+  }
+}
+
+function enterAsGuest() {
+  userId = "guest_" + crypto.randomUUID();
+  localStorage.setItem("aiq_guest_id", userId);
+  enterSystem();
+}
+
+async function logout() {
+  await sb.auth.signOut();
+  userId = null;
+  userEmail = null;
+  document.getElementById("userInfo").style.display = "none";
+  location.reload();
+}
+
+function showUserInfo() {
+  const el = document.getElementById("userInfo");
+  el.style.display = "flex";
+  document.getElementById("userEmail").textContent = userEmail || "guest";
+}
+
+// ── Canvas ──
 const canvas = document.getElementById("field");
 const ctx = canvas.getContext("2d");
 const bgGlow = document.getElementById("bgGlow");
@@ -282,7 +382,6 @@ let currentState="baseline",currentMode="427Hz BASELINE",currentMusic="427Hz";
 let lastScroll=window.scrollY,lastTime=Date.now(),clicks=0,dwellStart=Date.now();
 let typingStart=null;
 let metrics={scrollVelocity:0,clickDensity:0,dwellSeconds:0,inputTempo:0};
-
 let audioCtx=null,masterGain=null,toneOsc=null,toneGain=null;
 let pulseOsc=null,pulseGain=null,lfo=null,lfoGain=null;
 let audioEnabled=false,currentAudioMode="427Hz";
@@ -307,7 +406,6 @@ const musicVisualMap={
   "427Hz":{state:"baseline",mode:"427Hz BASELINE",intensity:.42,glow:.45}
 };
 
-// ── Canvas ──
 function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
 resize();addEventListener("resize",resize);
 
@@ -333,7 +431,6 @@ function draw(){
 }
 draw();
 
-// ── Audio ──
 function initAudio(){
   if(audioCtx)return;
   audioCtx=new(window.AudioContext||window.webkitAudioContext)();
@@ -398,7 +495,6 @@ function enterSystem(){
   loadConversations();
 }
 
-// ── State ──
 function normalizeState(s){
   return["baseline","overloaded","numb","anxious","focus","void"].includes(s)?s:"baseline";
 }
@@ -450,17 +546,14 @@ function appendLog(text){
 
 // ── Conversations ──
 async function loadConversations(){
+  if(!userId)return;
   try{
     const res=await fetch(`${CONV_ENDPOINT}?userId=${userId}`);
     const data=await res.json();
     conversations=data.conversations||[];
     renderConvList();
-
-    // Auto-load most recent or start new
     if(conversations.length>0){
       switchConversation(conversations[0].conversation_id);
-    } else {
-      currentConversationId=null;
     }
   }catch(e){
     console.error("Failed to load conversations:",e);
@@ -489,17 +582,7 @@ function escHtml(str){
 async function switchConversation(convId){
   currentConversationId=convId;
   renderConvList();
-
-  // Load messages for this conversation
-  try{
-    const res=await fetch(`${CONV_ENDPOINT}?userId=${userId}`);
-    const data=await res.json();
-    const conv=data.conversations?.find(c=>c.conversation_id===convId);
-    // We don't have messages in list endpoint — just clear log and show header
-    logEl.textContent=`[AiQ愛<3] 对话已加载。信号就绪。`;
-  }catch(e){
-    logEl.textContent=`[AiQ愛<3] 算力的慈悲已就绪。请输入你的感质频率。`;
-  }
+  logEl.textContent=`[AiQ愛<3] 对话已加载。信号就绪。`;
 }
 
 function newConversation(){
@@ -533,36 +616,22 @@ function calculateInputTempo(value){
 async function sendMessage(input){
   const message=input.trim();
   if(!message)return;
-
   appendLog("> "+message);
   appendLog("[AiQ愛<3] thinking through rhythm...");
-
   metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);
   metrics.inputTempo=calculateInputTempo(message);
-
   try{
     const response=await fetch(API_ENDPOINT,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        message,
-        state:currentState,
-        metrics,
-        userId,
-        conversationId:currentConversationId
-      })
+      body:JSON.stringify({message,state:currentState,metrics,userId,conversationId:currentConversationId})
     });
-
     const data=await response.json();
-
     if(data.reply){
       appendLog("[AiQ愛<3] "+data.reply);
       applyAIQPayload(data);
-
-      // Update conversationId if new
-      if(data.conversationId && !currentConversationId){
+      if(data.conversationId&&!currentConversationId){
         currentConversationId=data.conversationId;
-        // Refresh list
         await loadConversations();
       }
     }else if(data.error){
@@ -572,9 +641,7 @@ async function sendMessage(input){
     }
   }catch(error){
     appendLog("[FRONTEND ERROR] "+error.message);
-    console.error(error);
   }
-
   typingStart=null;
 }
 
@@ -582,19 +649,16 @@ function handleInput(event){
   const input=event.target;
   if(!typingStart&&input.value.length>0)typingStart=Date.now();
   if(event.key!=="Enter")return;
-  const value=input.value;
-  input.value="";
+  const value=input.value;input.value="";
   sendMessage(value);
 }
 
 function sendFromButton(){
   const input=document.getElementById("input");
-  const value=input.value;
-  input.value="";
+  const value=input.value;input.value="";
   sendMessage(value);
 }
 
-// ── Behavior tracking ──
 addEventListener("click",()=>{
   clicks++;metrics.clickDensity=clicks;
   if(clicks>8&&currentState!=="anxious"&&userEnteredSystem)setState("anxious");
@@ -615,6 +679,9 @@ addEventListener("scroll",()=>{
 });
 
 setInterval(()=>{metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);},1000);
+
+// ── Init ──
+initAuth();
 </script>
 </body>
 </html>
