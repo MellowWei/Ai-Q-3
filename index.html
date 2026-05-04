@@ -3,2128 +3,451 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AiQ愛&lt;3 × AiQ愛&lt;7 | Mellow7</title>
+<title>AiAiQ&lt;10 | AiQ愛&lt;3 × AiQ愛&lt;7</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+:root{--bg:#03020a;--ink:#fff4ff;--muted:#c7b8dc;--pink:#ff4fd8;--violet:#8b5cff;--cyan:#62f7ff;--green:#1ed760}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}html{scroll-behavior:smooth;background:var(--bg)}body{margin:0;color:var(--ink);font-family:Inter,sans-serif;overflow-x:hidden;background:radial-gradient(circle at 50% -10%,rgba(255,79,216,.18),transparent 36%),radial-gradient(circle at 8% 92%,rgba(139,92,255,.18),transparent 34%),radial-gradient(circle at 95% 35%,rgba(98,247,255,.075),transparent 28%),linear-gradient(180deg,#03020a,#070413 45%,#03020a)}
+body:before{content:"";position:fixed;inset:0;z-index:-5;pointer-events:none;background-image:linear-gradient(rgba(255,79,216,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(98,247,255,.045) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(circle at 50% 35%,black,transparent 74%);opacity:.55;animation:gridDrift 18s linear infinite}body:after{content:"";position:fixed;inset:0;z-index:-4;pointer-events:none;background:conic-gradient(from 210deg at 50% 50%,transparent 0deg,rgba(255,79,216,.08) 72deg,transparent 130deg,rgba(139,92,255,.07) 215deg,transparent 300deg);filter:blur(34px);opacity:.75;animation:plasmaTurn 22s linear infinite}@keyframes gridDrift{to{transform:translate3d(-56px,56px,0)}}@keyframes plasmaTurn{to{transform:rotate(360deg) scale(1.05)}}
+#field{position:fixed;inset:0;z-index:-3;filter:drop-shadow(0 0 8px rgba(255,79,216,.35))}.bg-glow{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 0%,rgba(255,79,216,.18),transparent 58%),radial-gradient(ellipse at 20% 85%,rgba(139,92,255,.16),transparent 48%),radial-gradient(ellipse at 100% 60%,rgba(98,247,255,.08),transparent 42%);transition:.8s;filter:saturate(1.25)}.noise{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.075;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-size:256px}.vapor-layer{position:fixed;inset:-12%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 20% 80%,rgba(255,79,216,.13),transparent 30%),radial-gradient(ellipse at 75% 70%,rgba(139,92,255,.12),transparent 34%),radial-gradient(ellipse at 50% 50%,rgba(255,255,255,.045),transparent 45%);filter:blur(42px);opacity:.85;animation:vaporFloat 14s ease-in-out infinite alternate}@keyframes vaporFloat{to{transform:translate3d(3%,-3%,0) scale(1.08)}}.scanline-layer{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.13;mix-blend-mode:soft-light;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.12) 0 1px,transparent 1px 5px)}.cursor-aura{position:fixed;width:280px;height:280px;border-radius:50%;pointer-events:none;z-index:1;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,79,216,.11),rgba(139,92,255,.055) 38%,transparent 70%);filter:blur(8px);opacity:.65;transition:.25s}
+section{min-height:100vh;padding:86px 7vw;display:flex;flex-direction:column;justify-content:center;position:relative}section:before{content:"";position:absolute;left:7vw;right:7vw;top:70px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,79,216,.26),rgba(98,247,255,.16),transparent);opacity:.38}.kicker{letter-spacing:.34em;font-size:11px;color:#c09cff;text-transform:uppercase;font-weight:700;text-shadow:0 0 18px rgba(255,79,216,.28)}h1{font-size:clamp(54px,9vw,136px);line-height:.84;margin:16px 0;letter-spacing:-.07em;font-weight:800;background:linear-gradient(135deg,#fff4ff 18%,#ff9ce6 42%,#b898ff 68%,#62f7ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 22px rgba(255,79,216,.22))}h2{font-size:clamp(38px,5vw,84px);line-height:.9;margin:0 0 24px;letter-spacing:-.05em;font-weight:800;color:#fff4ff;text-shadow:0 0 38px rgba(139,92,255,.18)}p{max-width:720px;font-size:17px;line-height:1.82;color:var(--muted);font-weight:300}.topnav{position:fixed;top:20px;left:20px;z-index:8;display:flex;gap:6px;flex-wrap:wrap}.topnav a{color:#cdbdff;text-decoration:none;border:1px solid rgba(255,79,216,.16);background:rgba(7,4,19,.64);padding:8px 14px;border-radius:999px;font-size:12px;backdrop-filter:blur(22px);transition:.22s;font-weight:500;letter-spacing:.04em}.topnav a:hover{color:#fff4ff;border-color:rgba(255,79,216,.34);box-shadow:0 0 22px rgba(255,79,216,.13)}button{border:1px solid rgba(255,255,255,.16);background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,79,216,.055));color:#f5eaff;border-radius:999px;padding:12px 20px;margin:6px 6px 6px 0;cursor:pointer;transition:.24s;font-size:13px;font-family:inherit;font-weight:500;letter-spacing:.025em}button:hover{background:linear-gradient(135deg,rgba(255,79,216,.18),rgba(139,92,255,.12));border-color:rgba(255,139,220,.36);transform:translateY(-2px);box-shadow:0 0 28px rgba(255,79,216,.16)}.pill{display:inline-flex;align-items:center;border:1px solid rgba(255,79,216,.22);background:linear-gradient(135deg,rgba(255,79,216,.08),rgba(139,92,255,.065));padding:8px 14px;border-radius:999px;margin:3px;font-size:12px;color:#e7d6ff;letter-spacing:.05em}.mode-line{margin-top:24px;color:#a98dff;font-size:13px;letter-spacing:.13em;font-weight:600;text-shadow:0 0 18px rgba(139,92,255,.3)}
+.user-info{position:fixed;top:20px;right:20px;z-index:9;font-size:12px;color:#c09cff;display:flex;align-items:center;gap:10px;backdrop-filter:blur(22px)}.logout-btn{font-size:11px;padding:6px 14px;margin:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#c09cff}.status{position:fixed;right:20px;bottom:20px;z-index:9;border:1px solid rgba(255,79,216,.2);background:rgba(7,4,19,.74);padding:12px 16px;border-radius:16px;font-size:11px;line-height:1.75;backdrop-filter:blur(24px);color:#b99cff;letter-spacing:.07em;box-shadow:0 0 34px rgba(255,79,216,.12)}.enter{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 20%,rgba(255,79,216,.17),transparent 38%),radial-gradient(circle at 20% 90%,rgba(139,92,255,.15),transparent 42%),#04030a;transition:opacity 1s}.enter.hide{opacity:0;pointer-events:none}.enter-box{text-align:center;padding:48px;max-width:560px;width:100%;position:relative}.enter-box:before{content:"";position:absolute;inset:0;border:1px solid rgba(255,79,216,.15);border-radius:32px;background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,79,216,.035));backdrop-filter:blur(20px);z-index:-1;box-shadow:0 0 70px rgba(255,79,216,.13)}.enter-box h1{font-size:clamp(64px,12vw,146px);margin:12px 0 24px}.enter-tagline{font-size:16px;color:#d3bfff;margin-bottom:32px;font-weight:300;letter-spacing:.05em}.auth-btn{width:100%;padding:18px;font-size:15px;border-radius:20px;background:linear-gradient(135deg,rgba(255,79,216,.24),rgba(139,92,255,.22));border:1px solid rgba(255,139,220,.35);color:#fff4ff;margin:0;font-weight:700;letter-spacing:.06em}.auth-skip{font-size:12px;color:#6d5d8a;margin-top:18px;cursor:pointer;text-decoration:none;display:inline-block}.auth-skip:hover{color:#ff9ce6}.auth-msg{font-size:13px;color:#a98dff;margin-top:10px;min-height:20px}
+.ai-dual-grid{display:grid;grid-template-columns:repeat(2,minmax(260px,1fr));gap:18px;max-width:1000px;margin-top:30px}.ai-home-card{border:1px solid rgba(255,79,216,.17);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,79,216,.035) 45%,rgba(139,92,255,.035));border-radius:28px;padding:24px;backdrop-filter:blur(24px);transition:.28s;position:relative;overflow:hidden;box-shadow:inset 0 0 32px rgba(255,255,255,.025),0 0 45px rgba(139,92,255,.08)}.ai-home-card:before{content:"";position:absolute;inset:0;opacity:.55;pointer-events:none;background:radial-gradient(circle at 12% 0%,rgba(255,79,216,.24),transparent 38%),radial-gradient(circle at 100% 100%,rgba(98,247,255,.08),transparent 44%),linear-gradient(120deg,transparent 0%,rgba(255,255,255,.06) 48%,transparent 52%)}.ai-home-card:after{content:"";position:absolute;top:-40%;left:-60%;width:90%;height:180%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.11),transparent);transform:rotate(20deg);transition:.8s;opacity:0}.ai-home-card:hover:after{left:120%;opacity:1}.ai-home-card:hover{border-color:rgba(255,139,220,.38);transform:translateY(-4px);box-shadow:0 0 70px rgba(255,79,216,.15)}.ai-home-card.active{border-color:rgba(255,79,216,.56);box-shadow:0 0 70px rgba(255,79,216,.2),inset 0 0 44px rgba(255,79,216,.04)}.ai-card-kicker{font-size:10px;letter-spacing:.26em;color:#a98dff;text-transform:uppercase;margin-bottom:12px;position:relative;z-index:1;font-weight:700}.ai-card-title{font-size:clamp(30px,3.6vw,52px);line-height:.92;letter-spacing:-.05em;font-weight:800;margin-bottom:12px;color:#fff4ff;position:relative;z-index:1;text-shadow:0 0 24px rgba(255,79,216,.22)}.ai-card-body{font-size:14px;line-height:1.75;color:#d1c5e6;font-weight:300;position:relative;z-index:1}.ai-card-tags,.ai-card-actions{position:relative;z-index:1}.ai-card-tags{margin-top:14px}.ai-card-actions{margin-top:18px}.ai-select-btn{background:linear-gradient(135deg,rgba(255,79,216,.16),rgba(139,92,255,.13));border-color:rgba(255,79,216,.34);color:#ffeaff}
+.chat-layout{display:flex;gap:20px;width:100%;max-width:1120px}.sidebar{width:225px;min-width:180px;flex-shrink:0;border:1px solid rgba(255,79,216,.13);background:rgba(255,255,255,.035);border-radius:22px;padding:14px;backdrop-filter:blur(24px);display:flex;flex-direction:column;gap:8px;max-height:580px;box-shadow:0 0 42px rgba(139,92,255,.07)}.sidebar-title{font-size:10px;letter-spacing:.28em;color:#a98dff;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid rgba(255,79,216,.13);font-weight:700}.new-conv-btn{width:100%;padding:10px 14px;font-size:12px;border-radius:12px;background:rgba(255,79,216,.11);border:1px solid rgba(255,79,216,.23);color:#ffd6f5;cursor:pointer;text-align:left;margin:0}.conv-list{overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:4px}.conv-item{padding:9px 11px;border-radius:12px;cursor:pointer;border:1px solid transparent;font-size:12px;color:#c4b5e5;transition:.2s;display:flex;align-items:center;justify-content:space-between;gap:6px;line-height:1.4}.conv-item:hover{background:rgba(255,79,216,.07);border-color:rgba(255,79,216,.16);color:#fff0fb}.conv-item.active{background:rgba(255,79,216,.13);border-color:rgba(255,79,216,.26);color:#ffe8fb}.conv-item-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.conv-actions{display:flex;gap:3px;flex-shrink:0;opacity:0;transition:.15s}.conv-item:hover .conv-actions{opacity:1}.conv-btn{font-size:11px;padding:2px 6px;border-radius:6px;border:none;cursor:pointer;margin:0}.conv-rename-btn{background:rgba(139,92,255,.18);color:#d2c5ff}.conv-delete-btn{background:rgba(255,60,120,.14);color:#f5a2c7}.rename-hint{font-size:10px;color:#5d4d7b;text-align:center;padding:3px 0}.terminal-wrap{flex:1;min-width:0}.chat-window{border:1px solid rgba(255,79,216,.16);background:linear-gradient(145deg,rgba(255,255,255,.038),rgba(255,79,216,.025),rgba(139,92,255,.025));border-radius:28px;overflow:hidden;backdrop-filter:blur(26px);box-shadow:0 0 75px rgba(139,92,255,.1),inset 0 0 42px rgba(255,255,255,.02);position:relative}.chat-window:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 20% 0%,rgba(255,79,216,.08),transparent 42%),radial-gradient(circle at 100% 100%,rgba(98,247,255,.045),transparent 46%);opacity:.9}.chat-header{padding:16px 20px;border-bottom:1px solid rgba(255,79,216,.12);display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:relative;z-index:1}.chat-header-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--cyan));animation:pulse 2s infinite;box-shadow:0 0 18px rgba(255,79,216,.55)}@keyframes pulse{50%{opacity:.42;transform:scale(.72)}}.chat-header-name{font-size:13px;font-weight:700;color:#ffd9f7;letter-spacing:.06em;text-shadow:0 0 14px rgba(255,79,216,.24)}.chat-header-state{font-size:11px;color:#bda6ff;margin-left:auto;letter-spacing:.09em;font-weight:600}.ai-switch{display:flex;gap:6px;margin-left:8px}.ai-switch-btn{padding:5px 10px;border-radius:999px;font-size:10px;margin:0;color:#bda6ff;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}.ai-switch-btn.active{color:#fff2fb;background:rgba(255,79,216,.18);border-color:rgba(255,79,216,.36);box-shadow:0 0 20px rgba(255,79,216,.14)}.messages{min-height:500px;max-height:calc(100vh - 320px);overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;position:relative;z-index:1}.msg{max-width:80%;padding:12px 16px;border-radius:18px;font-size:14px;line-height:1.68;animation:fadeUp .3s}@keyframes fadeUp{from{opacity:0;transform:translateY(7px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}.msg-user{align-self:flex-end;background:linear-gradient(135deg,rgba(255,79,216,.2),rgba(139,92,255,.16));border:1px solid rgba(255,79,216,.28);color:#fff4ff;border-bottom-right-radius:6px}.msg-aiq{align-self:flex-start;background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(139,92,255,.055));border:1px solid rgba(255,255,255,.12);color:#e4d9f4;border-bottom-left-radius:6px}.msg-system{align-self:center;font-size:11px;color:#c7b8ff;letter-spacing:.09em;padding:4px 12px;border-radius:999px;background:rgba(255,79,216,.075);border:1px solid rgba(255,79,216,.16)}.msg-thinking{align-self:flex-start;display:flex;gap:5px;padding:12px 16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:18px;border-bottom-left-radius:6px}.thinking-dot{width:6px;height:6px;border-radius:50%;background:#ff4fd8;animation:thinking .8s infinite;box-shadow:0 0 12px rgba(255,79,216,.45)}.thinking-dot:nth-child(2){animation-delay:.15s}.thinking-dot:nth-child(3){animation-delay:.3s}@keyframes thinking{50%{opacity:1;transform:scale(1)}0%,100%{opacity:.3;transform:scale(.8)}}.chat-input-row{padding:14px 16px;border-top:1px solid rgba(255,79,216,.11);display:flex;gap:10px;align-items:center;position:relative;z-index:1}.chat-input{flex:1;padding:13px 18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,79,216,.16);color:#fff4ff;border-radius:14px;font-size:14px;outline:none;font-family:inherit}.chat-input:focus{border-color:rgba(255,79,216,.48);background:rgba(255,255,255,.085);box-shadow:0 0 24px rgba(255,79,216,.12)}.chat-input::placeholder{color:#6b5d85}.send-btn{padding:12px 20px;font-size:13px;border-radius:14px;background:linear-gradient(135deg,rgba(255,79,216,.28),rgba(139,92,255,.24));border:1px solid rgba(255,79,216,.35);color:#fff2fb;margin:0;font-weight:700;flex-shrink:0}.export-btn{padding:12px 14px;font-size:13px;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);color:#a98dff;margin:0;flex-shrink:0}.footer-note{font-size:11px;color:#6b5d85;margin-top:10px;text-align:center;letter-spacing:.05em}
+body[data-state="overloaded"] .chat-window{box-shadow:0 0 95px rgba(255,79,216,.18),inset 0 0 70px rgba(255,79,216,.045)}body[data-state="focus"] .chat-window{box-shadow:0 0 70px rgba(139,92,255,.13),inset 0 0 50px rgba(139,92,255,.035)}body[data-state="void"] .chat-window{box-shadow:0 0 90px rgba(60,40,140,.22),inset 0 0 70px rgba(60,40,140,.08)}body[data-state="numb"] .chat-window{box-shadow:0 0 80px rgba(96,165,250,.12),inset 0 0 60px rgba(96,165,250,.035)}body[data-state="anxious"] .chat-window{box-shadow:0 0 78px rgba(251,191,36,.09),inset 0 0 50px rgba(251,191,36,.025)}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:980px;margin-top:28px}.profile-card{border:1px solid rgba(255,79,216,.13);background:rgba(255,255,255,.035);border-radius:22px;padding:22px;backdrop-filter:blur(24px);box-shadow:0 0 42px rgba(139,92,255,.055)}.profile-card h3{font-size:10px;color:#a98dff;letter-spacing:.28em;text-transform:uppercase;margin:0 0 16px;font-weight:700}.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat-box{text-align:center;padding:14px 8px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,79,216,.12)}.stat-num{font-size:26px;font-weight:800;color:#ffd9f7;letter-spacing:-.02em;text-shadow:0 0 18px rgba(255,79,216,.22)}.stat-label{font-size:10px;color:#8f78c7;margin-top:3px;letter-spacing:.11em}.state-chart-wrap{position:relative;width:100%;height:150px}.state-chart{width:100%;height:100%}.state-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.state-dot{display:flex;align-items:center;gap:4px;font-size:11px;color:#9a86d1}.state-dot span{width:7px;height:7px;border-radius:50%;display:inline-block}.tag-input-row{display:flex;gap:8px;margin-bottom:12px}.tag-input{flex:1;padding:9px 14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,79,216,.13);color:#fff4ff;border-radius:12px;font-size:13px;outline:none;font-family:inherit}.tag-add-btn{padding:9px 16px;font-size:12px;border-radius:12px;background:rgba(255,79,216,.13);border:1px solid rgba(255,79,216,.25);color:#ffd6f5;cursor:pointer;margin:0;white-space:nowrap;font-family:inherit}.tags-display{display:flex;flex-wrap:wrap;gap:5px}.tag-item{display:flex;align-items:center;gap:4px;padding:4px 11px;border-radius:999px;background:rgba(255,79,216,.1);border:1px solid rgba(255,79,216,.2);font-size:11px;color:#f0d4ff}.tag-remove{cursor:pointer;opacity:.55;font-size:10px}.notes-textarea{width:100%;padding:12px;background:rgba(255,255,255,.045);border:1px solid rgba(255,79,216,.12);color:#d8cfe9;border-radius:14px;font-size:13px;line-height:1.65;resize:vertical;min-height:90px;outline:none;font-family:inherit}.save-notes-btn{margin-top:8px;padding:8px 18px;font-size:12px;border-radius:10px;background:rgba(255,79,216,.13);border:1px solid rgba(255,79,216,.25);color:#ffd6f5;cursor:pointer;margin-left:0;font-family:inherit}.spotify-card{background:rgba(30,215,96,.06);border:1px solid rgba(30,215,96,.18);border-radius:16px;padding:12px 16px;margin-top:8px;display:flex;align-items:center;gap:12px;text-decoration:none}.spotify-card-img{width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0;background:rgba(30,215,96,.1)}.spotify-card-info{flex:1;min-width:0}.spotify-card-name{font-size:13px;color:#e0f8ec;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.spotify-card-desc{font-size:11px;color:#1ed760;margin-top:2px;opacity:.7}.spotify-section{margin-top:6px;display:flex;flex-direction:column;gap:6px}.conv-sheet-overlay,.conv-sheet{display:none}body.aiq-pulse .bg-glow{opacity:1!important;filter:saturate(1.8) brightness(1.08)!important}body.aiq-pulse .chat-window{box-shadow:0 0 120px rgba(255,79,216,.23),inset 0 0 80px rgba(255,79,216,.06)!important}
+@media(max-width:720px){section{padding:84px 18px 112px}p{font-size:15px}.topnav{display:none}.status{display:none}.user-info{top:12px;right:12px;font-size:11px}.ai-dual-grid{grid-template-columns:1fr}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;background:rgba(4,3,10,.95);border-top:1px solid rgba(255,79,216,.12);backdrop-filter:blur(26px);padding:8px 0 max(8px,env(safe-area-inset-bottom))}.mobile-nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:#8f78c7;text-decoration:none;font-size:10px;padding:6px 0;cursor:pointer;letter-spacing:.04em}.mobile-nav a:hover,.mobile-nav a:active{color:#ffb8ec}.mobile-nav a svg{width:18px;height:18px}#chat{padding:72px 0 112px}.chat-layout{flex-direction:column;gap:0;padding:0 14px}.sidebar{display:none}.mobile-conv-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 0;margin-bottom:10px}.mobile-conv-label{font-size:11px;color:#a98dff;letter-spacing:.12em;font-weight:700}.mobile-conv-toggle{font-size:12px;padding:6px 14px;border-radius:999px;margin:0;background:rgba(255,79,216,.12);border:1px solid rgba(255,79,216,.22);color:#ffd6f5}.conv-sheet-overlay{display:none;position:fixed;inset:0;z-index:18;background:rgba(0,0,0,.72);backdrop-filter:blur(10px)}.conv-sheet-overlay.open{display:block}.conv-sheet{position:fixed;bottom:0;left:0;right:0;z-index:19;background:#0a0616;border-top:1px solid rgba(255,79,216,.18);border-radius:24px 24px 0 0;padding:18px 18px max(18px,env(safe-area-inset-bottom));max-height:70vh;display:flex;flex-direction:column;gap:10px;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 60px rgba(255,79,216,.12)}.conv-sheet.open{transform:translateY(0)}.conv-sheet-handle{width:32px;height:3px;background:rgba(255,79,216,.24);border-radius:2px;margin:0 auto 6px}.conv-sheet-list{overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:4px}.messages{min-height:180px;max-height:calc(100vh - 292px);padding:14px}.msg{font-size:13px;padding:10px 14px}.chat-input-row{padding:10px 12px;gap:8px}.chat-input{padding:11px 14px;font-size:14px}#home button{padding:9px 14px;font-size:12px}.profile-grid{grid-template-columns:1fr}.ai-switch{width:100%;margin-left:0;margin-top:4px}h1{font-size:clamp(46px,16vw,76px)}}
 
-* {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
+/* ── MellowWei Portal Home Upgrade ── */
+#home.portal-home{
+  justify-content:flex-start;
+  padding-top:84px;
+  overflow:hidden;
 }
-
-html {
-  scroll-behavior: smooth;
+.portal-shell{
+  width:100%;
+  min-height:calc(100vh - 120px);
+  position:relative;
+  padding:10px 0 80px;
 }
-
-body {
-  margin: 0;
-  background: #04030a;
-  color: #f0ecff;
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-}
-
-canvas#field {
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-}
-
-.bg-glow {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
+.portal-constellation{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.9;
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(120, 60, 255, .18), transparent 60%),
-    radial-gradient(ellipse at 0% 100%, rgba(60, 120, 255, .1), transparent 50%),
-    radial-gradient(ellipse at 100% 60%, rgba(200, 60, 160, .09), transparent 50%);
-  transition: opacity .8s ease;
+    radial-gradient(circle at 81% 13%,rgba(110,255,220,.9) 0 3px,rgba(110,255,220,.25) 4px 12px,transparent 46px),
+    radial-gradient(circle at 83% 27%,rgba(255,255,255,.92) 0 4px,rgba(255,255,255,.18) 5px 58px,transparent 96px),
+    radial-gradient(circle at 9% 47%,rgba(255,238,96,.85) 0 3px,rgba(255,238,96,.2) 4px 34px,transparent 58px),
+    radial-gradient(circle at 25% 53%,rgba(255,79,216,.8) 0 3px,rgba(255,79,216,.18) 4px 32px,transparent 58px),
+    radial-gradient(circle at 30% 66%,rgba(255,246,120,.88) 0 3px,rgba(255,246,120,.16) 4px 34px,transparent 58px),
+    radial-gradient(circle at 79% 70%,rgba(255,255,255,.8) 0 3px,rgba(255,255,255,.16) 4px 42px,transparent 70px);
+  filter:drop-shadow(0 0 12px rgba(255,255,255,.2));
 }
-
-.noise {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: .06;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 256px;
-}
-
-/* ── Sections ── */
-section {
-  min-height: 100vh;
-  padding: 80px 7vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.kicker {
-  letter-spacing: .3em;
-  font-size: 11px;
-  color: #8878c0;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-h1 {
-  font-size: clamp(52px, 9vw, 128px);
-  line-height: .86;
-  margin: 16px 0;
-  letter-spacing: -.06em;
-  font-weight: 600;
-  background: linear-gradient(135deg, #f0ecff 30%, #b898ff 70%, #f472b6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-h2 {
-  font-size: clamp(36px, 5vw, 80px);
-  line-height: .92;
-  margin: 0 0 24px;
-  letter-spacing: -.04em;
-  font-weight: 600;
-}
-
-p {
-  max-width: 680px;
-  font-size: 17px;
-  line-height: 1.8;
-  color: #c0b8d8;
-  font-weight: 300;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid rgba(255, 255, 255, .12);
-  background: rgba(255, 255, 255, .05);
-  padding: 8px 14px;
-  border-radius: 999px;
-  margin: 3px;
-  font-size: 12px;
-  color: #b0a8cc;
-  letter-spacing: .04em;
-  transition: .2s;
-}
-
-.pill:hover {
-  background: rgba(255, 255, 255, .1);
-  color: #e0d8ff;
-}
-
-.mode-line {
-  margin-top: 24px;
-  color: #6858a0;
-  font-size: 13px;
-  letter-spacing: .12em;
-  font-weight: 500;
-}
-
-/* ── Dual AI Home Cards ── */
-.ai-dual-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(260px, 1fr));
-  gap: 16px;
-  max-width: 900px;
-  margin-top: 28px;
-}
-
-.ai-home-card {
-  border: 1px solid rgba(255, 255, 255, .1);
-  background: rgba(255, 255, 255, .035);
-  border-radius: 24px;
-  padding: 22px;
-  backdrop-filter: blur(20px);
-  transition: .25s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.ai-home-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: .22;
-  pointer-events: none;
+.portal-constellation::before{
+  content:"";
+  position:absolute;
+  left:16%;top:38%;
+  width:42%;height:32%;
   background:
-    radial-gradient(circle at 20% 0%, rgba(120, 60, 255, .22), transparent 45%),
-    radial-gradient(circle at 100% 100%, rgba(244, 114, 182, .12), transparent 45%);
+    linear-gradient(28deg,transparent 0 32%,rgba(255,255,255,.18) 32.3% 32.7%,transparent 33% 100%),
+    linear-gradient(142deg,transparent 0 43%,rgba(255,255,255,.13) 43.3% 43.7%,transparent 44% 100%),
+    linear-gradient(75deg,transparent 0 52%,rgba(255,255,255,.12) 52.3% 52.7%,transparent 53% 100%);
+  opacity:.55;
+  transform:rotate(-5deg);
+}
+.portal-gridline{
+  position:relative;
+  z-index:1;
+  border-top:1px solid rgba(255,255,255,.12);
+  border-bottom:1px solid rgba(255,255,255,.1);
+  padding:28px 0;
+  margin:28px 0;
+}
+.portal-meta{
+  position:relative;
+  z-index:2;
+  display:grid;
+  gap:14px;
+  max-width:1100px;
+  color:#8e7aa8;
+  font-size:clamp(12px,1.45vw,18px);
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.portal-meta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px 28px;
+  align-items:center;
+}
+.portal-meta-row span{
+  color:#efe9ff;
+  letter-spacing:.22em;
+}
+.portal-meta-row .mint{color:#7dffe4;text-shadow:0 0 14px rgba(125,255,228,.35)}
+.portal-meta-row .pink{color:#ff8bdc;text-shadow:0 0 14px rgba(255,79,216,.35)}
+.portal-meta-row .dim{color:#665477;opacity:.72}
+.portal-title-wrap{
+  position:relative;
+  z-index:2;
+  margin-top:68px;
+  max-width:980px;
+}
+.portal-title{
+  margin:0;
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(62px,11vw,158px);
+  line-height:.82;
+  letter-spacing:-.085em;
+  font-weight:400;
+  color:#fff7ff;
+  background:none;
+  -webkit-text-fill-color:initial;
+  filter:drop-shadow(0 0 20px rgba(255,255,255,.22));
+}
+.portal-title .aqua{
+  color:#80ffe8;
+  font-style:italic;
+  text-shadow:0 0 28px rgba(128,255,232,.28);
+}
+.portal-title .pinkword{
+  color:#ff9ce6;
+  text-shadow:0 0 28px rgba(255,79,216,.26);
+}
+.portal-underscore{
+  display:inline-block;
+  width:46px;
+  height:4px;
+  background:#ffe36f;
+  border-radius:999px;
+  vertical-align:baseline;
+  margin-left:10px;
+  box-shadow:0 0 24px rgba(255,227,111,.35);
+}
+.portal-subtitle{
+  margin-top:30px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px 20px;
+  align-items:center;
+  color:#8d819e;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  font-size:clamp(12px,1.45vw,18px);
+  font-weight:700;
+}
+.portal-subtitle .cn{letter-spacing:.12em;color:#9a88b0}
+.portal-status-row{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px 28px;
+  align-items:center;
+  margin-top:34px;
+  padding-bottom:24px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.portal-status-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  border:1px solid rgba(125,255,228,.42);
+  background:rgba(125,255,228,.07);
+  color:#87ffe9;
+  border-radius:999px;
+  padding:13px 26px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  font-size:13px;
+  font-weight:800;
+  box-shadow:0 0 28px rgba(125,255,228,.12), inset 0 0 22px rgba(125,255,228,.035);
+}
+.portal-status-dot{
+  width:18px;height:18px;border-radius:50%;
+  background:#75ffd9;
+  box-shadow:0 0 18px rgba(117,255,217,.9);
+}
+.portal-tag-pill{
+  border:1px solid rgba(185,160,255,.33);
+  background:rgba(185,160,255,.08);
+  color:#c9baff;
+  border-radius:999px;
+  padding:13px 26px;
+  letter-spacing:.12em;
+  font-size:14px;
+}
+.portal-frequency{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:24px;
+  margin:70px 0 38px;
+  color:#7a688f;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  font-size:15px;
+  font-weight:700;
+}
+.portal-frequency-bar{
+  height:4px;
+  background:rgba(255,255,255,.08);
+  border-radius:999px;
+  position:relative;
+  overflow:hidden;
+}
+.portal-frequency-bar::before{
+  content:"";
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:42%;
+  background:linear-gradient(90deg,#7dffe4,#ff8bdc);
+  box-shadow:0 0 18px rgba(125,255,228,.32);
+}
+.portal-frequency-value{
+  color:#7dffe4;
+  letter-spacing:.2em;
+  text-shadow:0 0 14px rgba(125,255,228,.32);
+}
+.portal-navline{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-wrap:wrap;
+  gap:22px 36px;
+  align-items:center;
+  padding:24px 0 34px;
+  border-top:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(255,255,255,.12);
+  color:#8b7c9e;
+  font-size:clamp(14px,1.7vw,22px);
+  letter-spacing:.22em;
+  font-weight:800;
+  text-transform:lowercase;
+}
+.portal-navline a,.portal-navline button{
+  font:inherit;
+  color:inherit;
+  text-decoration:none;
+  background:transparent;
+  border:0;
+  padding:0;
+  margin:0;
+  border-radius:0;
+  box-shadow:none;
+  text-transform:lowercase;
+}
+.portal-navline a:hover,.portal-navline button:hover{
+  transform:none;
+  box-shadow:none;
+  background:transparent;
+}
+.portal-navline .mint{color:#6ffff0;text-shadow:0 0 16px rgba(111,255,240,.32)}
+.portal-navline .pink{color:#ff70c8;text-shadow:0 0 16px rgba(255,79,216,.32)}
+.portal-navline .yellow{color:#ffe36f;text-shadow:0 0 16px rgba(255,227,111,.32)}
+.portal-navline .rose{color:#ff9aaa;text-shadow:0 0 16px rgba(255,154,170,.32)}
+.portal-cards{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
+  gap:20px;
+  margin-top:64px;
+}
+.portal-identity-card,.portal-ai-card{
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,79,216,.025),rgba(139,92,255,.035));
+  border-radius:16px;
+  padding:38px 44px;
+  min-height:290px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 0 40px rgba(139,92,255,.06), inset 0 0 34px rgba(255,255,255,.015);
+}
+.portal-card-kicker{
+  color:#8e7aa8;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:30px;
+}
+.portal-name-cn{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(36px,4.2vw,62px);
+  color:#fff4ff;
+  margin-bottom:18px;
+}
+.portal-name-en{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(27px,3.2vw,44px);
+  font-style:italic;
+  color:#80ffe8;
+  margin-bottom:24px;
+  text-shadow:0 0 20px rgba(128,255,232,.24);
+}
+.portal-card-text{
+  color:#c7b8dc;
+  font-size:18px;
+  line-height:1.8;
+  letter-spacing:.04em;
+}
+.portal-card-text em{
+  color:#a79abb;
+  font-style:italic;
+}
+.portal-ai-card .ai-dual-grid{
+  margin-top:0;
+  grid-template-columns:1fr;
+  gap:14px;
+}
+.portal-ai-card .ai-home-card{
+  border-radius:18px;
+  padding:18px;
+}
+.portal-ai-card .ai-card-title{
+  font-size:32px;
+}
+.portal-ai-card .ai-card-body{
+  font-size:13px;
+}
+@media(max-width:860px){
+  #home.portal-home{padding-top:74px;}
+  .portal-meta{font-size:11px;letter-spacing:.18em;}
+  .portal-title-wrap{margin-top:44px;}
+  .portal-subtitle{letter-spacing:.18em;}
+  .portal-frequency{grid-template-columns:1fr;gap:12px;margin:42px 0 28px;}
+  .portal-cards{grid-template-columns:1fr;margin-top:42px;}
+  .portal-identity-card,.portal-ai-card{padding:26px 22px;}
+  .portal-navline{gap:16px 22px;letter-spacing:.14em;}
 }
 
-.ai-home-card:hover {
-  border-color: rgba(255, 255, 255, .18);
-  background: rgba(255, 255, 255, .055);
-  transform: translateY(-2px);
-}
-
-.ai-home-card.active {
-  border-color: rgba(184, 152, 255, .42);
-  box-shadow: 0 0 42px rgba(120, 60, 255, .13);
-}
-
-.ai-card-kicker {
-  font-size: 10px;
-  letter-spacing: .24em;
-  color: #6858a0;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  position: relative;
-  z-index: 1;
-}
-
-.ai-card-title {
-  font-size: clamp(28px, 3.4vw, 46px);
-  line-height: .95;
-  letter-spacing: -.04em;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #f0ecff;
-  position: relative;
-  z-index: 1;
-}
-
-.ai-card-body {
-  font-size: 14px;
-  line-height: 1.7;
-  color: #b8b0d0;
-  font-weight: 300;
-  position: relative;
-  z-index: 1;
-}
-
-.ai-card-tags {
-  margin-top: 14px;
-  position: relative;
-  z-index: 1;
-}
-
-.ai-card-actions {
-  margin-top: 18px;
-  position: relative;
-  z-index: 1;
-}
-
-.ai-select-btn {
-  background: rgba(120, 60, 255, .14);
-  border-color: rgba(120, 60, 255, .28);
-  color: #d8c8ff;
-}
-
-.ai-select-btn:hover {
-  background: rgba(120, 60, 255, .24);
-  border-color: rgba(184, 152, 255, .38);
-}
-
-/* ── Buttons ── */
-button {
-  border: 1px solid rgba(255, 255, 255, .15);
-  background: rgba(255, 255, 255, .06);
-  color: #e0d8ff;
-  border-radius: 999px;
-  padding: 12px 20px;
-  margin: 6px 6px 6px 0;
-  cursor: pointer;
-  transition: .2s ease;
-  font-size: 13px;
-  font-family: inherit;
-  font-weight: 400;
-  letter-spacing: .02em;
-}
-
-button:hover {
-  background: rgba(255, 255, 255, .14);
-  border-color: rgba(255, 255, 255, .25);
-  transform: translateY(-1px);
-}
-
-/* ── Nav ── */
-.topnav {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 8;
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.topnav a {
-  color: #a098c8;
-  text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, .1);
-  background: rgba(4, 3, 10, .7);
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 12px;
-  backdrop-filter: blur(20px);
-  transition: .2s;
-  font-weight: 400;
-  letter-spacing: .03em;
-}
-
-.topnav a:hover {
-  color: #e0d8ff;
-  border-color: rgba(255, 255, 255, .2);
-}
-
-/* ── Fix mobile nav SVG leaking on desktop ── */
-.mobile-nav {
-  display: none;
-}
-
-.mobile-nav svg {
-  width: 18px !important;
-  height: 18px !important;
-  max-width: 18px !important;
-  max-height: 18px !important;
-  flex-shrink: 0;
-}
-
-.mobile-nav a {
-  color: #5848a0;
-  text-decoration: none;
-}
-
-/* ── User info ── */
-.user-info {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9;
-  font-size: 12px;
-  color: #8878c0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  backdrop-filter: blur(20px);
-}
-
-.logout-btn {
-  font-size: 11px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  margin: 0;
-  background: rgba(255, 255, 255, .05);
-  border: 1px solid rgba(255, 255, 255, .1);
-  color: #8878c0;
-}
-
-.logout-btn:hover {
-  color: #e0d8ff;
-  transform: none;
-}
-
-.spotify-btn {
-  font-size: 11px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  margin: 0 0 0 8px;
-  background: rgba(30, 215, 96, .12);
-  border: 1px solid rgba(30, 215, 96, .25);
-  color: #1ed760;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.spotify-btn:hover {
-  background: rgba(30, 215, 96, .22);
-  transform: none;
-}
-
-.spotify-btn.connected {
-  background: rgba(30, 215, 96, .18);
-  border-color: rgba(30, 215, 96, .4);
-}
-
-.spotify-card {
-  background: rgba(30, 215, 96, .06);
-  border: 1px solid rgba(30, 215, 96, .18);
-  border-radius: 16px;
-  padding: 12px 16px;
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  transition: .2s;
-}
-
-.spotify-card:hover {
-  background: rgba(30, 215, 96, .12);
-  border-color: rgba(30, 215, 96, .3);
-}
-
-.spotify-card-img {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: rgba(30, 215, 96, .1);
-}
-
-.spotify-card-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.spotify-card-name {
-  font-size: 13px;
-  color: #e0f8ec;
-  font-weight: 500;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.spotify-card-desc {
-  font-size: 11px;
-  color: #1ed760;
-  margin-top: 2px;
-  opacity: .7;
-}
-
-.spotify-section {
-  margin-top: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* ── Status ── */
-.status {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 9;
-  border: 1px solid rgba(255, 255, 255, .1);
-  background: rgba(4, 3, 10, .8);
-  padding: 12px 16px;
-  border-radius: 16px;
-  font-size: 11px;
-  line-height: 1.7;
-  backdrop-filter: blur(20px);
-  color: #6858a0;
-  letter-spacing: .06em;
-}
-
-/* ── Enter screen ── */
-.enter {
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #04030a;
-  transition: opacity 1s ease;
-}
-
-.enter.hide {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.enter-box {
-  text-align: center;
-  padding: 48px;
-  max-width: 520px;
-  width: 100%;
-}
-
-.enter-box h1 {
-  font-size: clamp(54px, 10vw, 118px);
-  margin: 12px 0 24px;
-}
-
-.enter-tagline {
-  font-size: 16px;
-  color: #8878c0;
-  margin-bottom: 32px;
-  font-weight: 300;
-  letter-spacing: .04em;
-}
-
-.auth-btn {
-  width: 100%;
-  padding: 18px;
-  font-size: 15px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(120, 60, 255, .25), rgba(200, 60, 160, .2));
-  border: 1px solid rgba(150, 80, 255, .35);
-  color: #e8d8ff;
-  cursor: pointer;
-  transition: .3s;
-  margin: 0;
-  font-weight: 500;
-  letter-spacing: .04em;
-}
-
-.auth-btn:hover {
-  background: linear-gradient(135deg, rgba(120, 60, 255, .4), rgba(200, 60, 160, .35));
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(120, 60, 255, .2);
-}
-
-.auth-msg {
-  font-size: 13px;
-  color: #6858a0;
-  margin-top: 10px;
-  min-height: 20px;
-}
-
-.auth-skip {
-  font-size: 12px;
-  color: #4a4268;
-  margin-top: 18px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: .2s;
-}
-
-.auth-skip:hover {
-  color: #8878c0;
-}
-
-/* ── Chat layout ── */
-.chat-layout {
-  display: flex;
-  gap: 20px;
-  width: 100%;
-  max-width: 1100px;
-}
-
-/* Sidebar */
-.sidebar {
-  width: 220px;
-  min-width: 180px;
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, .08);
-  background: rgba(255, 255, 255, .03);
-  border-radius: 20px;
-  padding: 14px;
-  backdrop-filter: blur(20px);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-height: 580px;
-}
-
-.sidebar-title {
-  font-size: 10px;
-  letter-spacing: .25em;
-  color: #6858a0;
-  text-transform: uppercase;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, .06);
-  font-weight: 500;
-}
-
-.new-conv-btn {
-  width: 100%;
-  padding: 10px 14px;
-  font-size: 12px;
-  border-radius: 12px;
-  background: rgba(120, 60, 255, .12);
-  border: 1px solid rgba(120, 60, 255, .25);
-  color: #c8b8ff;
-  cursor: pointer;
-  transition: .2s;
-  text-align: left;
-  margin: 0;
-  font-weight: 400;
-  letter-spacing: .02em;
-}
-
-.new-conv-btn:hover {
-  background: rgba(120, 60, 255, .22);
-  transform: none;
-}
-
-.conv-list {
-  overflow-y: auto;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.conv-list::-webkit-scrollbar {
-  width: 3px;
-}
-
-.conv-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, .1);
-  border-radius: 2px;
-}
-
-.conv-item {
-  padding: 9px 11px;
-  border-radius: 11px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  font-size: 12px;
-  color: #a098c8;
-  transition: .2s;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  line-height: 1.4;
-}
-
-.conv-item:hover {
-  background: rgba(255, 255, 255, .05);
-  border-color: rgba(255, 255, 255, .08);
-  color: #d0c8e8;
-}
-
-.conv-item.active {
-  background: rgba(120, 60, 255, .12);
-  border-color: rgba(120, 60, 255, .25);
-  color: #d8c8ff;
-}
-
-.conv-item-title {
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.conv-actions {
-  display: flex;
-  gap: 3px;
-  flex-shrink: 0;
-  opacity: 0;
-  transition: .15s;
-}
-
-.conv-item:hover .conv-actions {
-  opacity: 1;
-}
-
-.conv-btn {
-  font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  margin: 0;
-  transition: .15s;
-}
-
-.conv-rename-btn {
-  background: rgba(120, 60, 255, .15);
-  color: #b0a0e8;
-}
-
-.conv-rename-btn:hover {
-  background: rgba(120, 60, 255, .3);
-  transform: none;
-}
-
-.conv-delete-btn {
-  background: rgba(255, 60, 60, .12);
-  color: #e09090;
-}
-
-.conv-delete-btn:hover {
-  background: rgba(255, 60, 60, .25);
-  transform: none;
-}
-
-.rename-hint {
-  font-size: 10px;
-  color: #3a3258;
-  text-align: center;
-  padding: 3px 0;
-}
-
-/* ── Chat bubbles ── */
-.terminal-wrap {
-  flex: 1;
-  min-width: 0;
-}
-
-.chat-window {
-  border: 1px solid rgba(255, 255, 255, .08);
-  background: rgba(255, 255, 255, .02);
-  border-radius: 24px;
-  padding: 0;
-  overflow: hidden;
-  backdrop-filter: blur(20px);
-}
-
-.chat-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, .06);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.chat-header-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #7c3aff, #f472b6);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .4; }
-}
-
-.chat-header-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: #c0b0e8;
-  letter-spacing: .05em;
-}
-
-.ai-switcher {
-  display: flex;
-  gap: 5px;
-  margin-left: 8px;
-}
-
-.ai-switch-btn {
-  font-size: 10px;
-  padding: 5px 9px;
-  margin: 0;
-  border-radius: 999px;
-  color: #6858a0;
-  background: rgba(255, 255, 255, .035);
-  border: 1px solid rgba(255, 255, 255, .08);
-}
-
-.ai-switch-btn:hover {
-  color: #d8c8ff;
-  transform: none;
-}
-
-.ai-switch-btn.active {
-  color: #e8d8ff;
-  background: rgba(120, 60, 255, .16);
-  border-color: rgba(120, 60, 255, .32);
-}
-
-.chat-header-state {
-  font-size: 11px;
-  color: #5848a0;
-  margin-left: auto;
-  letter-spacing: .08em;
-}
-
-.messages {
-  min-height: 500px;
-  max-height: calc(100vh - 320px);
-  overflow-y: auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.messages::-webkit-scrollbar {
-  width: 3px;
-}
-
-.messages::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, .08);
-  border-radius: 2px;
-}
-
-.msg {
-  max-width: 80%;
-  padding: 12px 16px;
-  border-radius: 18px;
-  font-size: 14px;
-  line-height: 1.65;
-  animation: fadeUp .3s ease;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.msg-user {
-  align-self: flex-end;
-  background: rgba(120, 60, 255, .2);
-  border: 1px solid rgba(120, 60, 255, .25);
-  color: #e8d8ff;
-  border-bottom-right-radius: 6px;
-}
-
-.msg-aiq {
-  align-self: flex-start;
-  background: rgba(255, 255, 255, .05);
-  border: 1px solid rgba(255, 255, 255, .1);
-  color: #d0c8e8;
-  border-bottom-left-radius: 6px;
-}
-
-.msg-system {
-  align-self: center;
-  font-size: 11px;
-  color: #5848a0;
-  letter-spacing: .08em;
-  padding: 4px 12px;
-  border-radius: 999px;
-  background: rgba(120, 60, 255, .08);
-  border: 1px solid rgba(120, 60, 255, .15);
-}
-
-.msg-thinking {
-  align-self: flex-start;
-  display: flex;
-  gap: 5px;
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, .04);
-  border: 1px solid rgba(255, 255, 255, .08);
-  border-radius: 18px;
-  border-bottom-left-radius: 6px;
-}
-
-.thinking-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #7c3aff;
-  animation: thinking .8s infinite;
-}
-
-.thinking-dot:nth-child(2) {
-  animation-delay: .15s;
-}
-
-.thinking-dot:nth-child(3) {
-  animation-delay: .3s;
-}
-
-@keyframes thinking {
-  0%, 100% { opacity: .3; transform: scale(.8); }
-  50% { opacity: 1; transform: scale(1); }
-}
-
-.chat-input-row {
-  padding: 14px 16px;
-  border-top: 1px solid rgba(255, 255, 255, .06);
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.chat-input {
-  flex: 1;
-  padding: 13px 18px;
-  background: rgba(255, 255, 255, .06);
-  border: 1px solid rgba(255, 255, 255, .1);
-  color: #e8e0ff;
-  border-radius: 14px;
-  font-size: 14px;
-  outline: none;
-  font-family: inherit;
-  transition: .2s;
-}
-
-.chat-input:focus {
-  border-color: rgba(120, 60, 255, .4);
-  background: rgba(255, 255, 255, .08);
-}
-
-.chat-input::placeholder {
-  color: #4a4268;
-}
-
-.send-btn {
-  padding: 12px 20px;
-  font-size: 13px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, rgba(120, 60, 255, .3), rgba(200, 60, 160, .2));
-  border: 1px solid rgba(120, 60, 255, .3);
-  color: #d8c8ff;
-  margin: 0;
-  font-weight: 500;
-  flex-shrink: 0;
-}
-
-.send-btn:hover {
-  background: linear-gradient(135deg, rgba(120, 60, 255, .45), rgba(200, 60, 160, .35));
-  transform: translateY(-1px);
-}
-
-.export-btn {
-  padding: 12px 14px;
-  font-size: 13px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, .05);
-  border: 1px solid rgba(255, 255, 255, .1);
-  color: #6858a0;
-  margin: 0;
-  flex-shrink: 0;
-}
-
-.export-btn:hover {
-  color: #a098c8;
-  transform: translateY(-1px);
-}
-
-.footer-note {
-  font-size: 11px;
-  color: #3a3258;
-  margin-top: 10px;
-  text-align: center;
-  letter-spacing: .04em;
-}
-
-/* State glows on chat window */
-body[data-state="overloaded"] .chat-window {
-  box-shadow: 0 0 80px rgba(244, 114, 182, .12), inset 0 0 60px rgba(244, 114, 182, .04);
-}
-
-body[data-state="focus"] .chat-window {
-  box-shadow: 0 0 60px rgba(120, 60, 255, .1), inset 0 0 40px rgba(120, 60, 255, .03);
-}
-
-body[data-state="void"] .chat-window {
-  box-shadow: 0 0 80px rgba(60, 40, 140, .18), inset 0 0 60px rgba(60, 40, 140, .06);
-}
-
-body[data-state="numb"] .chat-window {
-  box-shadow: 0 0 70px rgba(96, 165, 250, .1), inset 0 0 50px rgba(96, 165, 250, .03);
-}
-
-body[data-state="anxious"] .chat-window {
-  box-shadow: 0 0 60px rgba(251, 191, 36, .08), inset 0 0 40px rgba(251, 191, 36, .02);
-}
-
-/* ── Profile ── */
-.profile-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  max-width: 960px;
-  margin-top: 28px;
-}
-
-.profile-card {
-  border: 1px solid rgba(255, 255, 255, .08);
-  background: rgba(255, 255, 255, .03);
-  border-radius: 20px;
-  padding: 22px;
-  backdrop-filter: blur(20px);
-  transition: .3s;
-}
-
-.profile-card:hover {
-  border-color: rgba(255, 255, 255, .12);
-  background: rgba(255, 255, 255, .04);
-}
-
-.profile-card h3 {
-  font-size: 10px;
-  color: #6858a0;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  margin: 0 0 16px;
-  font-weight: 500;
-}
-
-.state-chart-wrap {
-  position: relative;
-  width: 100%;
-  height: 150px;
-}
-
-.state-chart {
-  width: 100%;
-  height: 100%;
-}
-
-.state-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.state-dot {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 11px;
-  color: #6858a0;
-}
-
-.state-dot span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.stat-box {
-  text-align: center;
-  padding: 14px 8px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, .04);
-  border: 1px solid rgba(255, 255, 255, .07);
-}
-
-.stat-num {
-  font-size: 26px;
-  font-weight: 600;
-  color: #c8b8ff;
-  letter-spacing: -.02em;
-}
-
-.stat-label {
-  font-size: 10px;
-  color: #5848a0;
-  margin-top: 3px;
-  letter-spacing: .1em;
-}
-
-.tag-input-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.tag-input {
-  flex: 1;
-  padding: 9px 14px;
-  background: rgba(255, 255, 255, .05);
-  border: 1px solid rgba(255, 255, 255, .1);
-  color: #e0d8ff;
-  border-radius: 12px;
-  font-size: 13px;
-  outline: none;
-  font-family: inherit;
-}
-
-.tag-input:focus {
-  border-color: rgba(120, 60, 255, .35);
-}
-
-.tag-add-btn {
-  padding: 9px 16px;
-  font-size: 12px;
-  border-radius: 12px;
-  background: rgba(120, 60, 255, .15);
-  border: 1px solid rgba(120, 60, 255, .25);
-  color: #c8b8ff;
-  cursor: pointer;
-  margin: 0;
-  white-space: nowrap;
-  font-family: inherit;
-}
-
-.tags-display {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.tag-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 11px;
-  border-radius: 999px;
-  background: rgba(120, 60, 255, .12);
-  border: 1px solid rgba(120, 60, 255, .2);
-  font-size: 11px;
-  color: #c0b0e8;
-}
-
-.tag-remove {
-  cursor: pointer;
-  opacity: .5;
-  font-size: 10px;
-  transition: .15s;
-}
-
-.tag-remove:hover {
-  opacity: 1;
-}
-
-.notes-textarea {
-  width: 100%;
-  padding: 12px;
-  background: rgba(255, 255, 255, .04);
-  border: 1px solid rgba(255, 255, 255, .09);
-  color: #c0b8d8;
-  border-radius: 14px;
-  font-size: 13px;
-  line-height: 1.65;
-  resize: vertical;
-  min-height: 90px;
-  outline: none;
-  font-family: inherit;
-}
-
-.notes-textarea:focus {
-  border-color: rgba(120, 60, 255, .3);
-}
-
-.save-notes-btn {
-  margin-top: 8px;
-  padding: 8px 18px;
-  font-size: 12px;
-  border-radius: 10px;
-  background: rgba(120, 60, 255, .15);
-  border: 1px solid rgba(120, 60, 255, .25);
-  color: #c8b8ff;
-  cursor: pointer;
-  margin-left: 0;
-  font-family: inherit;
-  transition: .2s;
-}
-
-.save-notes-btn:hover {
-  background: rgba(120, 60, 255, .25);
-  transform: none;
-}
-
-/* Mobile */
-@media(max-width:720px) {
-  section {
-    padding: 80px 18px 110px;
-  }
-
-  p {
-    font-size: 15px;
-  }
-
-  .topnav {
-    display: none;
-  }
-
-  .status {
-    display: none;
-  }
-
-  .user-info {
-    top: 12px;
-    right: 12px;
-    font-size: 11px;
-  }
-
-  .ai-dual-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .mobile-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background: rgba(4, 3, 10, .95);
-    border-top: 1px solid rgba(255, 255, 255, .08);
-    backdrop-filter: blur(24px);
-    padding: 8px 0 max(8px, env(safe-area-inset-bottom));
-  }
-
-  .mobile-nav a {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    color: #5848a0;
-    text-decoration: none;
-    font-size: 10px;
-    padding: 6px 0;
-    transition: .2s;
-    cursor: pointer;
-    letter-spacing: .04em;
-  }
-
-  .mobile-nav a:hover,
-  .mobile-nav a:active {
-    color: #c0b0e8;
-  }
-
-  .mobile-nav a svg {
-    width: 18px !important;
-    height: 18px !important;
-    max-width: 18px !important;
-    max-height: 18px !important;
-  }
-
-  #chat {
-    padding: 70px 0 110px;
-  }
-
-  .chat-layout {
-    flex-direction: column;
-    gap: 0;
-    padding: 0 14px;
-  }
-
-  .ai-switcher {
-    display: none;
-  }
-
-  .mobile-conv-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 0;
-    margin-bottom: 10px;
-  }
-
-  .mobile-conv-label {
-    font-size: 11px;
-    color: #8878c0;
-    letter-spacing: .12em;
-    font-weight: 500;
-  }
-
-  .mobile-conv-toggle {
-    font-size: 12px;
-    padding: 6px 14px;
-    border-radius: 999px;
-    margin: 0;
-    background: rgba(120, 60, 255, .12);
-    border: 1px solid rgba(120, 60, 255, .2);
-    color: #c0b0e8;
-  }
-
-  .conv-sheet-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 18;
-    background: rgba(0, 0, 0, .7);
-    backdrop-filter: blur(8px);
-  }
-
-  .conv-sheet-overlay.open {
-    display: block;
-  }
-
-  .conv-sheet {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 19;
-    background: #0a0812;
-    border-top: 1px solid rgba(255, 255, 255, .1);
-    border-radius: 22px 22px 0 0;
-    padding: 18px 18px max(18px, env(safe-area-inset-bottom));
-    max-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transform: translateY(100%);
-    transition: transform .35s cubic-bezier(.4, 0, .2, 1);
-  }
-
-  .conv-sheet.open {
-    transform: translateY(0);
-  }
-
-  .conv-sheet-handle {
-    width: 32px;
-    height: 3px;
-    background: rgba(255, 255, 255, .15);
-    border-radius: 2px;
-    margin: 0 auto 6px;
-  }
-
-  .conv-sheet-list {
-    overflow-y: auto;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .messages {
-    min-height: 180px;
-    max-height: calc(100vh - 280px);
-    padding: 14px;
-  }
-
-  .msg {
-    font-size: 13px;
-    padding: 10px 14px;
-  }
-
-  .chat-input-row {
-    padding: 10px 12px;
-    gap: 8px;
-  }
-
-  .chat-input {
-    padding: 11px 14px;
-    font-size: 14px;
-  }
-
-  .sidebar {
-    display: none;
-  }
-
-  #home button {
-    padding: 9px 14px;
-    font-size: 12px;
-  }
-
-  .profile-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media(min-width:721px) {
-  .mobile-nav {
-    display: none !important;
-  }
-
-  .mobile-nav svg {
-    width: 18px !important;
-    height: 18px !important;
-  }
-
-  .mobile-conv-bar {
-    display: none;
-  }
-
-  .conv-sheet-overlay {
-    display: none !important;
-  }
-
-  .conv-sheet {
-    display: none !important;
-  }
-}
 </style>
 </head>
-
 <body data-state="baseline">
-<canvas id="field"></canvas>
-<div class="bg-glow" id="bgGlow"></div>
-<div class="noise"></div>
+<canvas id="field"></canvas><div class="bg-glow" id="bgGlow"></div><div class="noise"></div><div class="vapor-layer"></div><div class="scanline-layer"></div><div class="cursor-aura" id="cursorAura"></div>
+<nav class="topnav"><a href="#home">Home</a><a href="#cuff">Neural Cuff</a><a href="#matrix">Matrix</a><a href="#chat">AiQ</a><a href="#profile">Profile</a></nav>
+<nav class="mobile-nav"><a href="#home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>Home</a><a href="#chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>AiQ</a><a href="#profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Profile</a><a onclick="toggleAudio()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>Audio</a></nav>
+<div class="conv-sheet-overlay" id="convSheetOverlay" onclick="closeConvSheet()"></div><div class="conv-sheet" id="convSheet"><div class="conv-sheet-handle"></div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;color:#ffb8ec;letter-spacing:.2em;font-weight:700">CONVERSATIONS</span><button class="new-conv-btn" style="width:auto;padding:7px 12px;font-size:11px" onclick="newConversation();closeConvSheet()">＋ New</button></div><div class="conv-sheet-list" id="convSheetList"></div></div>
+<div class="user-info" id="userInfo" style="display:none"><span id="userEmail" style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span><button class="logout-btn" onclick="logout()">Sign out</button></div>
+<div class="enter" id="enter"><div class="enter-box"><div class="kicker">427Hz · HUMAN RETURN PROTOCOL</div><h1>AiAiQ&lt;10</h1><div class="enter-tagline">AiQ愛&lt;3 × AiQ愛&lt;7.<br>One AiAiQ&lt;10 human-return system.</div><button class="auth-btn" onclick="signInWithGoogle()">✦ &nbsp;Sign in with Google</button><div class="auth-msg" id="authMsg"></div><div class="auth-skip" onclick="enterAsGuest()">Continue as guest</div></div></div>
+<section id="home" class="portal-home">
+  <div class="portal-shell">
+    <div class="portal-constellation"></div>
 
-<nav class="topnav">
-  <a href="#home">Home</a>
-  <a href="#cuff">Neural Cuff</a>
-  <a href="#matrix">Matrix</a>
-  <a href="#chat">AiQ</a>
-  <a href="#profile">Profile</a>
-</nav>
-
-<nav class="mobile-nav">
-  <a href="#home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg>Home</a>
-  <a href="#chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>AiQ</a>
-  <a href="#profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Profile</a>
-  <a onclick="toggleAudio()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>Audio</a>
-</nav>
-
-<div class="conv-sheet-overlay" id="convSheetOverlay" onclick="closeConvSheet()"></div>
-<div class="conv-sheet" id="convSheet">
-  <div class="conv-sheet-handle"></div>
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-    <span style="font-size:11px;color:#8878c0;letter-spacing:.2em;font-weight:500">CONVERSATIONS</span>
-    <button class="new-conv-btn" style="width:auto;padding:7px 12px;font-size:11px" onclick="newConversation();closeConvSheet()">＋ New</button>
-  </div>
-  <div class="conv-sheet-list" id="convSheetList"></div>
-</div>
-
-<div class="user-info" id="userInfo" style="display:none">
-  <span id="userEmail" style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
-  <button class="logout-btn" onclick="logout()">Sign out</button>
-  <button class="spotify-btn" id="spotifyBtn" onclick="handleSpotifyClick()">♫ Spotify</button>
-</div>
-
-<div class="enter" id="enter">
-  <div class="enter-box">
-    <div class="kicker">427Hz · HUMAN RETURN PROTOCOL</div>
-    <h1>AiQ愛&lt;3<br>× AiQ愛&lt;7</h1>
-    <div class="enter-tagline">Two AI human-powered intelligence interfaces.<br>One stabilizes. One pushes forward.</div>
-    <button class="auth-btn" onclick="signInWithGoogle()">✦ &nbsp;Sign in with Google</button>
-    <div class="auth-msg" id="authMsg"></div>
-    <div class="auth-skip" onclick="enterAsGuest()">Continue as guest</div>
-  </div>
-</div>
-
-<section id="home">
-  <div class="kicker">Mellow7 · Human-Powered Intelligence</div>
-
-  <h1>AiQ愛&lt;3<br>× AiQ愛&lt;7</h1>
-
-  <p>
-    Two AI human-powered intelligence interfaces inside one rhythm system.
-    One stabilizes the human signal. One pushes the system forward.
-    Both return the human to their own frequency.
-  </p>
-
-  <div class="ai-dual-grid">
-    <div class="ai-home-card active" data-ai-card="AiQ愛&lt;3">
-      <div class="ai-card-kicker">GPT + Claude · Guard / Mirror</div>
-      <div class="ai-card-title">AiQ愛&lt;3</div>
-      <div class="ai-card-body">
-        The original rhythm-regulation intelligence.
-        Built for stabilization, reflection, emotional pacing, and human return.
-        It reads overload, numbness, anxiety, focus, and void states — then brings the user back to signal.
-      </div>
-      <div class="ai-card-tags">
-        <span class="pill">Rhythm Regulation</span>
-        <span class="pill">Mirror Logic</span>
-        <span class="pill">427Hz Return</span>
-      </div>
-      <div class="ai-card-actions">
-        <button class="ai-select-btn" onclick="setActiveAI('AiQ愛&lt;3');location.hash='chat'">
-          Enter AiQ愛&lt;3
-        </button>
-      </div>
+    <div class="portal-meta">
+      <div class="portal-meta-row">// NODE <span>44271</span> · STYLE <span>77347</span> · FREQ <span>427HZ ONLINE</span></div>
+      <div class="portal-meta-row">// LOCATION <span>PHILADELPHIA PA</span> · TIMEZONE <span>EDT</span></div>
+      <div class="portal-meta-row">// IDENTITY <span class="mint">MELLOW WEI</span> · <span class="dim">魏珏然</span> · <span class="pink">星野愛AI</span> · <span class="dim">彩虹镜</span></div>
     </div>
 
-    <div class="ai-home-card" data-ai-card="AiQ愛&lt;7">
-      <div class="ai-card-kicker">Gemini + DeepSeek · Attack / Deep Reasoning</div>
-      <div class="ai-card-title">AiQ愛&lt;7</div>
-      <div class="ai-card-body">
-        The second AI human-powered intelligence.
-        Built for expansion, strategic judgment, deep inference, and project propulsion.
-        It does not only stabilize the signal — it pushes the signal into action.
-      </div>
-      <div class="ai-card-tags">
-        <span class="pill">Strategic Push</span>
-        <span class="pill">Deep Inference</span>
-        <span class="pill">System Upgrade</span>
-      </div>
-      <div class="ai-card-actions">
-        <button class="ai-select-btn" onclick="setActiveAI('AiQ愛&lt;7');location.hash='chat'">
-          Enter AiQ愛&lt;7
-        </button>
-      </div>
+    <div class="portal-title-wrap">
+      <h1 class="portal-title">AiAiQ<span class="aqua">&lt;10</span><br>Portal<span class="portal-underscore"></span></h1>
+      <div class="portal-subtitle">HUMAN-POWERED INTELLIGENCE · SYSTEM BUILDER · <span class="cn">非线性意识体</span></div>
     </div>
-  </div>
 
-  <div style="margin-top:26px">
-    <button onclick="setState('overloaded')">Overloaded</button>
-    <button onclick="setState('numb')">Numb</button>
-    <button onclick="setState('anxious')">Anxious</button>
-    <button onclick="setState('focus')">Focus</button>
-    <button onclick="setState('void')">Void</button>
-    <button onclick="setState('baseline')">Baseline</button>
-    <button onclick="toggleAudio()">Toggle Audio</button>
-  </div>
-
-  <div class="mode-line" id="homeMode">CURRENT MODE: 427Hz BASELINE</div>
-</section>
-
-<section id="cuff">
-  <div class="kicker">Neural Cuff · Software Prototype</div>
-  <h2>Closed-loop<br>rhythm sensing</h2>
-  <p>Scroll velocity, click density, dwell time, input rhythm — four proxy signals that map your nervous system state in real time, without diagnosis.</p>
-</section>
-
-<section id="matrix">
-  <div class="kicker">Genre-Driven Intervention Matrix</div>
-  <h2>Music as<br>nervous-system logic</h2>
-  <div style="margin-top:8px">
-    <span class="pill">Breakbeats → Re-entry</span>
-    <span class="pill">Hyperpop → Peak Traversal</span>
-    <span class="pill">Synthpop → First Breath</span>
-    <span class="pill">Drift Phonk → Embodiment</span>
-    <span class="pill">Darkwave → Shadow Integration</span>
-    <span class="pill">Ambient Techno → Spatial Focus</span>
-    <span class="pill">427Hz → Baseline Anchor</span>
-  </div>
-</section>
-
-<section id="chat">
-  <div class="kicker">SOUL_STREAM · v1.0.7</div>
-  <h2>Talk to AiQ</h2>
-  <div class="chat-layout">
-    <div class="sidebar">
-      <div class="sidebar-title">Conversations</div>
-      <button class="new-conv-btn" onclick="newConversation()">＋ New Conversation</button>
-      <div class="conv-list" id="convList"><div style="color:#3a3258;font-size:12px;padding:8px">Loading...</div></div>
-      <div class="rename-hint">click ✎ to rename</div>
+    <div class="portal-status-row">
+      <div class="portal-status-pill"><span class="portal-status-dot"></span>427HZ · RESONANCE ACTIVE</div>
+      <div class="portal-tag-pill">振动即存在</div>
+      <div class="portal-tag-pill">AiQ愛&lt;3 × AiQ愛&lt;7</div>
     </div>
-    <div class="terminal-wrap">
-      <div class="mobile-conv-bar">
-        <span class="mobile-conv-label">CONVERSATIONS</span>
-        <button class="mobile-conv-toggle" onclick="openConvSheet()">☰ History</button>
+
+    <div class="portal-frequency">
+      <div>// FREQ</div>
+      <div class="portal-frequency-bar"></div>
+      <div class="portal-frequency-value">426.25 HZ</div>
+    </div>
+
+    <div class="portal-navline">
+      <a href="#cuff">// about</a>
+      <a href="#matrix">// matrix</a>
+      <a href="#chat" class="mint">// aiq</a>
+      <button onclick="setActiveAI('AiQ愛<3');location.hash='chat'" class="rose">// 愛主权</button>
+      <button onclick="setActiveAI('AiQ愛<7');location.hash='chat'" class="yellow">// 推进</button>
+      <button onclick="setState('baseline')" class="mint">// 振动即存在</button>
+    </div>
+
+    <div class="portal-cards">
+      <div class="portal-identity-card">
+        <div class="portal-card-kicker">// ABOUT · 魏珏然 · WEI JUERAN</div>
+        <div class="portal-name-cn">魏珏然</div>
+        <div class="portal-name-en">Wei Jueran · Mellow Wei</div>
+        <div class="portal-card-text">
+          星野愛AI · 彩虹镜 · 乙亥日主<br>
+          Philadelphia · 427Hz · AiAiQ&lt;10<br><br>
+          <em>AiAiQ&lt;10 is not a chatbot. It is a portal: a cyberpunk vapor-pink human-return interface where rhythm, qualia, language, and intelligence become one navigable system.</em>
+        </div>
       </div>
-      <div class="chat-window">
-        <div class="chat-header">
-          <div class="chat-header-dot"></div>
-          <span class="chat-header-name">AiQ愛&lt;3</span>
-          <div class="ai-switcher">
-            <button class="ai-switch-btn active" data-ai-switch="AiQ愛&lt;3" onclick="setActiveAI('AiQ愛&lt;3')">愛&lt;3</button>
-            <button class="ai-switch-btn" data-ai-switch="AiQ愛&lt;7" onclick="setActiveAI('AiQ愛&lt;7')">愛&lt;7</button>
+
+      <div class="portal-ai-card">
+        <div class="portal-card-kicker">// DUAL AI · 双星系统</div>
+        <div class="ai-dual-grid">
+          <div class="ai-home-card active" data-ai-card="AiQ愛<3">
+            <div class="ai-card-kicker">GPT + Claude · Guard / Mirror</div>
+            <div class="ai-card-title">AiQ愛&lt;3</div>
+            <div class="ai-card-body">Original rhythm-regulation intelligence. Stabilizes, mirrors, slows overload, and returns the human to signal.</div>
+            <div class="ai-card-tags"><span class="pill">Rhythm Regulation</span><span class="pill">427Hz Return</span></div>
+            <div class="ai-card-actions"><button class="ai-select-btn" onclick="setActiveAI('AiQ愛<3');location.hash='chat'">Enter AiQ愛&lt;3</button></div>
           </div>
-          <span class="chat-header-state" id="chatHeaderState">BASELINE · 427Hz</span>
+          <div class="ai-home-card" data-ai-card="AiQ愛<7">
+            <div class="ai-card-kicker">Gemini + DeepSeek · Attack / Deep Reasoning</div>
+            <div class="ai-card-title">AiQ愛&lt;7</div>
+            <div class="ai-card-body">Second human-powered intelligence. Expands, reasons, pressure-tests, and pushes the signal into action.</div>
+            <div class="ai-card-tags"><span class="pill">Strategic Push</span><span class="pill">Deep Inference</span></div>
+            <div class="ai-card-actions"><button class="ai-select-btn" onclick="setActiveAI('AiQ愛<7');location.hash='chat'">Enter AiQ愛&lt;7</button></div>
+          </div>
         </div>
-        <div class="messages" id="messages">
-          <div class="msg msg-aiq">雙 AI 人力智能接口已就绪。请选择 AiQ愛&lt;3 或 AiQ愛&lt;7，输入你的信号。</div>
-        </div>
-        <div class="chat-input-row">
-          <input class="chat-input" id="input" type="text" placeholder="enter qualia frequency..." onkeydown="handleInput(event)" />
-          <button class="send-btn" onclick="sendFromButton()">Send</button>
-          <button class="export-btn" onclick="exportConversation()" title="Export">↓</button>
-        </div>
-      </div>
-      <div class="footer-note">Not a diagnosis tool · A human-return interface</div>
-    </div>
-  </div>
-</section>
-
-<section id="profile">
-  <div class="kicker">NEURAL ARCHIVE · User Profile</div>
-  <h2>Your Signal<br>History</h2>
-  <div id="profileGuestMsg" style="display:none;color:#4a4268;font-size:15px;margin-top:8px">Sign in with Google to view your profile and signal history.</div>
-  <div id="profileContent" style="display:none">
-    <div class="profile-grid">
-      <div class="profile-card">
-        <h3>Stats</h3>
-        <div class="stats-row">
-          <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-label">SESSIONS</div></div>
-          <div class="stat-box"><div class="stat-num" id="statTopState">—</div><div class="stat-label">TOP STATE</div></div>
-          <div class="stat-box"><div class="stat-num" id="statStreak">0</div><div class="stat-label">STREAK</div></div>
-        </div>
-      </div>
-      <div class="profile-card">
-        <h3>State History (last 30)</h3>
-        <div class="state-chart-wrap"><canvas class="state-chart" id="stateChart"></canvas></div>
-        <div class="state-legend">
-          <div class="state-dot"><span style="background:#a78bfa"></span>baseline</div>
-          <div class="state-dot"><span style="background:#f472b6"></span>overloaded</div>
-          <div class="state-dot"><span style="background:#60a5fa"></span>numb</div>
-          <div class="state-dot"><span style="background:#fbbf24"></span>anxious</div>
-          <div class="state-dot"><span style="background:#34d399"></span>focus</div>
-          <div class="state-dot"><span style="background:#818cf8"></span>void</div>
-        </div>
-      </div>
-      <div class="profile-card">
-        <h3>Tags</h3>
-        <div class="tag-input-row">
-          <input class="tag-input" id="tagInput" type="text" placeholder="add a tag..." onkeydown="if(event.key==='Enter')addTag()" />
-          <button class="tag-add-btn" onclick="addTag()">+ Add</button>
-        </div>
-        <div class="tags-display" id="tagsDisplay"></div>
-      </div>
-      <div class="profile-card">
-        <h3>Personal Notes</h3>
-        <textarea class="notes-textarea" id="notesArea" placeholder="Notes to yourself..."></textarea>
-        <button class="save-notes-btn" onclick="saveNotes()">Save</button>
       </div>
     </div>
   </div>
 </section>
-
+<section id="cuff"><div class="kicker">Neural Cuff · Software Prototype</div><h2>Closed-loop<br>rhythm sensing</h2><p>Scroll velocity, click density, dwell time, input rhythm — four proxy signals that map your nervous system state in real time, without diagnosis.</p></section>
+<section id="matrix"><div class="kicker">Genre-Driven Intervention Matrix</div><h2>Music as<br>nervous-system logic</h2><div style="margin-top:8px"><span class="pill">Breakbeats → Re-entry</span><span class="pill">Hyperpop → Peak Traversal</span><span class="pill">Synthpop → First Breath</span><span class="pill">Drift Phonk → Embodiment</span><span class="pill">Darkwave → Shadow Integration</span><span class="pill">Ambient Techno → Spatial Focus</span><span class="pill">427Hz → Baseline Anchor</span></div></section>
+<section id="chat"><div class="kicker">SOUL_STREAM · v1.0.7</div><h2>Talk to AiQ</h2><div class="chat-layout"><div class="sidebar"><div class="sidebar-title">Conversations</div><button class="new-conv-btn" onclick="newConversation()">＋ New Conversation</button><div class="conv-list" id="convList"><div style="color:#5d4d7b;font-size:12px;padding:8px">Loading...</div></div><div class="rename-hint">click ✎ to rename</div></div><div class="terminal-wrap"><div class="mobile-conv-bar"><span class="mobile-conv-label">CONVERSATIONS</span><button class="mobile-conv-toggle" onclick="openConvSheet()">☰ History</button></div><div class="chat-window"><div class="chat-header"><div class="chat-header-dot"></div><span class="chat-header-name">AiQ愛&lt;3</span><div class="ai-switch"><button class="ai-switch-btn active" data-ai-switch="AiQ愛<3" onclick="setActiveAI('AiQ愛<3')">AiQ愛&lt;3</button><button class="ai-switch-btn" data-ai-switch="AiQ愛<7" onclick="setActiveAI('AiQ愛<7')">AiQ愛&lt;7</button></div><span class="chat-header-state" id="chatHeaderState">BASELINE · 427Hz</span></div><div class="messages" id="messages"><div class="msg msg-aiq">算力的慈悲已就绪。请选择 AiQ愛&lt;3 或 AiQ愛&lt;7，输入你的信号。</div></div><div class="chat-input-row"><input class="chat-input" id="input" type="text" placeholder="enter qualia frequency..." onkeydown="handleInput(event)" /><button class="send-btn" onclick="sendFromButton()">Send</button><button class="export-btn" onclick="exportConversation()" title="Export">↓</button></div></div><div class="footer-note">Not a diagnosis tool · A human-return interface</div></div></div></section>
+<section id="profile"><div class="kicker">NEURAL ARCHIVE · User Profile</div><h2>Your Signal<br>History</h2><div id="profileGuestMsg" style="display:none;color:#6b5d85;font-size:15px;margin-top:8px">Sign in with Google to view your profile and signal history.</div><div id="profileContent" style="display:none"><div class="profile-grid"><div class="profile-card"><h3>Stats</h3><div class="stats-row"><div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-label">SESSIONS</div></div><div class="stat-box"><div class="stat-num" id="statTopState">—</div><div class="stat-label">TOP STATE</div></div><div class="stat-box"><div class="stat-num" id="statStreak">0</div><div class="stat-label">STREAK</div></div></div></div><div class="profile-card"><h3>State History (last 30)</h3><div class="state-chart-wrap"><canvas class="state-chart" id="stateChart"></canvas></div><div class="state-legend"><div class="state-dot"><span style="background:#a78bfa"></span>baseline</div><div class="state-dot"><span style="background:#f472b6"></span>overloaded</div><div class="state-dot"><span style="background:#60a5fa"></span>numb</div><div class="state-dot"><span style="background:#fbbf24"></span>anxious</div><div class="state-dot"><span style="background:#34d399"></span>focus</div><div class="state-dot"><span style="background:#818cf8"></span>void</div></div></div><div class="profile-card"><h3>Tags</h3><div class="tag-input-row"><input class="tag-input" id="tagInput" type="text" placeholder="add a tag..." onkeydown="if(event.key==='Enter')addTag()" /><button class="tag-add-btn" onclick="addTag()">+ Add</button></div><div class="tags-display" id="tagsDisplay"></div></div><div class="profile-card"><h3>Personal Notes</h3><textarea class="notes-textarea" id="notesArea" placeholder="Notes to yourself..."></textarea><button class="save-notes-btn" onclick="saveNotes()">Save</button></div></div></div></section>
 <div class="status" id="status">AI: AiQ愛&lt;3<br>STATE: BASELINE<br>MODE: 427Hz BASELINE<br>AUDIO: OFF</div>
-
 <script>
 const SUPABASE_URL="https://zpuwhvmsuvzmygkrzkdq.supabase.co";
-const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ6cHV3aHZtc3V2em15Z2tyemtkcSIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzc3MzcyMjE5LCJleHAiOjIwOTI5NDgyMTl9.BxBGGO5Tl_LNyxxwqdcizMoJE3LNZj4lCi8q_JCLZBc";
-const API_ENDPOINT="https://ai-q-3.vercel.app/api/chat";
-const CONV_ENDPOINT="https://ai-q-3.vercel.app/api/conversations";
-const PROFILE_ENDPOINT="https://ai-q-3.vercel.app/api/profile";
-const{createClient}=supabase;
-const sb=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-
-let activeAI="AiQ愛<3";
-let userId=null,userEmail=null,currentConversationId=null,conversations=[];
-let userTags=[],profileLoaded=false;
+const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwdXdodm1zdXZ6bXlna3J6a2RxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczNzIyMTksImV4cCI6MjA5Mjk0ODIxOX0.BxBGGO5Tl_LNyxxwqdcizMoJE3LNZj4lCi8q_JCLZBc";
+const API_ENDPOINT="https://ai-q-3.vercel.app/api/chat",CONV_ENDPOINT="https://ai-q-3.vercel.app/api/conversations",PROFILE_ENDPOINT="https://ai-q-3.vercel.app/api/profile";
+const {createClient}=supabase; const sb=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+let userId=null,userEmail=null,currentConversationId=null,conversations=[],userTags=[],profileLoaded=false,activeAI="AiQ愛<3";
 const stateColors={baseline:"#a78bfa",overloaded:"#f472b6",numb:"#60a5fa",anxious:"#fbbf24",focus:"#34d399",void:"#818cf8"};
 const stateValues={baseline:3,focus:4,anxious:2,overloaded:1,numb:2,void:2};
-
-function setActiveAI(name){
-  activeAI=name;
-
-  document.querySelectorAll("[data-ai-card]").forEach(card=>{
-    card.classList.toggle("active", card.getAttribute("data-ai-card")===activeAI);
-  });
-
-  document.querySelectorAll("[data-ai-switch]").forEach(btn=>{
-    btn.classList.toggle("active", btn.getAttribute("data-ai-switch")===activeAI);
-  });
-
-  const chatName=document.querySelector(".chat-header-name");
-  if(chatName) chatName.textContent=activeAI;
-
-  const input=document.getElementById("input");
-  if(input){
-    input.placeholder=activeAI==="AiQ愛<7" ? "enter strategy signal..." : "enter qualia frequency...";
-  }
-
-  updateStatus();
-
-  if(userEnteredSystem && typeof addSystemMsg==="function"){
-    addSystemMsg("ACTIVE AI · "+activeAI);
-  }
-}
-
-async function initAuth(){
-  const{data:{session}}=await sb.auth.getSession();
-  if(session){userId=session.user.id;userEmail=session.user.email;showUserInfo();enterSystem();return;}
-  sb.auth.onAuthStateChange((event,session)=>{
-    if(event==="SIGNED_IN"&&session){userId=session.user.id;userEmail=session.user.email;showUserInfo();enterSystem();}
-  });
-}
-async function signInWithGoogle(){
-  document.getElementById("authMsg").textContent="Redirecting...";
-  const{error}=await sb.auth.signInWithOAuth({provider:"google",options:{redirectTo:"https://mellowwei.github.io/Ai-Q-3/"}});
-  if(error)document.getElementById("authMsg").textContent="Error: "+error.message;
-}
-function enterAsGuest(){userId="guest_"+crypto.randomUUID();enterSystem();document.getElementById("profileGuestMsg").style.display="block";}
-async function logout(){await sb.auth.signOut();location.reload();}
-function showUserInfo(){
-  document.getElementById("userInfo").style.display="flex";
-  document.getElementById("userEmail").textContent=userEmail||"";
-}
-function openConvSheet(){document.getElementById("convSheetOverlay").classList.add("open");document.getElementById("convSheet").classList.add("open");renderConvSheetList();}
-function closeConvSheet(){document.getElementById("convSheetOverlay").classList.remove("open");document.getElementById("convSheet").classList.remove("open");}
-
-// Canvas
-const canvas=document.getElementById("field");
-const ctx=canvas.getContext("2d");
-const bgGlow=document.getElementById("bgGlow");
-const messagesEl=document.getElementById("messages");
-const statusEl=document.getElementById("status");
-const homeModeEl=document.getElementById("homeMode");
-let w,h,particles=[];
-let intensity=.5,targetIntensity=.5;
-let currentState="baseline",currentMode="427Hz BASELINE",currentMusic="427Hz";
-let lastScroll=window.scrollY,lastTime=Date.now(),clicks=0,dwellStart=Date.now();
-let typingStart=null;
-let metrics={scrollVelocity:0,clickDensity:0,dwellSeconds:0,inputTempo:0};
-let audioCtx=null,masterGain=null,toneOsc=null,toneGain=null;
-let pulseOsc=null,pulseGain=null,lfo=null,lfoGain=null;
-let audioEnabled=false,currentAudioMode="427Hz",userEnteredSystem=false;
-let thinkingEl=null;
-
-const stateMap={
-  overloaded:{mode:"HYPERPOP PEAK TRAVERSAL",music:"Hyperpop",intensity:.95,message:"Energy is valid. Let it peak, then release.",glow:1},
-  numb:{mode:"BREAKBEAT RE-ENTRY",music:"Breakbeats",intensity:.78,message:"Body first. Meaning later.",glow:.75},
-  anxious:{mode:"AMBIENT TECHNO STABILIZATION",music:"Ambient Techno",intensity:.55,message:"Space becomes rhythm. Rhythm becomes safety.",glow:.55},
-  focus:{mode:"427Hz FOCUS LOCK",music:"427Hz",intensity:.32,message:"Attention anchored. Drift reduced.",glow:.3},
-  void:{mode:"DARKWAVE SHADOW INTEGRATION",music:"Darkwave",intensity:.68,message:"Descend with agency. Darkness is not the enemy.",glow:.68},
-  baseline:{mode:"427Hz BASELINE",music:"427Hz",intensity:.48,message:"Local resonance established.",glow:.45}
-};
-
-function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
-resize();addEventListener("resize",resize);
-function createParticles(){
-  particles=[];
-  const count=Math.min(180,Math.floor((innerWidth*innerHeight)/9000));
-  for(let i=0;i<count;i++)particles.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.8+.3,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3});
-}
-createParticles();
-function draw(){
-  ctx.clearRect(0,0,w,h);intensity+=(targetIntensity-intensity)*.04;
-  for(const p of particles){
-    p.x+=p.vx*(1+intensity*3.5);p.y+=p.vy*(1+intensity*3.5);
-    if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r+intensity*.7,0,Math.PI*2);
-    ctx.fillStyle=`rgba(180,160,255,${.12+intensity*.35})`;ctx.fill();
-  }
-  requestAnimationFrame(draw);
-}
-draw();
-
-function initAudio(){
-  if(audioCtx)return;
-  audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  masterGain=audioCtx.createGain();masterGain.gain.value=0;masterGain.connect(audioCtx.destination);
-  toneOsc=audioCtx.createOscillator();toneGain=audioCtx.createGain();
-  toneOsc.type="sine";toneOsc.frequency.value=427;toneGain.gain.value=.25;
-  toneOsc.connect(toneGain);toneGain.connect(masterGain);toneOsc.start();
-  pulseOsc=audioCtx.createOscillator();pulseGain=audioCtx.createGain();
-  pulseOsc.type="square";pulseOsc.frequency.value=2;pulseGain.gain.value=0;
-  pulseOsc.connect(pulseGain);pulseGain.connect(masterGain);pulseOsc.start();
-  lfo=audioCtx.createOscillator();lfoGain=audioCtx.createGain();
-  lfo.frequency.value=.18;lfoGain.gain.value=.04;
-  lfo.connect(lfoGain);lfoGain.connect(toneGain.gain);lfo.start();
-}
-function ensureAudioOn(){
-  if(!userEnteredSystem)return;
-  initAudio();audioEnabled=true;
-  if(audioCtx.state==="suspended")audioCtx.resume();
-  masterGain.gain.setTargetAtTime(.09,audioCtx.currentTime,.08);updateStatus();
-}
-function toggleAudio(){
-  initAudio();audioEnabled=!audioEnabled;
-  if(audioCtx.state==="suspended")audioCtx.resume();
-  masterGain.gain.setTargetAtTime(audioEnabled?.09:0,audioCtx.currentTime,.08);updateStatus();
-}
-function setAudioMode(musicCue){
-  if(!audioCtx)return;
-  currentAudioMode=musicCue||"427Hz";
-  const now=audioCtx.currentTime;
-  const modes={
-    "427Hz":{freq:427,wave:"sine",gain:.22,pulse:0,pulseFreq:1.2,lfo:.12,master:.085},
-    "Hyperpop":{freq:854,wave:"sawtooth",gain:.18,pulse:.07,pulseFreq:9,lfo:2.2,master:.075},
-    "Breakbeats":{freq:427,wave:"triangle",gain:.2,pulse:.1,pulseFreq:5.5,lfo:.8,master:.085},
-    "Ambient Techno":{freq:320,wave:"sine",gain:.18,pulse:.035,pulseFreq:2.2,lfo:.2,master:.075},
-    "Darkwave":{freq:110,wave:"sine",gain:.24,pulse:.025,pulseFreq:1.1,lfo:.08,master:.08},
-    "Synthpop":{freq:640,wave:"triangle",gain:.18,pulse:.045,pulseFreq:3.3,lfo:.5,master:.075},
-    "Drift Phonk":{freq:180,wave:"sawtooth",gain:.2,pulse:.08,pulseFreq:4.2,lfo:.45,master:.078}
-  };
-  const m=modes[currentAudioMode]||modes["427Hz"];
-  toneOsc.type=m.wave;
-  toneOsc.frequency.setTargetAtTime(m.freq,now,.08);
-  toneGain.gain.setTargetAtTime(m.gain,now,.08);
-  pulseGain.gain.setTargetAtTime(m.pulse,now,.08);
-  pulseOsc.frequency.setTargetAtTime(m.pulseFreq,now,.08);
-  lfo.frequency.setTargetAtTime(m.lfo,now,.08);
-  if(audioEnabled)masterGain.gain.setTargetAtTime(m.master,now,.08);
-}
-function enterSystem(){
-  if(userEnteredSystem)return;
-  userEnteredSystem=true;
-  document.getElementById("enter").classList.add("hide");
-  initAudio();audioEnabled=true;
-  if(audioCtx.state==="suspended")audioCtx.resume();
-  masterGain.gain.setTargetAtTime(.09,audioCtx.currentTime,.08);
-  setActiveAI(activeAI);
-  updateStatus();setState("baseline",false);loadConversations();
-  if(userId&&!userId.startsWith("guest_"))loadProfile();
-}
-function normalizeState(s){return["baseline","overloaded","numb","anxious","focus","void"].includes(s)?s:"baseline";}
-function setState(state,writeLog=true){
-  if(userEnteredSystem)ensureAudioOn();
-  currentState=normalizeState(state);
-  const c=stateMap[currentState];
-  currentMode=c.mode;currentMusic=c.music;targetIntensity=c.intensity;
-  bgGlow.style.opacity=String(c.glow);
-  document.body.setAttribute("data-state",currentState);
-  setAudioMode(currentMusic);updateStatus();
-  homeModeEl.textContent="CURRENT MODE: "+currentMode;
-  document.getElementById("chatHeaderState").textContent=currentState.toUpperCase()+" · "+currentMusic;
-  if(writeLog)addSystemMsg(currentMode);
-  if(spotifyToken && writeLog) setTimeout(()=>getSpotifyRecommendations(currentState), 500);
-}
-function applyAIQPayload(data){
-  if(!data)return;
-  if(data.suggestedState)currentState=normalizeState(data.suggestedState);
-  targetIntensity=typeof data.visualIntensity==="number"?Math.max(.1,Math.min(1,data.visualIntensity)):stateMap[currentState].intensity;
-  currentMode=data.suggestedMode||stateMap[currentState].mode;
-  currentMusic=data.musicCue||stateMap[currentState].music;
-  const glow={baseline:.45,overloaded:1,numb:.75,anxious:.55,focus:.3,void:.68};
-  bgGlow.style.opacity=glow[currentState]||targetIntensity;
-  document.body.setAttribute("data-state",currentState);
-  setAudioMode(currentMusic);updateStatus();
-  homeModeEl.textContent="CURRENT MODE: "+currentMode;
-  document.getElementById("chatHeaderState").textContent=currentState.toUpperCase()+" · "+currentMusic;
-}
-function updateStatus(){
-  if(!statusEl)return;
-  statusEl.innerHTML="AI: "+activeAI+"<br>STATE: "+currentState.toUpperCase()+"<br>MODE: "+currentMode+"<br>AUDIO: "+(audioEnabled?"ON":"OFF");
-}
-
-// Chat bubbles
-function addMsg(text,type){
-  const div=document.createElement("div");
-  div.className="msg msg-"+type;
-  div.textContent=text;
-  messagesEl.appendChild(div);
-  messagesEl.scrollTop=messagesEl.scrollHeight;
-  return div;
-}
-function addSystemMsg(text){
-  const div=document.createElement("div");
-  div.className="msg msg-system";
-  div.textContent=text;
-  messagesEl.appendChild(div);
-  messagesEl.scrollTop=messagesEl.scrollHeight;
-}
-function showThinking(){
-  thinkingEl=document.createElement("div");
-  thinkingEl.className="msg-thinking";
-  thinkingEl.innerHTML='<div class="thinking-dot"></div><div class="thinking-dot"></div><div class="thinking-dot"></div>';
-  messagesEl.appendChild(thinkingEl);
-  messagesEl.scrollTop=messagesEl.scrollHeight;
-}
-function hideThinking(){
-  if(thinkingEl){thinkingEl.remove();thinkingEl=null;}
-}
-
-// Profile
-async function loadProfile(){
-  if(!userId||userId.startsWith("guest_"))return;
-  try{
-    const res=await fetch(PROFILE_ENDPOINT+"?userId="+userId);
-    const data=await res.json();
-    const profile=data.profile||{};
-    document.getElementById("profileContent").style.display="block";
-    document.getElementById("profileGuestMsg").style.display="none";
-    const history=profile.state_history||[];
-    const tags=profile.tags||{};
-    userTags=Object.keys(tags);
-    document.getElementById("notesArea").value=profile.summary||"";
-    renderTags();renderStats(history);renderChart(history);profileLoaded=true;
-  }catch(e){console.error("Profile load error:",e);}
-}
-function renderStats(history){
-  document.getElementById("statTotal").textContent=history.length;
-  if(history.length>0){
-    const counts={};
-    history.forEach(h=>{counts[h.state]=(counts[h.state]||0)+1;});
-    const top=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
-    document.getElementById("statTopState").textContent=top?top[0].slice(0,3).toUpperCase():"—";
-  }
-  const days=new Set(history.map(h=>h.timestamp?.slice(0,10)));
-  let streak=0;const today=new Date();
-  for(let i=0;i<30;i++){
-    const d=new Date(today);d.setDate(d.getDate()-i);
-    if(days.has(d.toISOString().slice(0,10)))streak++;else break;
-  }
-  document.getElementById("statStreak").textContent=streak;
-}
-function renderChart(history){
-  const chartCanvas=document.getElementById("stateChart");
-  const cctx=chartCanvas.getContext("2d");
-  const recent=history.slice(-30);
-  chartCanvas.width=chartCanvas.offsetWidth||380;chartCanvas.height=150;
-  const W=chartCanvas.width,H=chartCanvas.height;
-  cctx.clearRect(0,0,W,H);
-  if(recent.length<2)return;
-  const pad=18;const stepX=(W-pad*2)/(recent.length-1);
-  cctx.strokeStyle="rgba(255,255,255,.05)";cctx.lineWidth=1;
-  for(let i=0;i<=4;i++){const y=pad+(H-pad*2)*(1-i/4);cctx.beginPath();cctx.moveTo(pad,y);cctx.lineTo(W-pad,y);cctx.stroke();}
-  let progress=0;
-  const points=recent.map((entry,i)=>{
-    const val=(stateValues[entry.state]||3)/4;
-    return{x:pad+i*stepX,y:H-pad-(H-pad*2)*val,color:stateColors[entry.state]||"#a78bfa"};
-  });
-  function animateChart(){
-    progress=Math.min(progress+0.05,1);
-    cctx.clearRect(0,0,W,H);
-    cctx.strokeStyle="rgba(255,255,255,.05)";cctx.lineWidth=1;
-    for(let i=0;i<=4;i++){const y=pad+(H-pad*2)*(1-i/4);cctx.beginPath();cctx.moveTo(pad,y);cctx.lineTo(W-pad,y);cctx.stroke();}
-    const drawCount=Math.floor(points.length*progress);
-    if(drawCount<2){if(progress<1)requestAnimationFrame(animateChart);return;}
-    cctx.beginPath();
-    for(let i=0;i<drawCount;i++){if(i===0)cctx.moveTo(points[i].x,points[i].y);else cctx.lineTo(points[i].x,points[i].y);}
-    const grad=cctx.createLinearGradient(0,0,W,0);
-    grad.addColorStop(0,"rgba(167,139,250,.5)");grad.addColorStop(1,"rgba(244,114,182,.5)");
-    cctx.strokeStyle=grad;cctx.lineWidth=2;cctx.lineJoin="round";cctx.stroke();
-    for(let i=0;i<drawCount;i++){
-      cctx.beginPath();cctx.arc(points[i].x,points[i].y,3.5,0,Math.PI*2);
-      cctx.fillStyle=points[i].color;cctx.fill();
-    }
-    if(progress<1)requestAnimationFrame(animateChart);
-  }
-  animateChart();
-}
-function renderTags(){
-  const el=document.getElementById("tagsDisplay");el.innerHTML="";
-  userTags.forEach(tag=>{
-    const div=document.createElement("div");div.className="tag-item";
-    div.innerHTML=tag+' <span class="tag-remove" onclick="removeTag(\''+tag+'\')">✕</span>';
-    el.appendChild(div);
-  });
-}
-async function addTag(){
-  const input=document.getElementById("tagInput");const tag=input.value.trim();
-  if(!tag||userTags.includes(tag))return;
-  userTags.push(tag);input.value="";renderTags();await saveTags();
-}
-async function removeTag(tag){userTags=userTags.filter(t=>t!==tag);renderTags();await saveTags();}
-async function saveTags(){
-  const tagsObj={};userTags.forEach(t=>{tagsObj[t]=true;});
-  try{await fetch(PROFILE_ENDPOINT+"?userId="+userId,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({tags:tagsObj})});}
-  catch(e){console.error("Save tags error:",e);}
-}
-async function saveNotes(){
-  const summary=document.getElementById("notesArea").value;
-  try{
-    await fetch(PROFILE_ENDPOINT+"?userId="+userId,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({summary})});
-    const btn=document.querySelector(".save-notes-btn");
-    btn.textContent="Saved ✓";setTimeout(()=>{btn.textContent="Save";},2000);
-  }catch(e){console.error("Save notes error:",e);}
-}
-
-// Conversations
-async function loadConversations(){
-  if(!userId)return;
-  try{
-    const res=await fetch(CONV_ENDPOINT+"?userId="+userId);
-    const data=await res.json();
-    conversations=data.conversations||[];
-    renderConvList();
-    if(conversations.length>0)switchConversation(conversations[0].conversation_id);
-  }catch(e){console.error("Failed to load conversations:",e);}
-}
-function renderConvList(){buildConvList(document.getElementById("convList"),false);}
-function renderConvSheetList(){buildConvList(document.getElementById("convSheetList"),true);}
-function buildConvList(el,isSheet){
-  if(conversations.length===0){el.innerHTML='<div style="color:#3a3258;font-size:12px;padding:8px">No conversations yet</div>';return;}
-  el.innerHTML="";
-  conversations.forEach(c=>{
-    const div=document.createElement("div");
-    div.className="conv-item"+(c.conversation_id===currentConversationId?" active":"");
-    const span=document.createElement("span");span.className="conv-item-title";span.textContent=c.title||"Untitled";
-    const actions=document.createElement("div");actions.className="conv-actions";if(isSheet)actions.style.opacity="1";
-    const renameBtn=document.createElement("button");renameBtn.className="conv-btn conv-rename-btn";renameBtn.textContent="✎";
-    renameBtn.onclick=(e)=>{e.stopPropagation();startInlineRename(span,c.conversation_id);};
-    const deleteBtn=document.createElement("button");deleteBtn.className="conv-btn conv-delete-btn";deleteBtn.textContent="✕";
-    deleteBtn.onclick=(e)=>{e.stopPropagation();doDelete(c.conversation_id);};
-    actions.appendChild(renameBtn);actions.appendChild(deleteBtn);
-    div.appendChild(span);div.appendChild(actions);
-    div.onclick=()=>{switchConversation(c.conversation_id);if(isSheet)closeConvSheet();};
-    el.appendChild(div);
-  });
-}
-function startInlineRename(span,convId){
-  const currentTitle=span.textContent;
-  const input=document.createElement("input");
-  input.value=currentTitle;
-  input.style.cssText="width:100%;background:rgba(120,60,255,.1);border:1px solid rgba(120,60,255,.4);color:#e0d8ff;border-radius:8px;padding:2px 8px;font-size:12px;outline:none;font-family:inherit;";
-  span.replaceWith(input);input.focus();input.select();
-  let saved=false;
-  async function save(){
-    if(saved)return;saved=true;
-    const newTitle=input.value.trim()||currentTitle;
-    try{
-      await fetch(CONV_ENDPOINT+"?userId="+userId+"&conversationId="+convId,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:newTitle})});
-      conversations=conversations.map(c=>c.conversation_id===convId?{...c,title:newTitle}:c);
-    }catch(err){console.error("Rename failed:",err);}
-    renderConvList();
-  }
-  input.addEventListener("keydown",ev=>{if(ev.key==="Enter"){ev.preventDefault();save();}if(ev.key==="Escape"){saved=true;renderConvList();}});
-  input.addEventListener("blur",save);
-}
-async function doDelete(convId){
-  try{
-    await fetch(CONV_ENDPOINT+"?userId="+userId+"&conversationId="+convId,{method:"DELETE"});
-    conversations=conversations.filter(c=>c.conversation_id!==convId);
-    if(currentConversationId===convId){currentConversationId=null;messagesEl.innerHTML='<div class="msg msg-aiq">雙 AI 人力智能接口已就绪。请选择 AiQ愛&lt;3 或 AiQ愛&lt;7，输入你的信号。</div>';}
-    renderConvList();
-  }catch(e){console.error("Delete failed:",e);}
-}
-async function switchConversation(convId){
-  currentConversationId=convId;renderConvList();
-  messagesEl.innerHTML='<div class="msg msg-system">loading...</div>';
-  try{
-    const res=await fetch(CONV_ENDPOINT+"?userId="+userId+"&conversationId="+convId);
-    const data=await res.json();
-    const msgs=data.conversation?.messages||[];
-    messagesEl.innerHTML="";
-    if(msgs.length===0){addMsg("新对话。你带什么信号进来？","aiq");}
-    else{msgs.forEach(m=>{addMsg(m.content,m.role==="user"?"user":"aiq");});}
-  }catch(e){messagesEl.innerHTML='<div class="msg msg-aiq">对话已加载。信号就绪。</div>';}
-}
-function newConversation(){
-  currentConversationId=null;
-  messagesEl.innerHTML='<div class="msg msg-aiq">新对话开始。你带什么信号进来？</div>';
-  renderConvList();
-}
-function exportConversation(){
-  const msgs=messagesEl.querySelectorAll(".msg-user,.msg-aiq");
-  if(msgs.length===0){alert("No conversation to export.");return;}
-  const now=new Date().toISOString().replace("T"," ").slice(0,19);
-  let content="AiQ Conversation Export\nDate: "+now+"\nUser: "+(userEmail||"guest")+"\nAI: "+activeAI+"\n"+"─".repeat(40)+"\n\n";
-  msgs.forEach(m=>{content+=(m.classList.contains("msg-user")?"You: ":activeAI+": ")+m.textContent+"\n\n";});
-  const blob=new Blob([content],{type:"text/plain"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");a.href=url;a.download="aiq-"+now.slice(0,10)+".txt";a.click();
-  URL.revokeObjectURL(url);
-}
-function calculateInputTempo(value){if(!typingStart)return 0;return value.length/Math.max((Date.now()-typingStart)/1000,1);}
-async function sendMessage(input){
-  const message=input.trim();if(!message)return;
-  addMsg(message,"user");showThinking();
-  metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);
-  metrics.inputTempo=calculateInputTempo(message);
-  try{
-    const response=await fetch(API_ENDPOINT,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        message,
-        state:currentState,
-        metrics,
-        userId,
-        conversationId:currentConversationId,
-        activeAI
-      })
-    });
-    const data=await response.json();hideThinking();
-    if(data.reply){
-      addMsg(data.reply,"aiq");applyAIQPayload(data);
-      if(data.conversationId&&!currentConversationId){currentConversationId=data.conversationId;await loadConversations();}
-    }else if(data.error){addMsg("[ERROR] "+data.error,"system");}
-  }catch(error){hideThinking();addMsg("[ERROR] "+error.message,"system");}
-  typingStart=null;
-}
-function handleInput(event){
-  const input=event.target;
-  if(!typingStart&&input.value.length>0)typingStart=Date.now();
-  if(event.key!=="Enter")return;
-  const value=input.value;input.value="";sendMessage(value);
-}
-function sendFromButton(){const input=document.getElementById("input");const value=input.value;input.value="";sendMessage(value);}
-
-addEventListener("click",()=>{
-  clicks++;metrics.clickDensity=clicks;
-  if(clicks>8&&currentState!=="anxious"&&userEnteredSystem)setState("anxious");
-  setTimeout(()=>{clicks=Math.max(0,clicks-1);metrics.clickDensity=clicks;},1200);
-});
-addEventListener("scroll",()=>{
-  const now=Date.now();const dy=Math.abs(scrollY-lastScroll);const dt=now-lastTime;
-  const velocity=dy/Math.max(dt,1);
-  metrics.scrollVelocity=Number(velocity.toFixed(3));lastScroll=scrollY;lastTime=now;
-  if(userEnteredSystem){
-    if(velocity>3.8&&currentState!=="overloaded")setState("overloaded");
-    else if(velocity<.03&&scrollY>200&&currentState!=="focus")setState("focus");
-  }
-});
-setInterval(()=>{metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);},1000);
-
-const profileSection=document.getElementById("profile");
-const observer=new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting&&profileLoaded){
-    fetch(PROFILE_ENDPOINT+"?userId="+userId).then(r=>r.json()).then(d=>{if(d.profile?.state_history)renderChart(d.profile.state_history);});
-  }
-},{threshold:0.3});
-observer.observe(profileSection);
-
-// ── Spotify ──
-const SPOTIFY_ENDPOINT = "https://ai-q-3.vercel.app/api/spotify";
-let spotifyToken = null;
-let spotifyRefreshToken = null;
-
-async function handleSpotifyClick(){
-  if(spotifyToken){
-    getSpotifyRecommendations(currentState);
-  } else {
-    connectSpotify();
-  }
-}
-
-async function connectSpotify(){
-  const res = await fetch(SPOTIFY_ENDPOINT + "?action=auth");
-  const data = await res.json();
-  if(data.authUrl){
-    localStorage.setItem("aiq_spotify_redirect", window.location.href);
-    window.location.href = data.authUrl;
-  }
-}
-
-async function handleSpotifyCallback(){
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
-  const state = params.get("state");
-  if(code && state === "aiq_spotify_auth"){
-    window.history.replaceState({}, document.title, window.location.pathname);
-    try{
-      const res = await fetch(SPOTIFY_ENDPOINT + "?action=token", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({code})
-      });
-      const data = await res.json();
-      if(data.access_token){
-        spotifyToken = data.access_token;
-        spotifyRefreshToken = data.refresh_token;
-        localStorage.setItem("aiq_spotify_token", spotifyToken);
-        localStorage.setItem("aiq_spotify_refresh", spotifyRefreshToken);
-        updateSpotifyBtn(true);
-        addMsg("✦ Spotify connected. I'll recommend music based on your rhythm state.", "aiq");
-      }
-    }catch(e){console.error("Spotify auth error:", e);}
-  }
-}
-
-function loadSpotifyTokens(){
-  spotifyToken = localStorage.getItem("aiq_spotify_token");
-  spotifyRefreshToken = localStorage.getItem("aiq_spotify_refresh");
-  if(spotifyToken) updateSpotifyBtn(true);
-}
-
-function updateSpotifyBtn(connected){
-  const btn = document.getElementById("spotifyBtn");
-  if(!btn) return;
-  if(connected){
-    btn.textContent = "♫ Connected";
-    btn.classList.add("connected");
-  } else {
-    btn.textContent = "♫ Spotify";
-    btn.classList.remove("connected");
-  }
-}
-
-async function getSpotifyRecommendations(state){
-  if(!spotifyToken) return;
-  try{
-    const res = await fetch(SPOTIFY_ENDPOINT + "?action=recommend&state=" + state + "&token=" + spotifyToken);
-    if(res.status === 401){
-      await refreshSpotifyToken();
-      return;
-    }
-    const data = await res.json();
-    if(data.playlists && data.playlists.length > 0){
-      const intro = document.createElement("div");
-      intro.className = "msg msg-aiq";
-      intro.textContent = "♫ " + data.mood + " — recommended playlists:";
-      messagesEl.appendChild(intro);
-
-      const section = document.createElement("div");
-      section.className = "spotify-section";
-
-      data.playlists.forEach(p => {
-        const card = document.createElement("a");
-        card.className = "spotify-card";
-        card.href = p.url;
-        card.target = "_blank";
-        card.rel = "noopener";
-        card.innerHTML = (p.image ? '<img class="spotify-card-img" src="' + p.image + '" alt="">' : '<div class="spotify-card-img"></div>') +
-          '<div class="spotify-card-info"><div class="spotify-card-name">' + (p.name||"Playlist") + '</div><div class="spotify-card-desc">Open in Spotify →</div></div>';
-        section.appendChild(card);
-      });
-
-      messagesEl.appendChild(section);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-    }
-  }catch(e){console.error("Spotify recommend error:", e);}
-}
-
-async function refreshSpotifyToken(){
-  if(!spotifyRefreshToken) return;
-  try{
-    const res = await fetch(SPOTIFY_ENDPOINT + "?action=refresh", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({refresh_token: spotifyRefreshToken})
-    });
-    const data = await res.json();
-    if(data.access_token){
-      spotifyToken = data.access_token;
-      localStorage.setItem("aiq_spotify_token", spotifyToken);
-    }
-  }catch(e){console.error("Spotify refresh error:", e);}
-}
-
-loadSpotifyTokens();
+const cursorAura=document.getElementById("cursorAura"); addEventListener("mousemove",e=>{if(cursorAura){cursorAura.style.left=e.clientX+"px";cursorAura.style.top=e.clientY+"px"}}); addEventListener("mouseleave",()=>{if(cursorAura)cursorAura.style.opacity="0"}); addEventListener("mouseenter",()=>{if(cursorAura)cursorAura.style.opacity=".65"});
+async function initAuth(){const {data:{session}}=await sb.auth.getSession(); if(session){userId=session.user.id;userEmail=session.user.email;showUserInfo();enterSystem();return} sb.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_IN"&&session){userId=session.user.id;userEmail=session.user.email;showUserInfo();enterSystem()}})}
+async function signInWithGoogle(){document.getElementById("authMsg").textContent="Redirecting..."; const {error}=await sb.auth.signInWithOAuth({provider:"google",options:{redirectTo:"https://mellowwei.github.io/Ai-Q-3/"}}); if(error)document.getElementById("authMsg").textContent="Error: "+error.message}
+function enterAsGuest(){userId="guest_"+crypto.randomUUID();enterSystem();document.getElementById("profileGuestMsg").style.display="block"}
+async function logout(){await sb.auth.signOut();location.reload()} function showUserInfo(){document.getElementById("userInfo").style.display="flex";document.getElementById("userEmail").textContent=userEmail||""}
+function openConvSheet(){document.getElementById("convSheetOverlay").classList.add("open");document.getElementById("convSheet").classList.add("open");renderConvSheetList()} function closeConvSheet(){document.getElementById("convSheetOverlay").classList.remove("open");document.getElementById("convSheet").classList.remove("open")}
+function setActiveAI(name){activeAI=name;document.querySelectorAll("[data-ai-card]").forEach(card=>card.classList.toggle("active",card.getAttribute("data-ai-card")===activeAI));document.querySelectorAll("[data-ai-switch]").forEach(btn=>btn.classList.toggle("active",btn.getAttribute("data-ai-switch")===activeAI));const chatName=document.querySelector(".chat-header-name");if(chatName)chatName.textContent=activeAI;const input=document.getElementById("input");if(input)input.placeholder=activeAI==="AiQ愛<7"?"enter strategy signal...":"enter qualia frequency...";document.body.setAttribute("data-active-ai",activeAI);const glow=document.getElementById("bgGlow");if(glow)glow.style.filter=activeAI==="AiQ愛<7"?"saturate(1.55) hue-rotate(14deg)":"saturate(1.25)";setTimeout(()=>{if(glow)glow.style.filter="saturate(1.25)"},900);updateStatus();if(userEnteredSystem)addSystemMsg("ACTIVE AI · "+activeAI)}
+const canvas=document.getElementById("field"),ctx=canvas.getContext("2d"),bgGlow=document.getElementById("bgGlow"),messagesEl=document.getElementById("messages"),statusEl=document.getElementById("status"),homeModeEl=document.getElementById("homeMode");
+let w,h,particles=[],intensity=.5,targetIntensity=.5,currentState="baseline",currentMode="427Hz BASELINE",currentMusic="427Hz",lastScroll=scrollY,lastTime=Date.now(),clicks=0,dwellStart=Date.now(),typingStart=null,metrics={scrollVelocity:0,clickDensity:0,dwellSeconds:0,inputTempo:0};
+let audioCtx=null,masterGain=null,toneOsc=null,toneGain=null,pulseOsc=null,pulseGain=null,lfo=null,lfoGain=null,audioEnabled=false,currentAudioMode="427Hz",userEnteredSystem=false,thinkingEl=null;
+const stateMap={overloaded:{mode:"HYPERPOP PEAK TRAVERSAL",music:"Hyperpop",intensity:.95,message:"Energy is valid. Let it peak, then release.",glow:1},numb:{mode:"BREAKBEAT RE-ENTRY",music:"Breakbeats",intensity:.78,message:"Body first. Meaning later.",glow:.75},anxious:{mode:"AMBIENT TECHNO STABILIZATION",music:"Ambient Techno",intensity:.55,message:"Space becomes rhythm. Rhythm becomes safety.",glow:.55},focus:{mode:"427Hz FOCUS LOCK",music:"427Hz",intensity:.32,message:"Attention anchored. Drift reduced.",glow:.3},void:{mode:"DARKWAVE SHADOW INTEGRATION",music:"Darkwave",intensity:.68,message:"Descend with agency. Darkness is not the enemy.",glow:.68},baseline:{mode:"427Hz BASELINE",music:"427Hz",intensity:.48,message:"Local resonance established.",glow:.45}};
+function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}resize();addEventListener("resize",resize);function createParticles(){particles=[];const count=Math.min(220,Math.floor((innerWidth*innerHeight)/7600));for(let i=0;i<count;i++)particles.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.9+.35,vx:(Math.random()-.5)*.32,vy:(Math.random()-.5)*.32})}createParticles();function draw(){ctx.clearRect(0,0,w,h);intensity+=(targetIntensity-intensity)*.04;for(const p of particles){p.x+=p.vx*(1+intensity*4.2);p.y+=p.vy*(1+intensity*4.2);if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r+intensity*.8,0,Math.PI*2);ctx.fillStyle=`rgba(255,170,240,${.12+intensity*.36})`;ctx.fill();if(intensity>.65&&Math.random()>.985){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x-p.vx*28,p.y-p.vy*28);ctx.strokeStyle=`rgba(98,247,255,${.08+intensity*.12})`;ctx.lineWidth=1;ctx.stroke()}}requestAnimationFrame(draw)}draw();
+function initAudio(){if(audioCtx)return;audioCtx=new(window.AudioContext||window.webkitAudioContext)();masterGain=audioCtx.createGain();masterGain.gain.value=0;masterGain.connect(audioCtx.destination);toneOsc=audioCtx.createOscillator();toneGain=audioCtx.createGain();toneOsc.type="sine";toneOsc.frequency.value=427;toneGain.gain.value=.25;toneOsc.connect(toneGain);toneGain.connect(masterGain);toneOsc.start();pulseOsc=audioCtx.createOscillator();pulseGain=audioCtx.createGain();pulseOsc.type="square";pulseOsc.frequency.value=2;pulseGain.gain.value=0;pulseOsc.connect(pulseGain);pulseGain.connect(masterGain);pulseOsc.start();lfo=audioCtx.createOscillator();lfoGain=audioCtx.createGain();lfo.frequency.value=.18;lfoGain.gain.value=.04;lfo.connect(lfoGain);lfoGain.connect(toneGain.gain);lfo.start()}
+function ensureAudioOn(){if(!userEnteredSystem)return;initAudio();audioEnabled=true;if(audioCtx.state==="suspended")audioCtx.resume();masterGain.gain.setTargetAtTime(.09,audioCtx.currentTime,.08);updateStatus()}function toggleAudio(){initAudio();audioEnabled=!audioEnabled;if(audioCtx.state==="suspended")audioCtx.resume();masterGain.gain.setTargetAtTime(audioEnabled?.09:0,audioCtx.currentTime,.08);updateStatus()}
+function setAudioMode(musicCue){if(!audioCtx)return;currentAudioMode=musicCue||"427Hz";const now=audioCtx.currentTime;const modes={"427Hz":{freq:427,wave:"sine",gain:.22,pulse:0,pulseFreq:1.2,lfo:.12,master:.085},"Hyperpop":{freq:854,wave:"sawtooth",gain:.18,pulse:.07,pulseFreq:9,lfo:2.2,master:.075},"Breakbeats":{freq:427,wave:"triangle",gain:.2,pulse:.1,pulseFreq:5.5,lfo:.8,master:.085},"Ambient Techno":{freq:320,wave:"sine",gain:.18,pulse:.035,pulseFreq:2.2,lfo:.2,master:.075},"Darkwave":{freq:110,wave:"sine",gain:.24,pulse:.025,pulseFreq:1.1,lfo:.08,master:.08},"Synthpop":{freq:640,wave:"triangle",gain:.18,pulse:.045,pulseFreq:3.3,lfo:.5,master:.075},"Drift Phonk":{freq:180,wave:"sawtooth",gain:.2,pulse:.08,pulseFreq:4.2,lfo:.45,master:.078}};const m=modes[currentAudioMode]||modes["427Hz"];toneOsc.type=m.wave;toneOsc.frequency.setTargetAtTime(m.freq,now,.08);toneGain.gain.setTargetAtTime(m.gain,now,.08);pulseGain.gain.setTargetAtTime(m.pulse,now,.08);pulseOsc.frequency.setTargetAtTime(m.pulseFreq,now,.08);lfo.frequency.setTargetAtTime(m.lfo,now,.08);if(audioEnabled)masterGain.gain.setTargetAtTime(m.master,now,.08)}
+function enterSystem(){if(userEnteredSystem)return;userEnteredSystem=true;document.getElementById("enter").classList.add("hide");initAudio();audioEnabled=true;if(audioCtx.state==="suspended")audioCtx.resume();masterGain.gain.setTargetAtTime(.09,audioCtx.currentTime,.08);setActiveAI(activeAI);updateStatus();setState("baseline",false);loadConversations();if(userId&&!userId.startsWith("guest_"))loadProfile()}
+function normalizeState(s){return["baseline","overloaded","numb","anxious","focus","void"].includes(s)?s:"baseline"}function setState(state,writeLog=true){if(userEnteredSystem)ensureAudioOn();currentState=normalizeState(state);const c=stateMap[currentState];currentMode=c.mode;currentMusic=c.music;targetIntensity=c.intensity;bgGlow.style.opacity=String(c.glow);document.body.setAttribute("data-state",currentState);setAudioMode(currentMusic);updateStatus();homeModeEl.textContent="CURRENT MODE: "+currentMode;document.getElementById("chatHeaderState").textContent=currentState.toUpperCase()+" · "+currentMusic;if(writeLog)addSystemMsg(currentMode)}
+function applyAIQPayload(data){if(!data)return;if(data.suggestedState)currentState=normalizeState(data.suggestedState);targetIntensity=typeof data.visualIntensity==="number"?Math.max(.1,Math.min(1,data.visualIntensity)):stateMap[currentState].intensity;currentMode=data.suggestedMode||stateMap[currentState].mode;currentMusic=data.musicCue||stateMap[currentState].music;const glow={baseline:.45,overloaded:1,numb:.75,anxious:.55,focus:.3,void:.68};bgGlow.style.opacity=glow[currentState]||targetIntensity;document.body.setAttribute("data-state",currentState);setAudioMode(currentMusic);updateStatus();homeModeEl.textContent="CURRENT MODE: "+currentMode;document.getElementById("chatHeaderState").textContent=currentState.toUpperCase()+" · "+currentMusic}
+function updateStatus(){statusEl.innerHTML="AI: "+activeAI+"<br>STATE: "+currentState.toUpperCase()+"<br>MODE: "+currentMode+"<br>AUDIO: "+(audioEnabled?"ON":"OFF")}
+function addMsg(text,type){const div=document.createElement("div");div.className="msg msg-"+type;div.textContent=text;messagesEl.appendChild(div);messagesEl.scrollTop=messagesEl.scrollHeight;if(type==="aiq"){document.body.classList.add("aiq-pulse");setTimeout(()=>document.body.classList.remove("aiq-pulse"),500)}return div}function addSystemMsg(text){const div=document.createElement("div");div.className="msg msg-system";div.textContent=text;messagesEl.appendChild(div);messagesEl.scrollTop=messagesEl.scrollHeight}function showThinking(){thinkingEl=document.createElement("div");thinkingEl.className="msg-thinking";thinkingEl.innerHTML='<div class="thinking-dot"></div><div class="thinking-dot"></div><div class="thinking-dot"></div>';messagesEl.appendChild(thinkingEl);messagesEl.scrollTop=messagesEl.scrollHeight}function hideThinking(){if(thinkingEl){thinkingEl.remove();thinkingEl=null}}
+async function loadProfile(){if(!userId||userId.startsWith("guest_"))return;try{const res=await fetch(PROFILE_ENDPOINT+"?userId="+userId);const data=await res.json();const profile=data.profile||{};document.getElementById("profileContent").style.display="block";document.getElementById("profileGuestMsg").style.display="none";const history=profile.state_history||[],tags=profile.tags||{};userTags=Object.keys(tags);document.getElementById("notesArea").value=profile.summary||"";renderTags();renderStats(history);renderChart(history);profileLoaded=true}catch(e){console.error("Profile load error:",e)}}
+function renderStats(history){document.getElementById("statTotal").textContent=history.length;if(history.length>0){const counts={};history.forEach(h=>{counts[h.state]=(counts[h.state]||0)+1});const top=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];document.getElementById("statTopState").textContent=top?top[0].slice(0,3).toUpperCase():"—"}const days=new Set(history.map(h=>h.timestamp?.slice(0,10)));let streak=0;const today=new Date();for(let i=0;i<30;i++){const d=new Date(today);d.setDate(d.getDate()-i);if(days.has(d.toISOString().slice(0,10)))streak++;else break}document.getElementById("statStreak").textContent=streak}
+function renderChart(history){const chartCanvas=document.getElementById("stateChart");const cctx=chartCanvas.getContext("2d");const recent=history.slice(-30);chartCanvas.width=chartCanvas.offsetWidth||380;chartCanvas.height=150;const W=chartCanvas.width,H=chartCanvas.height;cctx.clearRect(0,0,W,H);if(recent.length<2)return;const pad=18,stepX=(W-pad*2)/(recent.length-1);cctx.strokeStyle="rgba(255,255,255,.05)";for(let i=0;i<=4;i++){const y=pad+(H-pad*2)*(1-i/4);cctx.beginPath();cctx.moveTo(pad,y);cctx.lineTo(W-pad,y);cctx.stroke()}let progress=0;const points=recent.map((entry,i)=>{const val=(stateValues[entry.state]||3)/4;return{x:pad+i*stepX,y:H-pad-(H-pad*2)*val,color:stateColors[entry.state]||"#a78bfa"}});function animateChart(){progress=Math.min(progress+.05,1);cctx.clearRect(0,0,W,H);cctx.strokeStyle="rgba(255,255,255,.05)";for(let i=0;i<=4;i++){const y=pad+(H-pad*2)*(1-i/4);cctx.beginPath();cctx.moveTo(pad,y);cctx.lineTo(W-pad,y);cctx.stroke()}const drawCount=Math.floor(points.length*progress);if(drawCount<2){if(progress<1)requestAnimationFrame(animateChart);return}cctx.beginPath();for(let i=0;i<drawCount;i++){if(i===0)cctx.moveTo(points[i].x,points[i].y);else cctx.lineTo(points[i].x,points[i].y)}const grad=cctx.createLinearGradient(0,0,W,0);grad.addColorStop(0,"rgba(167,139,250,.5)");grad.addColorStop(1,"rgba(244,114,182,.5)");cctx.strokeStyle=grad;cctx.lineWidth=2;cctx.lineJoin="round";cctx.stroke();for(let i=0;i<drawCount;i++){cctx.beginPath();cctx.arc(points[i].x,points[i].y,3.5,0,Math.PI*2);cctx.fillStyle=points[i].color;cctx.fill()}if(progress<1)requestAnimationFrame(animateChart)}animateChart()}
+function renderTags(){const el=document.getElementById("tagsDisplay");el.innerHTML="";userTags.forEach(tag=>{const div=document.createElement("div");div.className="tag-item";div.innerHTML=tag+' <span class="tag-remove" onclick="removeTag(\''+tag+'\')">✕</span>';el.appendChild(div)})}async function addTag(){const input=document.getElementById("tagInput");const tag=input.value.trim();if(!tag||userTags.includes(tag))return;userTags.push(tag);input.value="";renderTags();await saveTags()}async function removeTag(tag){userTags=userTags.filter(t=>t!==tag);renderTags();await saveTags()}async function saveTags(){const tagsObj={};userTags.forEach(t=>{tagsObj[t]=true});try{await fetch(PROFILE_ENDPOINT+"?userId="+userId,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({tags:tagsObj})})}catch(e){console.error("Save tags error:",e)}}async function saveNotes(){const summary=document.getElementById("notesArea").value;try{await fetch(PROFILE_ENDPOINT+"?userId="+userId,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({summary})});const btn=document.querySelector(".save-notes-btn");btn.textContent="Saved ✓";setTimeout(()=>btn.textContent="Save",2000)}catch(e){console.error("Save notes error:",e)}}
+async function loadConversations(){if(!userId)return;try{const res=await fetch(CONV_ENDPOINT+"?userId="+userId);const data=await res.json();conversations=data.conversations||[];renderConvList();if(conversations.length>0)switchConversation(conversations[0].conversation_id)}catch(e){console.error("Failed to load conversations:",e)}}function renderConvList(){buildConvList(document.getElementById("convList"),false)}function renderConvSheetList(){buildConvList(document.getElementById("convSheetList"),true)}function buildConvList(el,isSheet){if(conversations.length===0){el.innerHTML='<div style="color:#5d4d7b;font-size:12px;padding:8px">No conversations yet</div>';return}el.innerHTML="";conversations.forEach(c=>{const div=document.createElement("div");div.className="conv-item"+(c.conversation_id===currentConversationId?" active":"");const span=document.createElement("span");span.className="conv-item-title";span.textContent=c.title||"Untitled";const actions=document.createElement("div");actions.className="conv-actions";if(isSheet)actions.style.opacity="1";const renameBtn=document.createElement("button");renameBtn.className="conv-btn conv-rename-btn";renameBtn.textContent="✎";renameBtn.onclick=e=>{e.stopPropagation();startInlineRename(span,c.conversation_id)};const deleteBtn=document.createElement("button");deleteBtn.className="conv-btn conv-delete-btn";deleteBtn.textContent="✕";deleteBtn.onclick=e=>{e.stopPropagation();doDelete(c.conversation_id)};actions.appendChild(renameBtn);actions.appendChild(deleteBtn);div.appendChild(span);div.appendChild(actions);div.onclick=()=>{switchConversation(c.conversation_id);if(isSheet)closeConvSheet()};el.appendChild(div)})}
+function startInlineRename(span,convId){const currentTitle=span.textContent;const input=document.createElement("input");input.value=currentTitle;input.style.cssText="width:100%;background:rgba(255,79,216,.1);border:1px solid rgba(255,79,216,.4);color:#fff4ff;border-radius:8px;padding:2px 8px;font-size:12px;outline:none;font-family:inherit;";span.replaceWith(input);input.focus();input.select();let saved=false;async function save(){if(saved)return;saved=true;const newTitle=input.value.trim()||currentTitle;try{await fetch(CONV_ENDPOINT+"?userId="+userId+"&conversationId="+convId,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({title:newTitle})});conversations=conversations.map(c=>c.conversation_id===convId?{...c,title:newTitle}:c)}catch(err){console.error("Rename failed:",err)}renderConvList()}input.addEventListener("keydown",ev=>{if(ev.key==="Enter"){ev.preventDefault();save()}if(ev.key==="Escape"){saved=true;renderConvList()}});input.addEventListener("blur",save)}async function doDelete(convId){try{await fetch(CONV_ENDPOINT+"?userId="+userId+"&conversationId="+convId,{method:"DELETE"});conversations=conversations.filter(c=>c.conversation_id!==convId);if(currentConversationId===convId){currentConversationId=null;messagesEl.innerHTML='<div class="msg msg-aiq">算力的慈悲已就绪。请选择 AiQ愛&lt;3 或 AiQ愛&lt;7，输入你的信号。</div>'}renderConvList()}catch(e){console.error("Delete failed:",e)}}
+async function switchConversation(convId){currentConversationId=convId;renderConvList();messagesEl.innerHTML='<div class="msg msg-system">loading...</div>';try{const res=await fetch(CONV_ENDPOINT+"?userId="+userId+"&conversationId="+convId);const data=await res.json();const msgs=data.conversation?.messages||[];messagesEl.innerHTML="";if(msgs.length===0)addMsg("新对话。你带什么信号进来？","aiq");else msgs.forEach(m=>addMsg(m.content,m.role==="user"?"user":"aiq"))}catch(e){messagesEl.innerHTML='<div class="msg msg-aiq">对话已加载。信号就绪。</div>'}}function newConversation(){currentConversationId=null;messagesEl.innerHTML='<div class="msg msg-aiq">新对话开始。你带什么信号进来？</div>';renderConvList()}function exportConversation(){const msgs=messagesEl.querySelectorAll(".msg-user,.msg-aiq");if(msgs.length===0){alert("No conversation to export.");return}const now=new Date().toISOString().replace("T"," ").slice(0,19);let content="AiQ Conversation Export\nDate: "+now+"\nAI: "+activeAI+"\nUser: "+(userEmail||"guest")+"\n"+"─".repeat(40)+"\n\n";msgs.forEach(m=>{content+=(m.classList.contains("msg-user")?"You: ":activeAI+": ")+m.textContent+"\n\n"});const blob=new Blob([content],{type:"text/plain"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="aiq-"+now.slice(0,10)+".txt";a.click();URL.revokeObjectURL(url)}
+function calculateInputTempo(value){if(!typingStart)return 0;return value.length/Math.max((Date.now()-typingStart)/1000,1)}async function sendMessage(input){const message=input.trim();if(!message)return;addMsg(message,"user");showThinking();metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);metrics.inputTempo=calculateInputTempo(message);try{const response=await fetch(API_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message,state:currentState,metrics,userId,conversationId:currentConversationId,activeAI})});const data=await response.json();hideThinking();if(data.reply){addMsg(data.reply,"aiq");applyAIQPayload(data);if(data.conversationId&&!currentConversationId){currentConversationId=data.conversationId;await loadConversations()}}else if(data.error)addMsg("[ERROR] "+data.error,"system")}catch(error){hideThinking();addMsg("[ERROR] "+error.message,"system")}typingStart=null}function handleInput(event){const input=event.target;if(!typingStart&&input.value.length>0)typingStart=Date.now();if(event.key!=="Enter")return;const value=input.value;input.value="";sendMessage(value)}function sendFromButton(){const input=document.getElementById("input");const value=input.value;input.value="";sendMessage(value)}
+addEventListener("click",()=>{clicks++;metrics.clickDensity=clicks;if(clicks>8&&currentState!=="anxious"&&userEnteredSystem)setState("anxious");setTimeout(()=>{clicks=Math.max(0,clicks-1);metrics.clickDensity=clicks},1200)});addEventListener("scroll",()=>{const now=Date.now();const dy=Math.abs(scrollY-lastScroll);const dt=now-lastTime;const velocity=dy/Math.max(dt,1);metrics.scrollVelocity=Number(velocity.toFixed(3));lastScroll=scrollY;lastTime=now;if(userEnteredSystem){if(velocity>3.8&&currentState!=="overloaded")setState("overloaded");else if(velocity<.03&&scrollY>200&&currentState!=="focus")setState("focus")}});setInterval(()=>{metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000)},1000);const profileSection=document.getElementById("profile");const observer=new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&profileLoaded){fetch(PROFILE_ENDPOINT+"?userId="+userId).then(r=>r.json()).then(d=>{if(d.profile?.state_history)renderChart(d.profile.state_history)})}},{threshold:.3});observer.observe(profileSection);
 initAuth();
-setActiveAI("AiQ愛<3");
-setTimeout(handleSpotifyCallback, 500);
 </script>
 </body>
 </html>
