@@ -98,7 +98,7 @@ body::after{
 #portalStarfield{
   position:fixed;
   inset:0;
-  z-index:-6;
+  z-index:0;
   width:100vw;
   height:100vh;
   pointer-events:none;
@@ -109,7 +109,7 @@ body::after{
 #field{
   position:fixed;
   inset:0;
-  z-index:-5;
+  z-index:1;
   pointer-events:none;
   opacity:.58;
   filter:drop-shadow(0 0 8px rgba(255,79,216,.35));
@@ -118,7 +118,7 @@ body::after{
 .bg-glow{
   position:fixed;
   inset:0;
-  z-index:-4;
+  z-index:2;
   pointer-events:none;
   background:
     radial-gradient(ellipse at 50% 0%,rgba(255,79,216,.14),transparent 58%),
@@ -132,7 +132,7 @@ body::after{
 .vapor-layer{
   position:fixed;
   inset:-12%;
-  z-index:-3;
+  z-index:3;
   pointer-events:none;
   background:
     radial-gradient(ellipse at 20% 80%,rgba(255,79,216,.12),transparent 30%),
@@ -151,7 +151,7 @@ body::after{
 .noise{
   position:fixed;
   inset:0;
-  z-index:-2;
+  z-index:4;
   pointer-events:none;
   opacity:.07;
   mix-blend-mode:screen;
@@ -1641,6 +1641,87 @@ body.aiq-pulse .chat-window{
     font-size:clamp(46px,16vw,76px);
   }
 }
+
+/* FORCE CONTENT ABOVE CANVAS STARFIELD */
+.topnav,
+.mobile-nav,
+.user-info,
+.portal-auth-dock,
+.status,
+section{
+  position:relative;
+  z-index:20;
+}
+
+.topnav,
+.user-info,
+.portal-auth-dock,
+.status,
+.mobile-nav{
+  position:fixed;
+}
+
+#home,
+#cuff,
+#matrix,
+#chat,
+#profile{
+  isolation:isolate;
+}
+
+#home > *,
+#cuff > *,
+#matrix > *,
+#chat > *,
+#profile > *{
+  position:relative;
+  z-index:21;
+}
+
+/* Debug-proof: starfield is deliberately visible, not hidden behind body background */
+#portalStarfield{
+  background:transparent !important;
+  display:block !important;
+}
+
+
+.big-dipper-overlay{
+  position:fixed;
+  inset:0;
+  z-index:6;
+  pointer-events:none;
+  opacity:.82;
+  mix-blend-mode:screen;
+  animation:dipperFloat 7s ease-in-out infinite alternate;
+}
+
+.big-dipper-overlay polyline{
+  fill:none;
+  stroke:rgba(98,247,255,.72);
+  stroke-width:1.6;
+  filter:drop-shadow(0 0 10px rgba(98,247,255,.85));
+}
+
+.big-dipper-overlay circle{
+  fill:rgba(255,244,255,.95);
+  stroke:rgba(98,247,255,.9);
+  stroke-width:1.2;
+  filter:drop-shadow(0 0 9px rgba(255,79,216,.8));
+}
+
+.big-dipper-overlay text{
+  fill:rgba(255,244,255,.72);
+  font-family:Inter, sans-serif;
+  font-size:12px;
+  letter-spacing:2px;
+  filter:drop-shadow(0 0 8px rgba(98,247,255,.5));
+}
+
+@keyframes dipperFloat{
+  from{transform:translate3d(-4px,2px,0)}
+  to{transform:translate3d(8px,-6px,0)}
+}
+
 </style>
 </head>
 
@@ -1651,6 +1732,19 @@ body.aiq-pulse .chat-window{
 <div class="vapor-layer"></div>
 <div class="scanline-layer"></div>
 <div class="cursor-aura" id="cursorAura"></div>
+<svg class="big-dipper-overlay" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">
+  <polyline points="585,110 635,98 682,118 728,150 780,138 835,165 895,148"></polyline>
+  <g>
+    <circle cx="585" cy="110" r="5"></circle>
+    <circle cx="635" cy="98" r="4"></circle>
+    <circle cx="682" cy="118" r="4"></circle>
+    <circle cx="728" cy="150" r="6"></circle>
+    <circle cx="780" cy="138" r="4"></circle>
+    <circle cx="835" cy="165" r="4"></circle>
+    <circle cx="895" cy="148" r="6"></circle>
+  </g>
+  <text x="570" y="82">北斗七星 · BIG DIPPER</text>
+</svg>
 
 <nav class="topnav">
   <a href="#home">Home</a>
@@ -3262,13 +3356,13 @@ async function refreshSpotifyToken(){
     const driftY = Math.cos(time * .28) * 8 * dpr;
 
     const pts = [
-      [.610,.180],
-      [.655,.160],
-      [.705,.190],
-      [.750,.242],
-      [.800,.220],
-      [.850,.275],
-      [.905,.248]
+      [.590,.220],
+      [.635,.198],
+      [.682,.230],
+      [.728,.285],
+      [.780,.262],
+      [.835,.318],
+      [.895,.292]
     ].map(([x,y],i) => ({
       x:x * sw + driftX + Math.sin(time + i) * 3.2 * dpr,
       y:y * sh + driftY + Math.cos(time * .8 + i) * 3.2 * dpr
@@ -3280,7 +3374,7 @@ async function refreshSpotifyToken(){
       if(i === 0) sctx.moveTo(p.x,p.y);
       else sctx.lineTo(p.x,p.y);
     });
-    sctx.strokeStyle = "rgba(98,247,255,.20)";
+    sctx.strokeStyle = "rgba(98,247,255,.42)";
     sctx.lineWidth = 8 * dpr;
     sctx.shadowBlur = 26 * dpr;
     sctx.shadowColor = "rgba(98,247,255,.55)";
@@ -3292,18 +3386,18 @@ async function refreshSpotifyToken(){
       if(i === 0) sctx.moveTo(p.x,p.y);
       else sctx.lineTo(p.x,p.y);
     });
-    sctx.strokeStyle = "rgba(255,244,255,.76)";
+    sctx.strokeStyle = "rgba(255,244,255,.92)";
     sctx.lineWidth = 1.35 * dpr;
     sctx.stroke();
 
     pts.forEach((p,i) => {
       const kind = i === 3 ? "gold" : i % 2 === 0 ? "cyan" : "pink";
       const size = (i === 0 || i === 3 || i === 6 ? 2.35 : 1.75) * dpr;
-      drawGlowStar(p.x,p.y,size,kind,.92);
+      drawGlowStar(p.x,p.y,size * 1.35,kind,1);
     });
 
     sctx.font = `${10 * dpr}px Inter, sans-serif`;
-    sctx.fillStyle = "rgba(189,166,255,.68)";
+    sctx.fillStyle = "rgba(255,244,255,.82)";
     sctx.fillText("北斗七星 · BIG DIPPER", pts[0].x - 8 * dpr, pts[0].y - 24 * dpr);
   }
 
