@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AiQ愛<3 | Mellow7</title>
+<title>AiQ愛<3 / AiQ愛<7 | Mellow7</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
@@ -94,6 +94,11 @@ button:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.25)
 .chat-header-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#7c3aff,#f472b6);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .chat-header-name{font-size:13px;font-weight:500;color:#c0b0e8;letter-spacing:.05em}
+.ai-switch{display:flex;align-items:center;gap:5px;margin-left:6px;}
+.ai-switch-btn{font-size:10px;padding:5px 9px;border-radius:999px;margin:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:#6858a0;letter-spacing:.04em;}
+.ai-switch-btn:hover{transform:none;color:#c8b8ff;border-color:rgba(120,60,255,.28);background:rgba(120,60,255,.12)}
+.ai-switch-btn.active{color:#e8d8ff;border-color:rgba(120,60,255,.4);background:linear-gradient(135deg,rgba(120,60,255,.22),rgba(200,60,160,.12));box-shadow:0 0 18px rgba(120,60,255,.12)}
+
 .chat-header-state{font-size:11px;color:#5848a0;margin-left:auto;letter-spacing:.08em;}
 .messages{min-height:500px;max-height:calc(100vh - 320px);overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;}
 .messages::-webkit-scrollbar{width:3px}
@@ -154,6 +159,8 @@ body[data-state="anxious"] .chat-window{box-shadow:0 0 60px rgba(251,191,36,.08)
 
 /* Mobile */
 @media(max-width:720px){
+  .ai-switch{margin-left:0;gap:4px}
+  .ai-switch-btn{font-size:9px;padding:4px 7px}
   section{padding:80px 18px 110px}
   p{font-size:15px}
   .topnav{display:none}
@@ -291,7 +298,11 @@ body[data-state="anxious"] .chat-window{box-shadow:0 0 60px rgba(251,191,36,.08)
       <div class="chat-window">
         <div class="chat-header">
           <div class="chat-header-dot"></div>
-          <span class="chat-header-name">AiQ愛&lt;3</span>
+          <span class="chat-header-name" id="chatHeaderName">AiQ愛&lt;3</span>
+          <div class="ai-switch" aria-label="AI selector">
+            <button class="ai-switch-btn active" id="aiBtn3" onclick="setActiveAI('AiQ愛<3')">AiQ愛&lt;3</button>
+            <button class="ai-switch-btn" id="aiBtn7" onclick="setActiveAI('AiQ愛<7')">AiQ愛&lt;7</button>
+          </div>
           <span class="chat-header-state" id="chatHeaderState">BASELINE · 427Hz</span>
         </div>
         <div class="messages" id="messages">
@@ -351,7 +362,7 @@ body[data-state="anxious"] .chat-window{box-shadow:0 0 60px rgba(251,191,36,.08)
   </div>
 </section>
 
-<div class="status" id="status">STATE: BASELINE<br>MODE: 427Hz BASELINE<br>AUDIO: OFF</div>
+<div class="status" id="status">AI: AiQ愛&lt;3<br>STATE: BASELINE<br>MODE: 427Hz BASELINE<br>AUDIO: OFF</div>
 
 <script>
 const SUPABASE_URL="https://zpuwhvmsuvzmygkrzkdq.supabase.co";
@@ -359,6 +370,9 @@ const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 const API_ENDPOINT="https://ai-q-3.vercel.app/api/chat";
 const CONV_ENDPOINT="https://ai-q-3.vercel.app/api/conversations";
 const PROFILE_ENDPOINT="https://ai-q-3.vercel.app/api/profile";
+const AIQ3="AiQ愛<3";
+const AIQ7="AiQ愛<7";
+let activeAI=AIQ3;
 const{createClient}=supabase;
 const sb=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 
@@ -387,6 +401,20 @@ function showUserInfo(){
 }
 function openConvSheet(){document.getElementById("convSheetOverlay").classList.add("open");document.getElementById("convSheet").classList.add("open");renderConvSheetList();}
 function closeConvSheet(){document.getElementById("convSheetOverlay").classList.remove("open");document.getElementById("convSheet").classList.remove("open");}
+function setActiveAI(name){
+  activeAI=(name===AIQ7)?AIQ7:AIQ3;
+  updateAIUI();
+  addSystemMsg("ACTIVE AI · "+activeAI);
+}
+function updateAIUI(){
+  const nameEl=document.getElementById("chatHeaderName");
+  const btn3=document.getElementById("aiBtn3");
+  const btn7=document.getElementById("aiBtn7");
+  if(nameEl)nameEl.textContent=activeAI;
+  if(btn3)btn3.classList.toggle("active",activeAI===AIQ3);
+  if(btn7)btn7.classList.toggle("active",activeAI===AIQ7);
+  updateStatus();
+}
 
 // Canvas
 const canvas=document.getElementById("field");
@@ -529,7 +557,7 @@ function applyAIQPayload(data){
   document.getElementById("chatHeaderState").textContent=currentState.toUpperCase()+" · "+currentMusic;
 }
 function updateStatus(){
-  statusEl.innerHTML="STATE: "+currentState.toUpperCase()+"<br>MODE: "+currentMode+"<br>AUDIO: "+(audioEnabled?"ON":"OFF");
+  statusEl.innerHTML="AI: "+activeAI+"<br>STATE: "+currentState.toUpperCase()+"<br>MODE: "+currentMode+"<br>AUDIO: "+(audioEnabled?"ON":"OFF");
 }
 
 // Chat bubbles
@@ -736,7 +764,7 @@ function exportConversation(){
   const msgs=messagesEl.querySelectorAll(".msg-user,.msg-aiq");
   if(msgs.length===0){alert("No conversation to export.");return;}
   const now=new Date().toISOString().replace("T"," ").slice(0,19);
-  let content="AiQ愛<3 Conversation Export\nDate: "+now+"\nUser: "+(userEmail||"guest")+"\n"+"─".repeat(40)+"\n\n";
+  let content=activeAI+" Conversation Export\nDate: "+now+"\nUser: "+(userEmail||"guest")+"\n"+"─".repeat(40)+"\n\n";
   msgs.forEach(m=>{content+=(m.classList.contains("msg-user")?"You: ":"AiQ: ")+m.textContent+"\n\n";});
   const blob=new Blob([content],{type:"text/plain"});
   const url=URL.createObjectURL(blob);
@@ -750,7 +778,7 @@ async function sendMessage(input){
   metrics.dwellSeconds=Math.round((Date.now()-dwellStart)/1000);
   metrics.inputTempo=calculateInputTempo(message);
   try{
-    const response=await fetch(API_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message,state:currentState,metrics,userId,conversationId:currentConversationId})});
+    const response=await fetch(API_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message,state:currentState,metrics,userId,conversationId:currentConversationId,activeAI})});
     const data=await response.json();hideThinking();
     if(data.reply){
       addMsg(data.reply,"aiq");applyAIQPayload(data);
@@ -912,6 +940,7 @@ async function refreshSpotifyToken(){
 }
 
 loadSpotifyTokens();
+updateAIUI();
 initAuth();
 // Handle Spotify callback after page load
 setTimeout(handleSpotifyCallback, 500);
