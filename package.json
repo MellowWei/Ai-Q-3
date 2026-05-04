@@ -1,11 +1,11 @@
 {
-  "name": "aiq-love",
-  "version": "1.0.0",
+  "name": "ai-q-3-dual-ai",
+  "version": "2.0.0",
   "type": "module",
   "private": true,
   "dependencies": {
+    "openai": "latest",
     "@anthropic-ai/sdk": "latest",
-    "@supabase/supabase-js": "latest",
-    "openai": "latest"
+    "@google/genai": "latest"
   }
 }
