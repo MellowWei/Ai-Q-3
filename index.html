@@ -2471,6 +2471,15 @@ window.addEventListener("mousemove", e => {
     cursorAura.style.left = e.clientX + "px";
     cursorAura.style.top = e.clientY + "px";
   }
+  const now = Date.now();
+  const dt = Math.max(now - _cursorLastTime, 1);
+  const dx = e.clientX - _cursorLastX;
+  const dy = e.clientY - _cursorLastY;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  metrics.cursorVelocity = Number((dist / dt * 1000).toFixed(1));
+  _cursorLastX = e.clientX;
+  _cursorLastY = e.clientY;
+  _cursorLastTime = now;
 });
 
 window.addEventListener("mouseleave", () => {
@@ -2615,8 +2624,21 @@ let metrics = {
   scrollVelocity:0,
   clickDensity:0,
   dwellSeconds:0,
-  inputTempo:0
+  inputTempo:0,
+  cursorVelocity:0,
+  deletionRate:0,
+  pauseDuration:0,
+  typingIrregularity:0,
+  inputLength:0,
+  sessionDuration:0
 };
+
+// 增强感知变量
+let _cursorLastX = 0, _cursorLastY = 0, _cursorLastTime = Date.now();
+let _keyTimestamps = [];
+let _keyTotal = 0, _keyDelete = 0;
+let _sessionStart = Date.now();
+let _lastKeyTime = Date.now();
 
 let audioCtx = null;
 let masterGain = null;
@@ -3502,9 +3524,29 @@ async function sendMessage(input){
 
 function handleInput(event){
   const input = event.target;
+  const now = Date.now();
+
+  // 追踪按键
+  _keyTotal++;
+  if(event.key === "Backspace" || event.key === "Delete") _keyDelete++;
+  metrics.deletionRate = _keyTotal > 0 ? Number((_keyDelete / _keyTotal).toFixed(3)) : 0;
+
+  // 追踪停顿
+  metrics.pauseDuration = now - _lastKeyTime;
+  _lastKeyTime = now;
+
+  // 追踪按键间隔标准差（节奏稳定性）
+  _keyTimestamps.push(now);
+  if(_keyTimestamps.length > 20) _keyTimestamps.shift();
+  if(_keyTimestamps.length > 2){
+    const intervals = [];
+    for(let i = 1; i < _keyTimestamps.length; i++) intervals.push(_keyTimestamps[i] - _keyTimestamps[i-1]);
+    const mean = intervals.reduce((a,b) => a+b, 0) / intervals.length;
+    const variance = intervals.reduce((a,b) => a + (b-mean)**2, 0) / intervals.length;
+    metrics.typingIrregularity = Number(Math.sqrt(variance).toFixed(1));
+  }
 
   if(!typingStart && input.value.length > 0) typingStart = Date.now();
-
   if(event.key !== "Enter") return;
 
   const value = input.value;
