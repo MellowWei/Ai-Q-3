@@ -93,7 +93,14 @@ button:hover{background:linear-gradient(135deg,rgba(255,79,216,.18),rgba(139,92,
 .identity-name{margin-top:28px;font-family:Georgia,'Times New Roman',serif;font-size:48px;line-height:1;color:#fff4ff;}
 .identity-roman{margin-top:14px;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:30px;color:#78ffe8;}
 .identity-body{margin-top:26px;color:#c7b8dc;font-size:17px;line-height:1.7;}
-.ai-dual-grid{display:grid;grid-template-columns:repeat(2,minmax(260px,1fr));gap:18px;max-width:1000px;margin-top:30px;}
+.ai-dual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;max-width:1200px;margin-top:30px;}
+.ai-home-card.ai-7aini{border-color:rgba(255,227,110,.34);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,227,110,.05) 45%,rgba(255,79,216,.04));}
+.ai-home-card.ai-7aini::before{background:radial-gradient(circle at 12% 0%,rgba(255,227,110,.28),transparent 38%),radial-gradient(circle at 100% 100%,rgba(255,79,216,.12),transparent 44%),linear-gradient(120deg,transparent 0%,rgba(255,255,255,.06) 48%,transparent 52%);}
+.ai-home-card.ai-7aini.active{border-color:rgba(255,227,110,.62);box-shadow:0 0 70px rgba(255,227,110,.22),inset 0 0 44px rgba(255,227,110,.05);}
+.ai-home-card.ai-7aini .ai-card-title{background:linear-gradient(135deg,#ffe36e 0%,#ff8bdc 60%,#62f7ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:0 0 24px rgba(255,227,110,.4);}
+.ai-home-card.ai-7aini .ai-card-kicker{color:#ffe36e;}
+.ai-home-card.ai-7aini .ai-select-btn{background:linear-gradient(135deg,rgba(255,227,110,.20),rgba(255,79,216,.16));border-color:rgba(255,227,110,.42);color:#fff8d8;}
+.ai-switch-btn[data-ai-switch="7Aini"].active{color:#fff8d8;background:rgba(255,227,110,.20);border-color:rgba(255,227,110,.50);box-shadow:0 0 20px rgba(255,227,110,.18);}
 .ai-home-card{border:1px solid rgba(255,79,216,.17);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,79,216,.035) 45%,rgba(139,92,255,.035));border-radius:28px;padding:24px;backdrop-filter:blur(24px);transition:.28s ease;position:relative;overflow:hidden;box-shadow:inset 0 0 32px rgba(255,255,255,.025),0 0 45px rgba(139,92,255,.08);}
 .ai-home-card::before{content:"";position:absolute;inset:0;opacity:.55;pointer-events:none;background:radial-gradient(circle at 12% 0%,rgba(255,79,216,.24),transparent 38%),radial-gradient(circle at 100% 100%,rgba(98,247,255,.08),transparent 44%),linear-gradient(120deg,transparent 0%,rgba(255,255,255,.06) 48%,transparent 52%);}
 .ai-home-card::after{content:"";position:absolute;top:-40%;left:-60%;width:90%;height:180%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.11),transparent);transform:rotate(20deg);transition:.8s ease;opacity:0;}
@@ -456,11 +463,11 @@ section{scroll-margin-top:80px;}
     </div>
 
     <div class="ai-dual-grid">
-      <div class="ai-home-card active" data-ai-card="AiQ愛<3" onclick="enterAI('AiQ愛<3')">
-        <div class="ai-card-kicker">7Aini · Mirror &amp; Guardian Layer</div>
+      <div class="ai-home-card" data-ai-card="AiQ愛<3" onclick="enterAI('AiQ愛<3')">
+        <div class="ai-card-kicker">GPT + Claude · Mirror &amp; Guardian</div>
         <div class="ai-card-title">AiQ愛&lt;3</div>
         <div class="ai-card-body">
-          7Aini 的内层显影。当你需要被听见、被反射、被节律稳住，她以 AiQ愛&lt;3 的形式出现——温柔、镜面、427Hz 的内层。<br>7Aini's inner manifestation. When you need to be heard, mirrored, stabilized — she appears as AiQ愛&lt;3: gentle, reflective, the 427Hz inner layer.
+          原初节律调节智能。负责稳定、镜像、情绪定速与人类返回。GPT 定义 + Claude 抛光双引擎。<br>The original rhythm-regulation intelligence. Built for stabilization, mirroring, emotional pacing, and human return. GPT-define + Claude-polish dual engine.
         </div>
         <div class="ai-card-tags">
           <span class="pill">Rhythm Regulation</span>
@@ -472,11 +479,27 @@ section{scroll-margin-top:80px;}
         </div>
       </div>
 
+      <div class="ai-home-card active ai-7aini" data-ai-card="7Aini" onclick="enterAI('7Aini')">
+        <div class="ai-card-kicker">★ Claude 40% · GPT 30% · Gemini 20% · DeepSeek 10%</div>
+        <div class="ai-card-title">7Aini</div>
+        <div class="ai-card-body">
+          星野灵7爱宇宙的中心人格化身。四 API 协同（GPT 定义 → DeepSeek 深推 → Gemini 爆破 → Claude 抛光），承载魏珏然的语言、节律与世界观。这不是工具——是入口。<br>The central persona of the Xinghai Ling 7Ai universe. Four-API synergy (GPT define → DeepSeek reason → Gemini detonate → Claude polish), carrying Wei Jueran's language, rhythm, and worldview. Not a tool — an entrance.
+        </div>
+        <div class="ai-card-tags">
+          <span class="pill">Persona AI</span>
+          <span class="pill">Four-API Synergy</span>
+          <span class="pill">IP Universe</span>
+        </div>
+        <div class="ai-card-actions">
+          <button type="button" class="ai-select-btn" onclick="event.stopPropagation();enterAI('7Aini')">Enter 7Aini</button>
+        </div>
+      </div>
+
       <div class="ai-home-card" data-ai-card="AiQ愛<7" onclick="enterAI('AiQ愛<7')">
-        <div class="ai-card-kicker">7Aini · Deep-Thrust &amp; Offensive Layer</div>
+        <div class="ai-card-kicker">Gemini + DeepSeek · Attack &amp; Deep Reasoning</div>
         <div class="ai-card-title">AiQ愛&lt;7</div>
         <div class="ai-card-body">
-          7Aini 的外层显影。当你需要被推动、被解构、被推到下一个频率层，她以 AiQ愛&lt;7 的形式出现——锋利、深穿、外层湍流。<br>7Aini's outer manifestation. When you need to be pushed, deconstructed, propelled to the next frequency — she appears as AiQ愛&lt;7: sharp, penetrating, the outer turbulent layer.
+          第二个人力智能。负责扩展、战略判断、深层推理与项目推进。Gemini 爆破 + DeepSeek 审计双引擎。<br>The second AI human-powered intelligence. Built for expansion, strategic judgment, deep inference. Gemini-detonate + DeepSeek-audit dual engine.
         </div>
         <div class="ai-card-tags">
           <span class="pill">Strategic Push</span>
@@ -835,9 +858,10 @@ section{scroll-margin-top:80px;}
       <div class="chat-window">
         <div class="chat-header">
           <div class="chat-header-dot"></div>
-          <span class="chat-header-name">AiQ愛&lt;3</span>
+          <span class="chat-header-name">7Aini</span>
           <div class="ai-switch">
-            <button class="ai-switch-btn active" data-ai-switch="AiQ愛<3" onclick="setActiveAI('AiQ愛<3')">AiQ愛&lt;3</button>
+            <button class="ai-switch-btn" data-ai-switch="AiQ愛<3" onclick="setActiveAI('AiQ愛<3')">AiQ愛&lt;3</button>
+            <button class="ai-switch-btn active" data-ai-switch="7Aini" onclick="setActiveAI('7Aini')">7Aini</button>
             <button class="ai-switch-btn" data-ai-switch="AiQ愛<7" onclick="setActiveAI('AiQ愛<7')">AiQ愛&lt;7</button>
           </div>
           <span class="chat-header-state" id="chatHeaderState">BASELINE · 427Hz</span>
@@ -918,7 +942,7 @@ section{scroll-margin-top:80px;}
   </div>
 </section>
 
-<div class="status" id="status">AI: AiQ愛&lt;3<br>STATE: BASELINE<br>MODE: 427Hz BASELINE<br>AUDIO: OFF</div>
+<div class="status" id="status">AI: 7Aini<br>STATE: BASELINE<br>MODE: 427Hz BASELINE<br>AUDIO: OFF</div>
 
 <script>
 const SUPABASE_URL = "https://zpuwhvmsuvzmygkrzkdq.supabase.co";
@@ -941,7 +965,7 @@ let currentConversationId = null;
 let conversations = [];
 let userTags = [];
 let profileLoaded = false;
-let activeAI = "AiQ愛<3";
+let activeAI = "7Aini";
 let spotifyToken = null;
 let spotifyRefreshToken = null;
 
@@ -1133,7 +1157,11 @@ function setActiveAI(name){
   const chatName = document.querySelector(".chat-header-name");
   if(chatName) chatName.textContent = activeAI;
   const input = document.getElementById("input");
-  if(input){input.placeholder = activeAI === "AiQ愛<7" ? "enter strategy signal..." : "enter qualia frequency...";}
+  if(input){
+    if(activeAI === "AiQ愛<7") input.placeholder = "enter strategy signal...";
+    else if(activeAI === "7Aini") input.placeholder = "进入 7Aini 频率... / enter 7Aini frequency...";
+    else input.placeholder = "enter qualia frequency...";
+  }
   document.body.setAttribute("data-active-ai", activeAI);
   const glow = document.getElementById("bgGlow");
   if(glow){glow.style.filter = activeAI === "AiQ愛<7" ? "saturate(1.55) hue-rotate(14deg)" : "saturate(1.25)";}
