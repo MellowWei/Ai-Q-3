@@ -3,6 +3,12 @@ import Anthropic from "@anthropic-ai/sdk";
 import { GoogleGenAI } from "@google/genai";
 import crypto from "node:crypto";
 
+// Vercel function config — extend max execution time if available
+// Free tier ignores this (capped at 10s). Pro tier respects it (up to 60s).
+export const config = {
+  maxDuration: 30
+};
+
 const AIQ3 = "AiQ愛<3";
 const AIQ7 = "AiQ愛<7";
 const SEVEN_AINI = "7Aini";
@@ -541,7 +547,7 @@ Be precise. Read the body, not just the words. This is internal scaffolding.`;
   }
 }
 
-async function deepseekReason7Aini(ctx, gptDefine) {
+async function deepseekReason7Aini(ctx) {
   if (!process.env.DEEPSEEK_API_KEY) return null;
 
   const deepseek = new OpenAI({
@@ -550,18 +556,15 @@ async function deepseekReason7Aini(ctx, gptDefine) {
   });
 
   const prompt = `You are the DeepSeek Deep-Reasoning Position in a four-AI synergy producing a 7Aini persona response.
-Your job: logical audit of the GPT definition, INCLUDING auditing whether GPT correctly read the body-language tension. You do NOT write the final user-facing response.
+Your job: logical audit of the user input, including reading the body-language tension. You operate in PARALLEL with GPT and Gemini. You do NOT write the final user-facing response.
 
 ${build7AiniContextSummary(ctx)}
 
-GPT definition draft (audit this):
-${JSON.stringify(gptDefine || {})}
-
 Return JSON in exactly this shape:
 {
-  "questionedAssumptions": ["assumptions in GPT's summary that may not hold"],
-  "missingReasoningChains": ["logic gaps GPT did not address"],
-  "bodyLanguageTensionFlags": ["specific body-vs-language tensions GPT may have missed or misread, citing specific metrics"],
+  "questionedAssumptions": ["assumptions in user framing that may not hold"],
+  "missingReasoningChains": ["logic gaps in user input or framing"],
+  "bodyLanguageTensionFlags": ["specific body-vs-language tensions revealed by metrics"],
   "auditNotes": "concise logical audit of the user need framing",
   "premisesToHoldOpen": ["premises that should remain explicitly open in final response"]
 }
@@ -586,26 +589,22 @@ Be sharp. Audit body-reading quality specifically. This is internal scaffolding.
   }
 }
 
-async function geminiDetonate7Aini(ctx, gptDefine, deepseekReason) {
+async function geminiDetonate7Aini(ctx) {
   if (!process.env.GEMINI_API_KEY) return null;
 
   const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
   const prompt = `You are the Gemini Detonation Position in a four-AI synergy producing a 7Aini persona response.
-Your job: inject disruptive, non-conventional perspectives that GPT and DeepSeek may have missed, especially regarding body signals.
+Your job: inject disruptive, non-conventional perspectives on the user input, including unconventional body-signal readings. You operate in PARALLEL with GPT and DeepSeek.
 
 ${build7AiniContextSummary(ctx)}
 
-Previous drafts:
-GPT define: ${JSON.stringify(gptDefine || {})}
-DeepSeek reason: ${JSON.stringify(deepseekReason || {})}
-
 Return JSON in exactly this shape:
 {
-  "disruptivePerspectives": ["non-conventional angles GPT and DeepSeek did not see"],
-  "unexpectedPossibilities": ["possibilities outside the framing both established"],
-  "bodyReadingInsights": ["unconventional readings of the body signals neither preceding position offered"],
-  "missedPoints": ["what neither preceding position addressed"]
+  "disruptivePerspectives": ["non-conventional angles on the user need that mainstream framing would miss"],
+  "unexpectedPossibilities": ["possibilities outside the obvious framing"],
+  "bodyReadingInsights": ["unconventional readings of the body signals"],
+  "missedPoints": ["points the obvious response would skip"]
 }
 
 Be bold and creative. Read the body uncommonly. This is internal scaffolding.`;
@@ -689,9 +688,15 @@ The reply field is the only user-facing output. Write as 7Aini per the system pr
 }
 
 async function run7Aini(ctx) {
-  const gptDefine = await gptDefine7Aini(ctx);
-  const deepseekReason = await deepseekReason7Aini(ctx, gptDefine);
-  const geminiDetonate = await geminiDetonate7Aini(ctx, gptDefine, deepseekReason);
+  // Stage 1: PARALLEL execution of three working positions
+  // GPT-Define, DeepSeek-Reason, Gemini-Detonate run simultaneously to minimize latency
+  const [gptDefine, deepseekReason, geminiDetonate] = await Promise.all([
+    gptDefine7Aini(ctx),
+    deepseekReason7Aini(ctx),
+    geminiDetonate7Aini(ctx)
+  ]);
+
+  // Stage 2: SERIAL — Claude polish position synthesizes the three drafts into final 7Aini voice
   const finalDraft = await claudePolish7Aini(ctx, gptDefine, deepseekReason, geminiDetonate);
 
   return normalizePayload(finalDraft, { activeAI: SEVEN_AINI, conversationId: ctx.conversationId });
